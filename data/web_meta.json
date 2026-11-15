@@ -9,11 +9,8 @@
   "patch_slope_gb",
   "T2M",
   "temp_range",
-  "PRECTOTCORR",
   "RH2M",
   "ALLSKY_SFC_SW_DWN",
-  "WS2M",
-  "elevation_m",
   "lst_season",
   "rock"
  ],
@@ -38,33 +35,27 @@
  "typical": {
   "Mars": {
    "rock": "clastic_sediment",
-   "PRECTOTCORR": 0.395,
    "RH2M": 42.965,
    "temp_range": 48.75,
    "lst_season": 27.900000000000006,
    "patch_roughness": 0.04893925413489342,
-   "patch_slope_gb": 0.6420546770095825,
-   "elevation_m": 884.11
+   "patch_slope_gb": 0.6420546770095825
   },
   "Moon": {
    "rock": "mafic_volcanic",
-   "PRECTOTCORR": 0.96,
    "RH2M": 47.71,
    "temp_range": 54.97,
    "lst_season": 37.20000000000002,
    "patch_roughness": 0.05021966993808746,
-   "patch_slope_gb": 0.832139253616333,
-   "elevation_m": 1144.66
+   "patch_slope_gb": 0.832139253616333
   },
   "Neither": {
    "rock": "clastic_sediment",
-   "PRECTOTCORR": 2.38,
    "RH2M": 75.59,
    "temp_range": 45.459999999999994,
    "lst_season": 16.19999999999999,
    "patch_roughness": 0.0263567753136158,
-   "patch_slope_gb": 1.1770436763763428,
-   "elevation_m": 333.28
+   "patch_slope_gb": 1.1770436763763428
   }
  },
  "mu": {
@@ -77,11 +68,8 @@
   "patch_slope_gb": 0.938506543636322,
   "T2M": 13.933482142857144,
   "temp_range": 48.57883928571429,
-  "PRECTOTCORR": 1.6641071428571428,
   "RH2M": 60.22339285714286,
   "ALLSKY_SFC_SW_DWN": 17.76875,
-  "WS2M": 2.7289285714285714,
-  "elevation_m": 801.7249107142858,
   "lst_season": 26.110810810810808
  },
  "sd": {
@@ -94,11 +82,8 @@
   "patch_slope_gb": 0.3841009736061096,
   "T2M": 11.511486289540237,
   "temp_range": 15.865528315524037,
-  "PRECTOTCORR": 1.7209135189684401,
   "RH2M": 20.834399809253934,
   "ALLSKY_SFC_SW_DWN": 4.192111021886207,
-  "WS2M": 1.3382477161598108,
-  "elevation_m": 664.7273615320505,
   "lst_season": 14.743845257359865
  },
  "analogs": [
@@ -114,11 +99,8 @@
    "patch_slope_gb": 0.6687272787094116,
    "T2M": -7.26,
    "temp_range": 47.230000000000004,
-   "PRECTOTCORR": 1.95,
    "RH2M": 94.8,
    "ALLSKY_SFC_SW_DWN": 7.41,
-   "WS2M": 3.38,
-   "elevation_m": 352.81,
    "lst_season": 26.400000000000034
   },
   {
@@ -133,11 +115,8 @@
    "patch_slope_gb": 0.7423732280731201,
    "T2M": 14.67,
    "temp_range": 47.17,
-   "PRECTOTCORR": 0.59,
    "RH2M": 39.9,
    "ALLSKY_SFC_SW_DWN": 20.61,
-   "WS2M": 2.47,
-   "elevation_m": 1829.84,
    "lst_season": 28.19999999999999
   },
   {
@@ -152,11 +131,8 @@
    "patch_slope_gb": 0.5464925765991211,
    "T2M": 21.39,
    "temp_range": 53.099999999999994,
-   "PRECTOTCORR": 0.33,
    "RH2M": 30.69,
    "ALLSKY_SFC_SW_DWN": 21.01,
-   "WS2M": 2.43,
-   "elevation_m": 517.21,
    "lst_season": 39.0
   },
   {
@@ -171,11 +147,8 @@
    "patch_slope_gb": 0.8011878132820129,
    "T2M": 19.68,
    "temp_range": 48.74,
-   "PRECTOTCORR": 0.49,
    "RH2M": 42.79,
    "ALLSKY_SFC_SW_DWN": 20.45,
-   "WS2M": 3.2,
-   "elevation_m": 232.23,
    "lst_season": 26.399999999999977
   },
   {
@@ -190,11 +163,8 @@
    "patch_slope_gb": 0.42715567350387573,
    "T2M": 17.07,
    "temp_range": 33.57,
-   "PRECTOTCORR": 0.02,
    "RH2M": 44.09,
    "ALLSKY_SFC_SW_DWN": 25.94,
-   "WS2M": 2.34,
-   "elevation_m": 1261.0,
    "lst_season": 20.099999999999994
   },
   {
@@ -209,11 +179,8 @@
    "patch_slope_gb": 1.171020746231079,
    "T2M": -33.67,
    "temp_range": 51.849999999999994,
-   "PRECTOTCORR": 0.39,
    "RH2M": 79.33,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "WS2M": 9.6,
-   "elevation_m": 1710.18,
    "lst_season": 23.399999999999977
   },
   {
@@ -228,11 +195,8 @@
    "patch_slope_gb": 0.60997474193573,
    "T2M": 16.47,
    "temp_range": 47.38,
-   "PRECTOTCORR": 0.58,
    "RH2M": 39.94,
    "ALLSKY_SFC_SW_DWN": 21.51,
-   "WS2M": 2.74,
-   "elevation_m": 1556.79,
    "lst_season": 31.19999999999999
   },
   {
@@ -247,11 +211,8 @@
    "patch_slope_gb": 0.7673563361167908,
    "T2M": 13.78,
    "temp_range": 57.0,
-   "PRECTOTCORR": 0.93,
    "RH2M": 41.85,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "WS2M": 2.49,
-   "elevation_m": 1592.0,
    "lst_season": 46.200000000000045
   },
   {
@@ -266,11 +227,8 @@
    "patch_slope_gb": 1.0952969789505005,
    "T2M": 11.91,
    "temp_range": 61.08,
-   "PRECTOTCORR": 1.07,
    "RH2M": 47.98,
    "ALLSKY_SFC_SW_DWN": 19.22,
-   "WS2M": 3.71,
-   "elevation_m": 1819.03,
    "lst_season": 32.70000000000002
   },
   {
@@ -285,11 +243,8 @@
    "patch_slope_gb": 0.8452998399734497,
    "T2M": 20.12,
    "temp_range": 54.74,
-   "PRECTOTCORR": 0.9,
    "RH2M": 45.78,
    "ALLSKY_SFC_SW_DWN": 20.66,
-   "WS2M": 2.36,
-   "elevation_m": 979.7,
    "lst_season": 24.600000000000023
   },
   {
@@ -304,11 +259,8 @@
    "patch_slope_gb": 0.8254275918006897,
    "T2M": 13.78,
    "temp_range": 57.0,
-   "PRECTOTCORR": 0.93,
    "RH2M": 41.85,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "WS2M": 2.49,
-   "elevation_m": 1592.0,
    "lst_season": 46.19999999999999
   },
   {
@@ -323,11 +275,8 @@
    "patch_slope_gb": 0.7572929859161377,
    "T2M": 10.74,
    "temp_range": 54.97,
-   "PRECTOTCORR": 0.97,
    "RH2M": 44.96,
    "ALLSKY_SFC_SW_DWN": 20.56,
-   "WS2M": 1.76,
-   "elevation_m": 1914.17,
    "lst_season": 39.599999999999966
   },
   {
@@ -342,11 +291,8 @@
    "patch_slope_gb": 0.7545111179351807,
    "T2M": 5.69,
    "temp_range": 69.53,
-   "PRECTOTCORR": 1.14,
    "RH2M": 59.83,
    "ALLSKY_SFC_SW_DWN": 16.38,
-   "WS2M": 2.21,
-   "elevation_m": 1891.71,
    "lst_season": 54.0
   },
   {
@@ -361,11 +307,8 @@
    "patch_slope_gb": 0.47689056396484375,
    "T2M": 25.96,
    "temp_range": 29.010000000000005,
-   "PRECTOTCORR": 1.23,
    "RH2M": 46.84,
    "ALLSKY_SFC_SW_DWN": 21.45,
-   "WS2M": 2.59,
-   "elevation_m": 1063.31,
    "lst_season": 6.600000000000023
   },
   {
@@ -380,11 +323,8 @@
    "patch_slope_gb": 0.606499969959259,
    "T2M": 19.1,
    "temp_range": 52.379999999999995,
-   "PRECTOTCORR": 0.34,
    "RH2M": 29.33,
    "ALLSKY_SFC_SW_DWN": 20.53,
-   "WS2M": 2.09,
-   "elevation_m": 845.57,
    "lst_season": 38.39999999999998
   },
   {
@@ -399,11 +339,8 @@
    "patch_slope_gb": 0.27093505859375,
    "T2M": -8.1,
    "temp_range": 48.76,
-   "PRECTOTCORR": 2.1,
    "RH2M": 95.66,
    "ALLSKY_SFC_SW_DWN": 7.94,
-   "WS2M": 3.3,
-   "elevation_m": 409.59,
    "lst_season": 24.600000000000023
   },
   {
@@ -418,11 +355,8 @@
    "patch_slope_gb": 0.7574086785316467,
    "T2M": 22.3,
    "temp_range": 53.059999999999995,
-   "PRECTOTCORR": 0.51,
    "RH2M": 37.68,
    "ALLSKY_SFC_SW_DWN": 21.62,
-   "WS2M": 2.69,
-   "elevation_m": 374.11,
    "lst_season": 30.599999999999966
   },
   {
@@ -437,11 +371,8 @@
    "patch_slope_gb": 0.6603252291679382,
    "T2M": 21.95,
    "temp_range": 40.37,
-   "PRECTOTCORR": 0.18,
    "RH2M": 41.66,
    "ALLSKY_SFC_SW_DWN": 23.89,
-   "WS2M": 3.02,
-   "elevation_m": 442.81,
    "lst_season": 15.0
   },
   {
@@ -456,11 +387,8 @@
    "patch_slope_gb": 1.4087964296340942,
    "T2M": 23.61,
    "temp_range": 12.690000000000001,
-   "PRECTOTCORR": 2.14,
    "RH2M": 77.38,
    "ALLSKY_SFC_SW_DWN": 20.91,
-   "WS2M": 5.4,
-   "elevation_m": 227.42,
    "lst_season": 3.299999999999983
   },
   {
@@ -475,11 +403,8 @@
    "patch_slope_gb": 0.004447309300303459,
    "T2M": -14.42,
    "temp_range": 65.36,
-   "PRECTOTCORR": 0.85,
    "RH2M": 94.36,
    "ALLSKY_SFC_SW_DWN": 8.34,
-   "WS2M": 3.08,
-   "elevation_m": 173.12,
    "lst_season": 49.80000000000001
   },
   {
@@ -494,11 +419,8 @@
    "patch_slope_gb": 1.012190818786621,
    "T2M": 22.54,
    "temp_range": 49.25,
-   "PRECTOTCORR": 0.65,
    "RH2M": 34.81,
    "ALLSKY_SFC_SW_DWN": 22.57,
-   "WS2M": 3.08,
-   "elevation_m": 499.97,
    "lst_season": 24.599999999999966
   },
   {
@@ -513,11 +435,8 @@
    "patch_slope_gb": 0.37194904685020447,
    "T2M": -2.84,
    "temp_range": 34.14,
-   "PRECTOTCORR": 2.36,
    "RH2M": 94.09,
    "ALLSKY_SFC_SW_DWN": 10.73,
-   "WS2M": 4.82,
-   "elevation_m": 801.56,
    "lst_season": 26.400000000000034
   },
   {
@@ -532,11 +451,8 @@
    "patch_slope_gb": 0.686852753162384,
    "T2M": 12.31,
    "temp_range": 57.49,
-   "PRECTOTCORR": 0.54,
    "RH2M": 42.56,
    "ALLSKY_SFC_SW_DWN": 20.32,
-   "WS2M": 2.83,
-   "elevation_m": 1853.88,
    "lst_season": 48.60000000000002
   },
   {
@@ -551,11 +467,8 @@
    "patch_slope_gb": 0.9756390452384949,
    "T2M": 18.18,
    "temp_range": 20.529999999999998,
-   "PRECTOTCORR": 4.97,
    "RH2M": 83.01,
    "ALLSKY_SFC_SW_DWN": 19.01,
-   "WS2M": 2.11,
-   "elevation_m": 1144.66,
    "lst_season": 6.0
   },
   {
@@ -570,11 +483,8 @@
    "patch_slope_gb": 0.6670492887496948,
    "T2M": 17.68,
    "temp_range": 56.16,
-   "PRECTOTCORR": 0.63,
    "RH2M": 39.08,
    "ALLSKY_SFC_SW_DWN": 21.24,
-   "WS2M": 2.82,
-   "elevation_m": 1275.56,
    "lst_season": 36.0
   },
   {
@@ -589,11 +499,8 @@
    "patch_slope_gb": 0.6504182815551758,
    "T2M": 21.99,
    "temp_range": 49.459999999999994,
-   "PRECTOTCORR": 0.21,
    "RH2M": 30.09,
    "ALLSKY_SFC_SW_DWN": 21.68,
-   "WS2M": 2.83,
-   "elevation_m": 780.48,
    "lst_season": 30.599999999999966
   },
   {
@@ -608,11 +515,8 @@
    "patch_slope_gb": 0.9120899438858032,
    "T2M": 12.14,
    "temp_range": 58.3,
-   "PRECTOTCORR": 1.89,
    "RH2M": 62.95,
    "ALLSKY_SFC_SW_DWN": 17.76,
-   "WS2M": 1.69,
-   "elevation_m": 1181.02,
    "lst_season": 26.399999999999977
   },
   {
@@ -627,11 +531,8 @@
    "patch_slope_gb": 0.8844327330589294,
    "T2M": 20.12,
    "temp_range": 15.469999999999999,
-   "PRECTOTCORR": 0.3,
    "RH2M": 78.06,
    "ALLSKY_SFC_SW_DWN": 18.6,
-   "WS2M": 5.5,
-   "elevation_m": 26.63,
    "lst_season": 9.599999999999966
   },
   {
@@ -646,11 +547,8 @@
    "patch_slope_gb": 1.160407543182373,
    "T2M": 25.96,
    "temp_range": 39.47,
-   "PRECTOTCORR": 2.31,
    "RH2M": 53.19,
    "ALLSKY_SFC_SW_DWN": 19.21,
-   "WS2M": 2.55,
-   "elevation_m": 530.02,
    "lst_season": NaN
   },
   {
@@ -665,11 +563,8 @@
    "patch_slope_gb": 1.3251031637191772,
    "T2M": -2.05,
    "temp_range": 78.87,
-   "PRECTOTCORR": 2.84,
    "RH2M": 90.41,
    "ALLSKY_SFC_SW_DWN": 11.17,
-   "WS2M": 1.03,
-   "elevation_m": 469.19,
    "lst_season": 39.0
   },
   {
@@ -684,11 +579,8 @@
    "patch_slope_gb": 0.48004764318466187,
    "T2M": 11.75,
    "temp_range": 61.08,
-   "PRECTOTCORR": 0.66,
    "RH2M": 43.14,
    "ALLSKY_SFC_SW_DWN": 19.03,
-   "WS2M": 2.46,
-   "elevation_m": 1659.66,
    "lst_season": 47.39999999999998
   },
   {
@@ -703,11 +595,8 @@
    "patch_slope_gb": 0.9677062630653381,
    "T2M": 20.9,
    "temp_range": 15.920000000000002,
-   "PRECTOTCORR": 4.41,
    "RH2M": 82.05,
    "ALLSKY_SFC_SW_DWN": 19.01,
-   "WS2M": 3.79,
-   "elevation_m": 635.57,
    "lst_season": 7.2000000000000455
   },
   {
@@ -722,11 +611,8 @@
    "patch_slope_gb": 0.8096075057983398,
    "T2M": 18.18,
    "temp_range": 20.529999999999998,
-   "PRECTOTCORR": 4.97,
    "RH2M": 83.01,
    "ALLSKY_SFC_SW_DWN": 19.01,
-   "WS2M": 2.11,
-   "elevation_m": 1144.66,
    "lst_season": 7.199999999999989
   },
   {
@@ -741,11 +627,8 @@
    "patch_slope_gb": 0.8191266655921936,
    "T2M": 19.89,
    "temp_range": 53.41,
-   "PRECTOTCORR": 0.4,
    "RH2M": 30.62,
    "ALLSKY_SFC_SW_DWN": 20.7,
-   "WS2M": 2.59,
-   "elevation_m": 725.38,
    "lst_season": 40.19999999999999
   },
   {
@@ -760,11 +643,8 @@
    "patch_slope_gb": 1.7222392559051514,
    "T2M": -27.23,
    "temp_range": 48.22,
-   "PRECTOTCORR": 0.22,
    "RH2M": 79.0,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "WS2M": 5.37,
-   "elevation_m": 1138.8,
    "lst_season": 25.80000000000001
   },
   {
@@ -779,11 +659,8 @@
    "patch_slope_gb": 0.6594516038894653,
    "T2M": 21.11,
    "temp_range": 49.199999999999996,
-   "PRECTOTCORR": 0.23,
    "RH2M": 32.97,
    "ALLSKY_SFC_SW_DWN": 21.34,
-   "WS2M": 2.99,
-   "elevation_m": 827.73,
    "lst_season": 28.200000000000045
   },
   {
@@ -798,11 +675,8 @@
    "patch_slope_gb": 0.7244564890861511,
    "T2M": 11.36,
    "temp_range": 60.19,
-   "PRECTOTCORR": 1.14,
    "RH2M": 47.71,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "WS2M": 2.35,
-   "elevation_m": 1914.92,
    "lst_season": 44.39999999999998
   },
   {
@@ -817,11 +691,8 @@
    "patch_slope_gb": 0.6336910128593445,
    "T2M": 22.89,
    "temp_range": 50.15,
-   "PRECTOTCORR": 0.23,
    "RH2M": 28.76,
    "ALLSKY_SFC_SW_DWN": 21.9,
-   "WS2M": 2.88,
-   "elevation_m": 681.73,
    "lst_season": 28.80000000000001
   },
   {
@@ -836,11 +707,8 @@
    "patch_slope_gb": 0.8116993308067322,
    "T2M": -5.86,
    "temp_range": 72.25,
-   "PRECTOTCORR": 2.6,
    "RH2M": 92.59,
    "ALLSKY_SFC_SW_DWN": 10.83,
-   "WS2M": 4.32,
-   "elevation_m": 426.62,
    "lst_season": 44.400000000000034
   },
   {
@@ -855,11 +723,8 @@
    "patch_slope_gb": 0.5483489632606506,
    "T2M": 19.66,
    "temp_range": 52.279999999999994,
-   "PRECTOTCORR": 0.39,
    "RH2M": 32.56,
    "ALLSKY_SFC_SW_DWN": 20.84,
-   "WS2M": 2.45,
-   "elevation_m": 694.2,
    "lst_season": 37.80000000000001
   },
   {
@@ -874,11 +739,8 @@
    "patch_slope_gb": 0.9159088134765625,
    "T2M": 7.86,
    "temp_range": 60.39,
-   "PRECTOTCORR": 1.13,
    "RH2M": 48.61,
    "ALLSKY_SFC_SW_DWN": 19.18,
-   "WS2M": 2.31,
-   "elevation_m": 2246.85,
    "lst_season": 46.80000000000001
   },
   {
@@ -893,11 +755,8 @@
    "patch_slope_gb": 0.9539887309074402,
    "T2M": 7.04,
    "temp_range": 65.35,
-   "PRECTOTCORR": 1.36,
    "RH2M": 68.43,
    "ALLSKY_SFC_SW_DWN": 16.31,
-   "WS2M": 1.16,
-   "elevation_m": 1500.57,
    "lst_season": 33.0
   },
   {
@@ -912,11 +771,8 @@
    "patch_slope_gb": 0.7516119480133057,
    "T2M": 21.89,
    "temp_range": 51.53,
-   "PRECTOTCORR": 0.26,
    "RH2M": 35.07,
    "ALLSKY_SFC_SW_DWN": 21.34,
-   "WS2M": 2.44,
-   "elevation_m": 380.74,
    "lst_season": 32.400000000000034
   },
   {
@@ -931,11 +787,8 @@
    "patch_slope_gb": 0.6759960651397705,
    "T2M": 16.47,
    "temp_range": 47.38,
-   "PRECTOTCORR": 0.58,
    "RH2M": 39.94,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "WS2M": 2.74,
-   "elevation_m": 1556.79,
    "lst_season": 30.0
   },
   {
@@ -950,11 +803,8 @@
    "patch_slope_gb": 0.30045086145401,
    "T2M": 16.08,
    "temp_range": 22.169999999999998,
-   "PRECTOTCORR": 0.27,
    "RH2M": 55.57,
    "ALLSKY_SFC_SW_DWN": 23.86,
-   "WS2M": 2.13,
-   "elevation_m": 1940.88,
    "lst_season": 9.599999999999966
   },
   {
@@ -969,11 +819,8 @@
    "patch_slope_gb": 0.9184463024139404,
    "T2M": 27.5,
    "temp_range": 42.46,
-   "PRECTOTCORR": 1.11,
    "RH2M": 39.26,
    "ALLSKY_SFC_SW_DWN": 23.06,
-   "WS2M": 3.27,
-   "elevation_m": 175.37,
    "lst_season": 14.400000000000034
   },
   {
@@ -988,11 +835,8 @@
    "patch_slope_gb": 0.7280510663986206,
    "T2M": 20.18,
    "temp_range": 52.11,
-   "PRECTOTCORR": 0.35,
    "RH2M": 33.06,
    "ALLSKY_SFC_SW_DWN": 21.19,
-   "WS2M": 2.42,
-   "elevation_m": 616.12,
    "lst_season": 38.400000000000034
   },
   {
@@ -1007,11 +851,8 @@
    "patch_slope_gb": 0.4657272696495056,
    "T2M": 3.2,
    "temp_range": 55.68,
-   "PRECTOTCORR": 0.14,
    "RH2M": 33.54,
    "ALLSKY_SFC_SW_DWN": 18.67,
-   "WS2M": 2.69,
-   "elevation_m": 3015.38,
    "lst_season": 42.0
   },
   {
@@ -1026,11 +867,8 @@
    "patch_slope_gb": 1.2253663539886475,
    "T2M": 8.74,
    "temp_range": 55.39,
-   "PRECTOTCORR": 2.05,
    "RH2M": 81.27,
    "ALLSKY_SFC_SW_DWN": 11.71,
-   "WS2M": 2.6,
-   "elevation_m": 470.09,
    "lst_season": 30.599999999999966
   },
   {
@@ -1045,11 +883,8 @@
    "patch_slope_gb": 0.7618675827980042,
    "T2M": 7.77,
    "temp_range": 59.379999999999995,
-   "PRECTOTCORR": 1.17,
    "RH2M": 53.65,
    "ALLSKY_SFC_SW_DWN": 19.06,
-   "WS2M": 1.76,
-   "elevation_m": 2462.77,
    "lst_season": 44.39999999999998
   },
   {
@@ -1064,11 +899,8 @@
    "patch_slope_gb": 0.9706573486328125,
    "T2M": 18.01,
    "temp_range": 50.87,
-   "PRECTOTCORR": 1.28,
    "RH2M": 62.53,
    "ALLSKY_SFC_SW_DWN": 18.07,
-   "WS2M": 2.41,
-   "elevation_m": 187.78,
    "lst_season": 30.0
   },
   {
@@ -1083,11 +915,8 @@
    "patch_slope_gb": 0.5800901055335999,
    "T2M": 20.47,
    "temp_range": 48.58,
-   "PRECTOTCORR": 0.44,
    "RH2M": 34.72,
    "ALLSKY_SFC_SW_DWN": 21.15,
-   "WS2M": 2.73,
-   "elevation_m": 923.83,
    "lst_season": 30.600000000000023
   },
   {
@@ -1102,11 +931,8 @@
    "patch_slope_gb": 0.9744788408279419,
    "T2M": 16.69,
    "temp_range": 49.67,
-   "PRECTOTCORR": 0.78,
    "RH2M": 46.75,
    "ALLSKY_SFC_SW_DWN": 20.32,
-   "WS2M": 2.22,
-   "elevation_m": 785.57,
    "lst_season": 28.80000000000001
   },
   {
@@ -1121,11 +947,8 @@
    "patch_slope_gb": 0.7201117277145386,
    "T2M": 19.35,
    "temp_range": 49.13,
-   "PRECTOTCORR": 0.4,
    "RH2M": 34.47,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "WS2M": 3.03,
-   "elevation_m": 1223.17,
    "lst_season": 28.19999999999999
   },
   {
@@ -1140,11 +963,8 @@
    "patch_slope_gb": 0.5529618859291077,
    "T2M": 21.09,
    "temp_range": 43.650000000000006,
-   "PRECTOTCORR": 0.23,
    "RH2M": 61.29,
    "ALLSKY_SFC_SW_DWN": 20.55,
-   "WS2M": 4.53,
-   "elevation_m": 116.01,
    "lst_season": 9.0
   },
   {
@@ -1159,11 +979,8 @@
    "patch_slope_gb": 0.5843775272369385,
    "T2M": 20.16,
    "temp_range": 34.31,
-   "PRECTOTCORR": 0.42,
    "RH2M": 72.07,
    "ALLSKY_SFC_SW_DWN": 20.42,
-   "WS2M": 4.64,
-   "elevation_m": 34.4,
    "lst_season": 10.199999999999989
   },
   {
@@ -1178,11 +995,8 @@
    "patch_slope_gb": 0.7054835557937622,
    "T2M": 20.07,
    "temp_range": 44.26,
-   "PRECTOTCORR": 0.53,
    "RH2M": 66.77,
    "ALLSKY_SFC_SW_DWN": 20.97,
-   "WS2M": 4.5,
-   "elevation_m": 141.49,
    "lst_season": 9.0
   },
   {
@@ -1197,11 +1011,8 @@
    "patch_slope_gb": 0.697562575340271,
    "T2M": 19.75,
    "temp_range": 33.43,
-   "PRECTOTCORR": 0.34,
    "RH2M": 75.23,
    "ALLSKY_SFC_SW_DWN": 20.97,
-   "WS2M": 4.52,
-   "elevation_m": 25.7,
    "lst_season": 6.599999999999966
   },
   {
@@ -1216,11 +1027,8 @@
    "patch_slope_gb": 0.832139253616333,
    "T2M": 14.83,
    "temp_range": 53.73,
-   "PRECTOTCORR": 0.37,
    "RH2M": 34.29,
    "ALLSKY_SFC_SW_DWN": 20.04,
-   "WS2M": 2.83,
-   "elevation_m": 1409.11,
    "lst_season": 43.799999999999955
   },
   {
@@ -1235,11 +1043,8 @@
    "patch_slope_gb": 0.9344050884246826,
    "T2M": 17.86,
    "temp_range": 54.67,
-   "PRECTOTCORR": 0.96,
    "RH2M": 48.12,
    "ALLSKY_SFC_SW_DWN": 19.98,
-   "WS2M": 3.35,
-   "elevation_m": 1229.79,
    "lst_season": 27.600000000000023
   },
   {
@@ -1254,11 +1059,8 @@
    "patch_slope_gb": 1.158540964126587,
    "T2M": 3.69,
    "temp_range": 71.46000000000001,
-   "PRECTOTCORR": 1.82,
    "RH2M": 68.86,
    "ALLSKY_SFC_SW_DWN": 14.84,
-   "WS2M": 2.2,
-   "elevation_m": 2001.45,
    "lst_season": 31.200000000000045
   },
   {
@@ -1273,11 +1075,8 @@
    "patch_slope_gb": 1.410197377204895,
    "T2M": 4.07,
    "temp_range": 80.00999999999999,
-   "PRECTOTCORR": 2.24,
    "RH2M": 83.88,
    "ALLSKY_SFC_SW_DWN": 12.66,
-   "WS2M": 0.81,
-   "elevation_m": 303.33,
    "lst_season": 36.0
   },
   {
@@ -1292,11 +1091,8 @@
    "patch_slope_gb": 0.16144876182079315,
    "T2M": -7.62,
    "temp_range": 51.940000000000005,
-   "PRECTOTCORR": 1.82,
    "RH2M": 94.8,
    "ALLSKY_SFC_SW_DWN": 7.52,
-   "WS2M": 3.37,
-   "elevation_m": 343.29,
    "lst_season": 24.600000000000023
   },
   {
@@ -1311,11 +1107,8 @@
    "patch_slope_gb": 0.5318547487258911,
    "T2M": 13.06,
    "temp_range": 62.06999999999999,
-   "PRECTOTCORR": 0.17,
    "RH2M": 31.6,
    "ALLSKY_SFC_SW_DWN": 17.97,
-   "WS2M": 2.52,
-   "elevation_m": 1053.44,
    "lst_season": 46.200000000000045
   },
   {
@@ -1330,11 +1123,8 @@
    "patch_slope_gb": 1.014849066734314,
    "T2M": 20.16,
    "temp_range": 15.719999999999999,
-   "PRECTOTCORR": 0.68,
    "RH2M": 77.2,
    "ALLSKY_SFC_SW_DWN": 18.78,
-   "WS2M": 4.98,
-   "elevation_m": 138.18,
    "lst_season": 22.80000000000001
   },
   {
@@ -1349,11 +1139,8 @@
    "patch_slope_gb": 0.7041375041007996,
    "T2M": 21.22,
    "temp_range": 49.17,
-   "PRECTOTCORR": 0.28,
    "RH2M": 30.93,
    "ALLSKY_SFC_SW_DWN": 20.61,
-   "WS2M": 2.7,
-   "elevation_m": 922.65,
    "lst_season": 28.200000000000045
   },
   {
@@ -1368,11 +1155,8 @@
    "patch_slope_gb": 0.5818462371826172,
    "T2M": 15.03,
    "temp_range": 65.3,
-   "PRECTOTCORR": 0.1,
    "RH2M": 28.55,
    "ALLSKY_SFC_SW_DWN": 17.19,
-   "WS2M": 1.76,
-   "elevation_m": 463.53,
    "lst_season": 56.39999999999998
   },
   {
@@ -1387,11 +1171,8 @@
    "patch_slope_gb": 0.8136438727378845,
    "T2M": 15.47,
    "temp_range": 54.21,
-   "PRECTOTCORR": 0.45,
    "RH2M": 32.82,
    "ALLSKY_SFC_SW_DWN": 20.17,
-   "WS2M": 2.04,
-   "elevation_m": 1359.83,
    "lst_season": 39.599999999999966
   },
   {
@@ -1406,11 +1187,8 @@
    "patch_slope_gb": 0.6312251687049866,
    "T2M": 18.12,
    "temp_range": 48.92,
-   "PRECTOTCORR": 0.11,
    "RH2M": 41.77,
    "ALLSKY_SFC_SW_DWN": 22.53,
-   "WS2M": 2.83,
-   "elevation_m": 1076.35,
    "lst_season": 30.0
   },
   {
@@ -1425,11 +1203,8 @@
    "patch_slope_gb": 1.3996987342834473,
    "T2M": -29.87,
    "temp_range": 50.54,
-   "PRECTOTCORR": 0.25,
    "RH2M": 67.49,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "WS2M": 6.19,
-   "elevation_m": 1416.84,
    "lst_season": 27.600000000000023
   },
   {
@@ -1444,11 +1219,8 @@
    "patch_slope_gb": 0.5995892286300659,
    "T2M": 21.45,
    "temp_range": 49.56,
-   "PRECTOTCORR": 0.22,
    "RH2M": 29.74,
    "ALLSKY_SFC_SW_DWN": 21.7,
-   "WS2M": 2.82,
-   "elevation_m": 929.64,
    "lst_season": 28.799999999999955
   },
   {
@@ -1463,11 +1235,8 @@
    "patch_slope_gb": 0.7236111164093018,
    "T2M": 19.83,
    "temp_range": 48.61,
-   "PRECTOTCORR": 0.27,
    "RH2M": 32.19,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "WS2M": 2.91,
-   "elevation_m": 1169.3,
    "lst_season": 28.80000000000001
   },
   {
@@ -1482,11 +1251,8 @@
    "patch_slope_gb": 0.739702582359314,
    "T2M": 11.22,
    "temp_range": 56.66,
-   "PRECTOTCORR": 0.88,
    "RH2M": 45.67,
    "ALLSKY_SFC_SW_DWN": 19.83,
-   "WS2M": 2.86,
-   "elevation_m": 2133.05,
    "lst_season": 43.80000000000001
   }
  ]
