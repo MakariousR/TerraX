@@ -120,7 +120,7 @@ function card(d, title) {
     <ul>${d.reasons.map(r => `<li>${r}</li>`).join("") || "<li>no single strong reason</li>"}</ul>
     <div class="section">Conditions</div>
     <table><tr><th>condition</th><th>here</th><th>Moon analogs</th><th>Mars analogs</th></tr>${rows}</table>
-    <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 %." : ""}</div>
+    <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 % and each higher than Neither." : ""}</div>
     <div class="section">Most similar known analog</div>
     <div style="font-size:13px">${d.similar.site} <span style="color:${COLORS[d.similar.label]}">(${d.similar.label})</span></div>
     <div class="note" style="margin-top:12px">Model: LightGBM trained on 125 documented sites · about 80 % accurate on unseen regions, weakest on Moon vs Mars.</div>

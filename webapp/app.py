@@ -22,7 +22,7 @@ NUMERIC = [f for f in FEATURES if f != "rock"]
 MU, SD = pd.Series(meta["mu"]), pd.Series(meta["sd"])
 ANALOGS = pd.DataFrame(meta["analogs"])
 TYPICAL = meta["typical"]
-BOTH_MIN = meta.get("both_min", 0.30)        # Moon and Mars both at least this -> verdict "Both" (same as the notebook)
+BOTH_MIN = meta.get("both_min", 0.30)        # Moon and Mars both at least this and both above Neither -> "Both" (same as the notebook)
 
 # NASA GIBS land mask of the whole world at 0.5 deg: lets us reject ocean clicks instantly (downloaded once)
 _mask_file = DATA / "cache" / "OSM_Land_Mask_global_0.5deg.png"
@@ -89,7 +89,8 @@ def predict():
     proba = model.predict_proba(X).mean(0)
     best = int(np.argmax(proba))
     moon, mars = CLASSES.index("Moon"), CLASSES.index("Mars")
-    both = proba[moon] >= BOTH_MIN and proba[mars] >= BOTH_MIN
+    neither = CLASSES.index("Neither")
+    both = proba[moon] >= BOTH_MIN and proba[mars] >= BOTH_MIN and min(proba[moon], proba[mars]) > proba[neither]
     prediction = "Both" if both else CLASSES[best]
     contrib = model.predict(X, pred_contrib=True).reshape(len(X), len(CLASSES), len(FEATURES) + 1)
     pushed = contrib[:, moon, :-1] + contrib[:, mars, :-1] if both else contrib[:, best, :-1]   # Both: what made it Moon- and Mars-like
