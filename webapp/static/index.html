@@ -34,6 +34,8 @@
   td { padding:4px 4px; border-bottom:1px solid #f1f0ec; }
   td.here { font-weight:600; }
   .note { color:var(--muted); font-size:11.5px; margin-top:6px; line-height:1.4; }
+  .progress { height:10px; background:var(--line); border-radius:5px; overflow:hidden; margin:10px 0 6px; }
+  .progress div { height:100%; background:var(--moon); transition:width .4s; }
   .conf { display:inline-block; font-size:11.5px; font-weight:600; padding:2px 8px; border-radius:10px; margin:0 0 10px; }
   .conf.high { background:#e6f4ea; color:#1e6b34; } .conf.medium { background:#fff4d6; color:#7a5a00; } .conf.low { background:#fde8e6; color:#9b2c22; }
   .caution { font-size:12.5px; color:#7a5a00; background:#fff8e5; border:1px solid #f2dfa6; border-radius:8px; padding:9px 11px; margin:4px 0 10px; line-height:1.45; }
@@ -50,8 +52,8 @@
     <h1>TerraX</h1>
     <div class="sub">Click anywhere on land. The model downloads NASA imagery, climate, surface temperature and geology for a ±11 km area and predicts whether it is a <b style="color:var(--moon)">Moon</b> analog, a <b style="color:var(--mars)">Mars</b> analog, <b style="color:#8a4fd0">both</b>, or <b style="color:var(--neither)">neither</b>.</div>
     <form id="search"><input id="q" placeholder="Search a place (e.g. Atacama Desert)"><button>Go</button></form>
-    <div id="scanbox"><button id="scanbtn" class="btn">▦ Scan this area</button>
-      <div class="note">Scores the area on screen as a grid of 22 km squares, up to 2° × 2° (about 220 km) at a time. Zoom in to a region first; a bigger view scans its centre.</div></div>
+    <div id="scanbox"><button id="scanbtn" class="btn">▦ Select an area to scan</button>
+      <div class="note">Press the button, then drag a box on the map. TerraX scores it as a grid of 22 km squares, up to 2° × 2° (about 220 km, 100 squares) at a time. A progress bar shows how far it is.</div></div>
     <div id="result"><div class="hint">No place selected yet.<br><br>Click the map or search a place. The small dots are the known training sites; click one to see how the model scores it.</div></div>
   </div>
 </div>
@@ -95,29 +97,92 @@ fetch("/api/sites").then(r => r.json()).then(rows => rows.forEach(s =>
 // ---- area scan ----
 let lastScanHtml = null;
 const OPACITY = { high: 0.55, medium: 0.35, low: 0.18 };
-document.getElementById("scanbtn").addEventListener("click", () => {
-  const b = map.getBounds(), btn = document.getElementById("scanbtn"), res = document.getElementById("result");
-  const big = b.getNorth() - b.getSouth() > 2.2 || b.getEast() - b.getWest() > 2.2;
-  btn.disabled = true; btn.textContent = "Scanning…";
-  res.innerHTML = `<div class="hint"><span class="spinner"></span>Scanning this area… please wait.<br>
-    <span style="font-size:12px">Up to 100 squares are scored. A new area can take up to about a minute; areas already scanned take a few seconds.</span></div>`;
-  fetch(`/api/scan?south=${b.getSouth()}&west=${b.getWest()}&north=${b.getNorth()}&east=${b.getEast()}`)
-    .then(r => r.json()).then(d => {
-      if (d.error) { res.innerHTML = `<div class="error">${d.error}</div>`; return; }
-      scanLayer.clearLayers();
-      const [s, w, n, e] = d.bounds, h = d.tile / 2;
-      L.rectangle([[s, w], [n, e]], { fill: false, color: "#222", weight: 1.5, dashArray: "5 4", interactive: false }).addTo(scanLayer);
-      d.squares.forEach(q => {
-        const p = q.probabilities, pct = v => Math.round(v * 100);
-        L.rectangle([[q.lat - h, q.lon - h], [q.lat + h, q.lon + h]],
-          { color: COLORS[q.prediction], weight: 0.6, fillColor: COLORS[q.prediction], fillOpacity: OPACITY[q.confidence], bubblingMouseEvents: false })
-          .bindTooltip(`<b>${q.prediction}</b> · ${q.confidence} confidence<br>Moon ${pct(p.Moon)}% · Mars ${pct(p.Mars)}% · Neither ${pct(p.Neither)}%`)
-          .on("click", () => select(q.lat, q.lon, `Scan square (${q.prediction})`)).addTo(scanLayer);
-      });
-      lastScanHtml = scanSummary(d, big); res.innerHTML = lastScanHtml;
-    }).catch(() => { res.innerHTML = `<div class="error">The server did not answer. Is <code>python webapp/app.py</code> running?</div>`; })
-    .finally(() => { btn.disabled = false; btn.textContent = "▦ Scan this area"; });
+const MAX_DEG = 2, SCAN_LABEL = "▦ Select an area to scan";
+const scanBtn = document.getElementById("scanbtn");
+let selecting = false, selStart = null, selRect = null, ignoreClick = false;
+
+// selection mode: press the button, then drag a box on the map (Esc or the button again cancels)
+scanBtn.addEventListener("click", () => selecting ? stopSelect(true) : startSelect());
+document.addEventListener("keydown", e => { if (e.key === "Escape" && selecting) stopSelect(true); });
+
+function startSelect() {
+  selecting = true; map.dragging.disable(); map.boxZoom.disable(); map.doubleClickZoom.disable();
+  map.getContainer().style.cursor = "crosshair"; scanBtn.textContent = "✕ Cancel selection";
+  document.getElementById("result").innerHTML = `<div class="hint"><b>Drag on the map</b> to draw the area to scan.<br><br>
+    <span style="font-size:12px">Up to 2° × 2° (about 220 km, 100 squares). Press Esc or the button to cancel.</span></div>`;
+}
+function stopSelect(cancelled) {
+  selecting = false; selStart = null;
+  map.dragging.enable(); map.boxZoom.enable(); map.doubleClickZoom.enable();
+  map.getContainer().style.cursor = ""; scanBtn.textContent = SCAN_LABEL;
+  if (selRect) { map.removeLayer(selRect); selRect = null; }
+  if (cancelled) document.getElementById("result").innerHTML = lastScanHtml || `<div class="hint">Selection cancelled.</div>`;
+}
+function clampBox(a, b) {
+  // box from corner a towards b, at most MAX_DEG on each side
+  const dLat = Math.max(-MAX_DEG, Math.min(MAX_DEG, b.lat - a.lat)), dLon = Math.max(-MAX_DEG, Math.min(MAX_DEG, b.lng - a.lng));
+  return L.latLngBounds(a, L.latLng(a.lat + dLat, a.lng + dLon));
+}
+map.on("mousedown", e => {
+  if (!selecting) return;
+  selStart = e.latlng;
+  selRect = L.rectangle([e.latlng, e.latlng], { color: "#222", weight: 1.5, dashArray: "5 4", fillOpacity: 0.08, interactive: false }).addTo(map);
 });
+map.on("mousemove", e => { if (selecting && selStart) selRect.setBounds(clampBox(selStart, e.latlng)); });
+map.on("mouseup", e => {
+  if (!selecting || !selStart) return;
+  const trimmed = Math.abs(e.latlng.lat - selStart.lat) > MAX_DEG || Math.abs(e.latlng.lng - selStart.lng) > MAX_DEG;
+  const box = clampBox(selStart, e.latlng);
+  ignoreClick = true; setTimeout(() => ignoreClick = false, 300);       // the mouse-up must not also count as a map click
+  stopSelect(false);
+  runScan(box, trimmed);
+});
+
+function runScan(b, big) {
+  const btn = scanBtn, res = document.getElementById("result");
+  btn.disabled = true; btn.textContent = "Scanning…";
+  const fail = msg => { res.innerHTML = `<div class="error">${msg}</div>`; btn.disabled = false; btn.textContent = SCAN_LABEL; };
+  const offline = () => fail(`The server did not answer. Is <code>python webapp/app.py</code> running?`);
+  fetch(`/api/scan/start?south=${b.getSouth()}&west=${b.getWest()}&north=${b.getNorth()}&east=${b.getEast()}`)
+    .then(r => r.json()).then(start => {
+      if (start.error) return fail(start.error);
+      showProgress({ stage: "Starting", done: 0, total: 1, elapsed: 0 }, start.squares_total);
+      const poll = () => fetch(`/api/scan/status/${start.job}`).then(r => r.json()).then(d => {
+        if (d.error) return fail(d.error);
+        if (d.status === "running") { showProgress(d, start.squares_total); return setTimeout(poll, 1000); }
+        drawScan(d); lastScanHtml = scanSummary(d, big); res.innerHTML = lastScanHtml;
+        btn.disabled = false; btn.textContent = SCAN_LABEL;
+      }).catch(offline);
+      setTimeout(poll, 500);
+    }).catch(offline);
+}
+
+const STAGES = ["Downloading NASA images", "Downloading climate and rock type", "Scoring squares"];
+function showProgress(d, squaresTotal) {
+  // overall bar: images ~15 %, climate + rock ~70 %, scoring ~15 % of the work
+  const k = STAGES.indexOf(d.stage), part = d.total ? d.done / d.total : 0;
+  const pct = k < 0 ? 0 : Math.round(100 * ([0, 0.15, 0.85][k] + part * [0.15, 0.70, 0.15][k]));
+  document.getElementById("result").innerHTML = `<div class="hint">
+    <b>Scanning this area… please wait.</b><br>
+    <span style="font-size:12px">Up to ${squaresTotal} squares. A new area takes under a minute; an area already scanned takes a few seconds.</span>
+    <div class="progress"><div style="width:${pct}%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px">
+      <span>${k < 0 ? "Starting…" : `Step ${k + 1}/3: ${d.stage} (${d.done} / ${d.total})`}</span><span>${pct}% · ${d.elapsed || 0} s</span></div></div>`;
+}
+
+const scanRenderer = L.canvas({ padding: 0.5 });     // canvas keeps hundreds of squares fast to pan and zoom
+function drawScan(d) {
+  scanLayer.clearLayers();
+  const [s, w, n, e] = d.bounds, h = d.tile / 2;
+  L.rectangle([[s, w], [n, e]], { fill: false, color: "#222", weight: 1.5, dashArray: "5 4", interactive: false }).addTo(scanLayer);
+  d.squares.forEach(q => {
+    const p = q.probabilities, pct = v => Math.round(v * 100);
+    L.rectangle([[q.lat - h, q.lon - h], [q.lat + h, q.lon + h]],
+      { renderer: scanRenderer, color: COLORS[q.prediction], weight: 0.6, fillColor: COLORS[q.prediction], fillOpacity: OPACITY[q.confidence], bubblingMouseEvents: false })
+      .bindTooltip(`<b>${q.prediction}</b> · ${q.confidence} confidence<br>Moon ${pct(p.Moon)}% · Mars ${pct(p.Mars)}% · Neither ${pct(p.Neither)}%`)
+      .on("click", () => select(q.lat, q.lon, `Scan square (${q.prediction})`)).addTo(scanLayer);
+  });
+}
 
 function scanSummary(d, big) {
   const counts = { Moon: 0, Mars: 0, Both: 0, Neither: 0 };
@@ -128,7 +193,7 @@ function scanSummary(d, big) {
       ${q.lat.toFixed(2)}°, ${q.lon.toFixed(2)}°</a> · <b style="color:${COLORS[q.prediction]}">${q.prediction}</b> ${Math.round(analog(q) * 100)}% · ${q.confidence}</li>`).join("");
   return `<div class="card"><h2>Area scan</h2>
     <div class="coords">${d.squares.length} land squares scored${d.skipped ? ` · ${d.skipped} ocean or water squares skipped` : ""}</div>
-    ${big ? `<div class="caution">The view was larger than 2° × 2°, so only its centre was scanned (dashed box). Zoom in or pan to scan elsewhere.</div>` : ""}
+    ${big ? `<div class="caution">Your box was bigger than 2° × 2°, so it was trimmed to 2° from where you started dragging (dashed box).</div>` : ""}
     <div class="legend">${Object.entries(counts).map(([k, v]) => `<span><span class="dot" style="background:${COLORS[k]}"></span>${k} <b>${v}</b></span>`).join("")}</div>
     <div class="section">Strongest analog squares</div>
     <ul>${list || "<li>no analog squares in this area</li>"}</ul>
@@ -137,7 +202,7 @@ function scanSummary(d, big) {
 
 // ---- predictions ----
 let pin = null;
-map.on("click", e => select(e.latlng.lat, e.latlng.lng));
+map.on("click", e => { if (!selecting && !ignoreClick) select(e.latlng.lat, e.latlng.lng); });
 
 function select(lat, lon, title) {
   if (pin) map.removeLayer(pin);

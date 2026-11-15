@@ -54,7 +54,7 @@ An internet connection is needed: for every new spot, the website downloads live
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
 - **Search a place by name** (for example "Atacama Desert" or "Lanzarote").
-- **Scan a whole area** to find new candidate analogs. Zoom in to a region and press **▦ Scan this area**. TerraX covers the view with a grid of 22 km squares, up to 2° × 2° (about 220 km, 100 squares) at a time, and colours each square by its verdict, with stronger colour for higher confidence. A summary lists the strongest analog squares; click any square for its full card. A new area takes about 30–60 seconds; an area already scanned takes a few seconds.
+- **Scan a whole area** to find new candidate analogs. Press **▦ Select an area to scan** and drag a box on the map. TerraX covers the box with a grid of 22 km squares, up to 2° × 2° (about 220 km, 100 squares) at a time, and colours each square by its verdict, with stronger colour for higher confidence. A progress bar shows each step while it works. A summary lists the strongest analog squares; click any square for its full card. A new area takes under a minute; an area already scanned takes a few seconds.
 - **Click a coloured dot** to see how the model scores one of the 110 known training sites.
 - **Switch the base map** between satellite imagery, NASA Blue Marble and OpenStreetMap.
 
@@ -161,7 +161,9 @@ It returns JSON with `probabilities`, `prediction`, `confidence`, `cautions`, `r
 GET /api/scan?south=29.5&west=58&north=31.5&east=60
 ```
 
-It scans the area as 22 km squares (at most 2° × 2°) and returns each square's `prediction`, `confidence` and `probabilities`. To stay fast, it downloads each NASA image layer once for the whole area and cuts it into squares, and fetches NASA POWER climate once per POWER grid cell, which nearby squares share. Each square gives the same result as clicking its centre.
+It scans the area as 22 km squares (at most 2° × 2°, 100 squares) and returns each square's `prediction`, `confidence` and `probabilities`. To stay fast, it downloads each NASA image layer in blocks of up to 10 × 10 squares and cuts them into squares, and fetches NASA POWER climate once per POWER grid cell, which nearby squares share. Each square gives the same result as clicking its centre.
+
+The website runs scans in the background instead: `GET /api/scan/start?…` (same parameters) returns a `job` id, and `GET /api/scan/status/<job>` returns the current step and progress until the scan is done, then the same result as above.
 
 ---
 

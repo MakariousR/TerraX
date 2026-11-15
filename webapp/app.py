@@ -5,7 +5,10 @@ Needs: data/analog_model.joblib, data/web_meta.json and data/web_sites.json, cre
 """
 import json
 import math
-from concurrent.futures import ThreadPoolExecutor
+import threading
+import time
+import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import joblib
 import numpy as np
@@ -70,7 +73,8 @@ def judge(proba):
 
 
 TILE = 0.2          # one square = the same ±0.1° (about 22 km) area as a single click
-MAX_TILES = 10      # at most 10 x 10 squares per scan (2° x 2°, about 220 km)
+MAX_TILES = 10      # at most 10 x 10 = 100 squares per scan (2° x 2°, about 220 km)
+BLOCK = 10          # images are downloaded in blocks of up to 10 x 10 squares (480 x 480 pixels)
 PX = 48             # pixels per square, as for a single click
 
 
@@ -146,48 +150,129 @@ def predict():
                    land_pixels=int(len(df)))
 
 
-@app.get("/api/scan")
-def scan():
-    # Scan an area as a grid of 22 km squares. Images are downloaded once for the whole area and cut into squares;
-    # climate is downloaded once per NASA POWER grid cell; rock type once per square (in parallel).
-    try:
-        s, w, n, e = (float(request.args[k]) for k in ("south", "west", "north", "east"))
-    except (KeyError, ValueError):
-        return jsonify(error="south, west, north and east are required numbers"), 400
-    cy, cx = (s + n) / 2, ((((w + e) / 2) + 180) % 360) - 180
-    rows = max(1, min(MAX_TILES, round((n - s) / TILE)))
-    cols = max(1, min(MAX_TILES, round((e - w) / TILE)))
-    south = min(max(math.floor((cy - rows * TILE / 2) / TILE) * TILE, -82.0), 82.0 - rows * TILE)   # snap to the 0.2° grid
-    west = min(max(math.floor((cx - cols * TILE / 2) / TILE) * TILE, -180.0), 180.0 - cols * TILE)
-    south, west = round(south, 2), round(west, 2)
+def parse_box(args):
+    # request args -> (south, west, rows, cols) on the 0.2° grid, covering the whole box, at most MAX_TILES a side
+    s, w, n, e = (float(args[k]) for k in ("south", "west", "north", "east"))
+    s, n = min(s, n), max(s, n)
+    w, e = min(w, e), max(w, e)
+    shift = 360 * math.floor((w + 180) / 360)                 # boxes drawn on a repeated world copy -> -180..180
+    w, e = w - shift, e - shift
+
+    def snap(lo, hi, lo_lim, hi_lim):
+        # grow the box outwards to the 0.2° grid so the squares cover the whole selection; keep at most MAX_TILES
+        a, b = math.floor(round(lo / TILE, 6)) * TILE, math.ceil(round(hi / TILE, 6)) * TILE
+        k = max(1, round((b - a) / TILE))
+        if k > MAX_TILES:                                     # too big: keep the centre
+            k = MAX_TILES
+            a = math.floor(round(((lo + hi) / 2 - k * TILE / 2) / TILE, 6)) * TILE
+        a = min(max(a, lo_lim), hi_lim - k * TILE)
+        return round(a, 2), k
+
+    south, rows = snap(s, n, -82.0, 82.0)
+    west, cols = snap(w, e, -180.0, 180.0)
+    return south, west, rows, cols
+
+
+def run_scan(south, west, rows, cols, progress=lambda stage, done, total: None):
+    # Scan an area as a grid of 22 km squares. Images are downloaded in blocks of up to BLOCK x BLOCK squares
+    # (so no single GIBS request is too big) and cut into squares; climate is downloaded once per NASA POWER
+    # grid cell; rock type once per square (in parallel). progress(stage, done, total) reports how far it got.
     north, east = round(south + rows * TILE, 2), round(west + cols * TILE, 2)
-    try:
-        colour, relief, lst, ndvi = area_layers(south, west, north, east, cols * PX, rows * PX)
-        squares = []
-        for i in range(rows):
-            for j in range(cols):
-                sl = (slice(i * PX, (i + 1) * PX), slice(j * PX, (j + 1) * PX))
-                c = colour[sl]; r, g, b = c[..., 0], c[..., 1], c[..., 2]
-                land = (c[..., 3] > 0) & ~((b > r) & (b > g) & ((r + g + b) / 3 < 0.35))
-                if land.sum() >= 100:                                   # skip ocean / mostly-water squares
-                    squares.append((round(north - (i + 0.5) * TILE, 2), round(west + (j + 0.5) * TILE, 2), sl))
-        cells = sorted({power_cell(la, lo) for la, lo, _ in squares})
-        with ThreadPoolExecutor(12) as ex:
-            clim = dict(zip(cells, ex.map(lambda cell: power_climate(*cell), cells)))
-            rocks = list(ex.map(lambda sq: rock_type(sq[0], sq[1]), squares))
-    except Exception as err:                                            # a data service failed
-        return jsonify(error=f"Could not download the data for this area ({err}). Try again."), 502
+    H, W = rows * PX, cols * PX
+    colour, relief = np.zeros((H, W, 4), np.float32), np.zeros((H, W), np.float32)
+    lst, ndvi = np.full((H, W), np.nan, np.float32), np.zeros((H, W), np.float32)
+    blocks = [(i, j) for i in range(0, rows, BLOCK) for j in range(0, cols, BLOCK)]
+    for b, (i, j) in enumerate(blocks):                                 # i = square row from the north
+        progress("Downloading NASA images", b, len(blocks))
+        r, c = min(BLOCK, rows - i), min(BLOCK, cols - j)
+        bn, bw = round(north - i * TILE, 2), round(west + j * TILE, 2)
+        layers = area_layers(round(bn - r * TILE, 2), bw, bn, round(bw + c * TILE, 2), c * PX, r * PX)
+        sl = (slice(i * PX, (i + r) * PX), slice(j * PX, (j + c) * PX))
+        for arr, part in zip((colour, relief, lst, ndvi), layers):
+            arr[sl] = part
+    squares = []
+    for i in range(rows):
+        for j in range(cols):
+            sl = (slice(i * PX, (i + 1) * PX), slice(j * PX, (j + 1) * PX))
+            cc = colour[sl]; r, g, b = cc[..., 0], cc[..., 1], cc[..., 2]
+            land = (cc[..., 3] > 0) & ~((b > r) & (b > g) & ((r + g + b) / 3 < 0.35))
+            if land.sum() >= 100:                                       # skip ocean / mostly-water squares
+                squares.append((round(north - (i + 0.5) * TILE, 2), round(west + (j + 0.5) * TILE, 2), sl))
+    cells = sorted({power_cell(la, lo) for la, lo, _ in squares})
+    clim, rocks, done = {}, {}, 0
+    with ThreadPoolExecutor(12) as ex:
+        jobs = {ex.submit(power_climate, *cell): ("clim", cell) for cell in cells}
+        jobs.update({ex.submit(rock_type, la, lo): ("rock", (la, lo)) for la, lo, _ in squares})
+        for f in as_completed(jobs):
+            kind, key = jobs[f]
+            (clim if kind == "clim" else rocks)[key] = f.result()
+            done += 1
+            progress("Downloading climate and rock type", done, len(jobs))
     out = []
-    for (lat, lon, sl), rock in zip(squares, rocks):
+    for k, (lat, lon, sl) in enumerate(squares):
+        progress("Scoring squares", k, len(squares))
         df = features_from(colour[sl], relief[sl], lst[sl], ndvi[sl],
-                           lambda: clim[power_cell(lat, lon)], lambda: rock)
+                           lambda: clim[power_cell(lat, lon)], lambda: rocks[(lat, lon)])
         if len(df) < 100:
             continue
         proba = model.predict_proba(df[FEATURES]).mean(0)
         verdict, conf = judge(proba)
         out.append(dict(lat=lat, lon=lon, prediction=verdict, confidence=conf,
                         probabilities=dict(zip(CLASSES, map(float, proba)))))
-    return jsonify(bounds=[south, west, north, east], tile=TILE, squares=out, skipped=rows * cols - len(out))
+    return dict(bounds=[south, west, north, east], tile=TILE, squares=out, skipped=rows * cols - len(out))
+
+
+@app.get("/api/scan")
+def scan():
+    # synchronous scan (for direct API use); the website uses /api/scan/start and /api/scan/status for progress
+    try:
+        box = parse_box(request.args)
+    except (KeyError, ValueError):
+        return jsonify(error="south, west, north and east are required numbers"), 400
+    try:
+        return jsonify(run_scan(*box))
+    except Exception as err:                                            # a data service failed
+        return jsonify(error=f"Could not download the data for this area ({err}). Try again."), 502
+
+
+SCANS = {}          # job id -> progress and result of background scans (kept for an hour)
+
+
+@app.get("/api/scan/start")
+def scan_start():
+    try:
+        box = parse_box(request.args)
+    except (KeyError, ValueError):
+        return jsonify(error="south, west, north and east are required numbers"), 400
+    for k in [k for k, v in SCANS.items() if time.time() - v["started"] > 3600]:
+        SCANS.pop(k, None)
+    job = uuid.uuid4().hex[:12]
+    SCANS[job] = state = dict(started=time.time(), stage="Starting", done=0, total=1, result=None, error=None)
+
+    def progress(stage, done, total):
+        state.update(stage=stage, done=done, total=max(total, 1))
+
+    def work():
+        try:
+            state["result"] = run_scan(*box, progress=progress)
+        except Exception as err:                                        # a data service failed
+            state["error"] = f"Could not download the data for this area ({err}). Try again."
+
+    threading.Thread(target=work, daemon=True).start()
+    return jsonify(job=job, squares_total=box[2] * box[3])
+
+
+@app.get("/api/scan/status/<job>")
+def scan_status(job):
+    st = SCANS.get(job)
+    if st is None:
+        return jsonify(error="Unknown or expired scan."), 404
+    if st["error"]:
+        return jsonify(error=st["error"]), 502
+    if st["result"] is not None:
+        return jsonify(status="done", elapsed=round(time.time() - st["started"]), **st["result"])
+    return jsonify(status="running", stage=st["stage"], done=st["done"], total=st["total"],
+                   elapsed=round(time.time() - st["started"]))
 
 
 if __name__ == "__main__":
