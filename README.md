@@ -95,7 +95,7 @@ Every pixel becomes one row with **15 features**: colour and colour shape (`b`, 
 
 ### 4. Model
 
-A **LightGBM** classifier built in 200 rounds of tiny trees (one per class each round, 600 in total), each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
+A **LightGBM** classifier scores every land pixel as Moon, Mars or Neither. It's deliberately kept simple, so it learns broad patterns shared by many places instead of memorising individual sites. For a new place, the probabilities of all its land pixels are averaged.
 
 **Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's uncommon: about 8 of the 110 training places on average (4 to 10 depending on the split), and never for ordinary land.
 
@@ -162,7 +162,7 @@ It returns JSON with `probabilities`, `prediction`, `confidence`, `cautions`, `r
 GET /api/scan?south=29.5&west=58&north=31.5&east=60
 ```
 
-It scans the area as 22 km squares (at most 2° × 2°, 100 squares) and returns each square's `prediction`, `confidence` and `probabilities`. To stay fast, it downloads each NASA image layer in blocks of up to 10 × 10 squares and cuts them into squares, and fetches NASA POWER climate once per POWER grid cell, which nearby squares share. Each square gives the same result as clicking its centre.
+It scans the area as 22 km squares (at most 2° × 2°, 100 squares) and returns each square's `prediction`, `confidence` and `probabilities`. To stay fast, it downloads each NASA image layer in blocks of up to 10 × 10 squares and cuts them into squares, and fetches NASA POWER climate once per POWER grid cell, which nearby squares share. Each square gives practically the same result as clicking its centre: in tests the verdict was always the same, and the probabilities differed by at most half a percentage point, because the shared climate cell can have a slightly different sunlight value.
 
 The website runs scans in the background instead: `GET /api/scan/start?…` (same parameters) returns a `job` id, and `GET /api/scan/status/<job>` returns the current step and progress until the scan is done, then the same result as above.
 
