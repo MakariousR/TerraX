@@ -34,6 +34,9 @@
   td { padding:4px 4px; border-bottom:1px solid #f1f0ec; }
   td.here { font-weight:600; }
   .note { color:var(--muted); font-size:11.5px; margin-top:6px; line-height:1.4; }
+  .conf { display:inline-block; font-size:11.5px; font-weight:600; padding:2px 8px; border-radius:10px; margin:0 0 10px; }
+  .conf.high { background:#e6f4ea; color:#1e6b34; } .conf.medium { background:#fff4d6; color:#7a5a00; } .conf.low { background:#fde8e6; color:#9b2c22; }
+  .caution { font-size:12.5px; color:#7a5a00; background:#fff8e5; border:1px solid #f2dfa6; border-radius:8px; padding:9px 11px; margin:4px 0 10px; line-height:1.45; }
   .error { color:#b3261e; font-size:13px; border:1px solid #f1c6c2; background:#fdf3f2; border-radius:8px; padding:12px; }
   .spinner { width:22px; height:22px; border:3px solid var(--line); border-top-color:var(--moon); border-radius:50%; animation:spin 0.9s linear infinite; display:inline-block; vertical-align:middle; margin-right:8px; }
   @keyframes spin { to { transform:rotate(360deg); } }
@@ -114,8 +117,10 @@ function card(d, title) {
   return `<div class="card">
     <h2 style="color:${COLORS[d.prediction]}">${headline}</h2>
     <div class="coords">${title ? title + " · " : ""}${d.lat.toFixed(2)}°, ${d.lon.toFixed(2)}°</div>
+    <div class="conf ${d.confidence}" title="How decisive the probabilities are: high ≥ 75 %, medium ≥ 55 %, low below">${d.confidence} confidence</div>
     <div class="bar">${bar}</div>
     <div class="legend">${legend}</div>
+    ${(d.cautions || []).map(c => `<div class="caution">⚠️ ${c}</div>`).join("")}
     <div class="section">Why</div>
     <ul>${d.reasons.map(r => `<li>${r}</li>`).join("") || "<li>no single strong reason</li>"}</ul>
     <div class="section">Conditions</div>
@@ -123,7 +128,7 @@ function card(d, title) {
     <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 % and each higher than Neither." : ""}</div>
     <div class="section">Most similar known analog</div>
     <div style="font-size:13px">${d.similar.site} <span style="color:${COLORS[d.similar.label]}">(${d.similar.label})</span></div>
-    <div class="note" style="margin-top:12px">Model: LightGBM trained on 125 documented sites · about 80 % accurate on unseen regions, weakest on Moon vs Mars.</div>
+    <div class="note" style="margin-top:12px">Model: LightGBM trained on 125 documented sites · about 84 % accurate on unseen regions, weakest on Moon vs Mars.</div>
   </div>`;
 }
 

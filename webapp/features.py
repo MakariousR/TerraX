@@ -26,6 +26,8 @@ POWER = "https://power.larc.nasa.gov/api/temporal/climatology/point"
 MACROSTRAT = "https://macrostrat.org/api/v2/geologic_units/map"
 LST_COLORMAP_URL = "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_Land_Surface_Temp.xml"
 LST_MONTHS = ["2023-01-01", "2023-07-01"]
+NDVI_COLORMAP_URL = "https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_NDVI.xml"
+NDVI_MONTHS = ["2023-01-01", "2023-07-01"]
 POWER_PARAMS = ["T2M", "T2M_MAX", "T2M_MIN", "RH2M", "ALLSKY_SFC_SW_DWN"]
 
 
@@ -97,6 +99,28 @@ def lst_season(lat, lon):
     return np.abs(jul - jan)
 
 
+# ---- vegetation (MODIS NDVI colour image -> NDVI) -----------------------------------------
+_ndf = CACHE / "MODIS_NDVI_colormap.xml"
+if not _ndf.exists():
+    _ndf.write_text(_get(NDVI_COLORMAP_URL).text, encoding="utf-8")
+_nentries = re.findall(r'rgb="(\d+),(\d+),(\d+)" transparent="false"[^>]*?value="\[([\d.]+),([\d.]+)\)"', _ndf.read_text(encoding="utf-8"))
+NDVI_RGB = np.array([[int(r), int(g), int(b)] for r, g, b, _, _ in _nentries], dtype=np.float32) / 255
+NDVI_VAL = np.array([(float(lo) + float(hi)) / 2 for *_, lo, hi in _nentries])
+
+
+def decode_ndvi(img):
+    # transparent pixels are NDVI <= 0 (bare ground, snow) -> 0
+    rgb = img[..., :3].reshape(-1, 1, 3)
+    v = NDVI_VAL[((rgb - NDVI_RGB[None]) ** 2).sum(-1).argmin(1)].reshape(img.shape[:2])
+    return np.where(img[..., 3] == 0, 0.0, v)
+
+
+def ndvi_peak(lat, lon):
+    # peak-season greenness per pixel: the higher of January and July
+    jan, jul = [decode_ndvi(gibs_patch("MODIS_Terra_L3_NDVI_Monthly", lat, lon, date=m)) for m in NDVI_MONTHS]
+    return np.maximum(jan, jul)
+
+
 # ---- rock type (Macrostrat geologic maps) -------------------------------------------------
 ROCK_RULES = [
     ("impact",           ["impact", "breccia", "suevite"]),
@@ -148,6 +172,7 @@ def place_features(lat, lon):
         "slope_rg": np.log(lin[..., 0] / lin[..., 1]),
         "slope_gb": np.log(lin[..., 1] / lin[..., 2]),
         "lst_season": lst_season(lat, lon),
+        "ndvi_peak": ndvi_peak(lat, lon),
     }
     df = pd.DataFrame({k: v.ravel() for k, v in f.items()})
     water = (b > r) & (b > g) & (brightness < 0.35)
@@ -155,6 +180,7 @@ def place_features(lat, lon):
     df["patch_roughness"] = relief.std()
     df["patch_color_var"] = brightness.std()
     df["patch_slope_gb"] = df["slope_gb"].mean()
+    df["patch_ndvi"] = df["ndvi_peak"].mean()
     clim = power_climate(lat, lon)
     for k, v in clim.items():
         df[k] = v

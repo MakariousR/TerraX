@@ -21,6 +21,7 @@ FEATURES, CLASSES = meta["features"], meta["classes"]
 NUMERIC = [f for f in FEATURES if f != "rock"]
 MU, SD = pd.Series(meta["mu"]), pd.Series(meta["sd"])
 ANALOGS = pd.DataFrame(meta["analogs"])
+SITES = pd.read_json(DATA / "web_sites.json")                      # known training sites (for the cold-region caution)
 TYPICAL = meta["typical"]
 BOTH_MIN = meta.get("both_min", 0.30)        # Moon and Mars both at least this and both above Neither -> "Both" (same as the notebook)
 
@@ -42,11 +43,18 @@ NICE = {"patch_slope_gb": "area colour (green/blue)", "rock": "rock type", "patc
         "RH2M": "humidity", "patch_roughness": "terrain roughness", "lst_season": "seasonal ground-temperature swing",
         "temp_range": "air-temperature range", "ALLSKY_SFC_SW_DWN": "sunlight",
         "slope_rg": "pixel colour (red/green)", "T2M": "mean temperature",
-        "slope_gb": "pixel colour (green/blue)", "brightness": "brightness", "b": "blue reflectance"}
+        "slope_gb": "pixel colour (green/blue)", "brightness": "brightness", "b": "blue reflectance",
+        "ndvi_peak": "pixel summer greenness", "patch_ndvi": "summer greenness (NDVI)"}
 # rows of the "Conditions" table; must match SHOWN in section 10 of model/main.ipynb
 SHOW = [("rock", "Rock type", ""), ("RH2M", "Humidity", " %"),
         ("temp_range", "Air-temperature range", " °C"), ("lst_season", "Seasonal ground swing", " K"),
+        ("patch_ndvi", "Summer greenness (NDVI)", ""),
         ("patch_roughness", "Terrain roughness", ""), ("patch_slope_gb", "Area colour (G/B)", "")]
+
+
+def confidence(p):
+    # how decisive the answer is: probability of the verdict (for Both: of being an analog at all)
+    return "high" if p >= 0.75 else "medium" if p >= 0.55 else "low"
 
 
 def fmt(f, v):
@@ -107,7 +115,16 @@ def predict():
     conditions = [{"name": name, "here": fmt(f, values[f]) + unit,
                    "moon": fmt(f, TYPICAL["Moon"][f]) + unit, "mars": fmt(f, TYPICAL["Mars"][f]) + unit}
                   for f, name, unit in SHOW]
+
+    conf = confidence(proba[moon] + proba[mars] if both else proba[best])
+    cautions = []
+    la, lo, sla, slo = np.radians(lat), np.radians(lon), np.radians(SITES.lat.values), np.radians(SITES.lon.values)
+    near_known = (6371 * 2 * np.arcsin(np.sqrt(np.sin((sla - la) / 2) ** 2 + np.cos(la) * np.cos(sla) * np.sin((slo - lo) / 2) ** 2))).min() < 50
+    if prediction != "Neither" and values["T2M"] < 0 and not near_known:   # cold climate: bare tundra resembles the polar Mars analogs
+        cautions.append("Cold, high-latitude terrain: bare tundra often scores like the polar Mars analogs (Svalbard, "
+                        "Axel Heiberg), even where no analog has been documented. Treat this result with care.")
     return jsonify(lat=lat, lon=lon, probabilities=dict(zip(CLASSES, map(float, proba))), prediction=prediction,
+                   confidence=conf, cautions=cautions,
                    reasons=reasons, conditions=conditions, similar={"site": twin.site, "label": twin.label},
                    land_pixels=int(len(df)))
 

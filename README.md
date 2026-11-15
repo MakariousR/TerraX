@@ -30,7 +30,7 @@ The trained model is in `data/`, so the website works straight away.
 **1. Install** (Python 3.10 or newer):
 
 ```bash
-git clone <this-repository-url>
+git clone https://github.com/MakariousR/TerraX
 cd TerraX
 pip install -r requirements.txt
 ```
@@ -49,6 +49,7 @@ An internet connection is needed: for every new spot, the website downloads live
 
 - **Click anywhere on land.** After about 10–20 seconds (instant for places already seen), a card shows:
   - the **verdict** (Moon, Mars, Both or Neither) and the **probabilities** for Moon, Mars and Neither;
+  - a **confidence level** (high, medium or low) showing how decisive the probabilities are, plus a caution for cases the model is known to struggle with;
   - **why**: the features that pushed the model towards its answer;
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
@@ -63,7 +64,7 @@ An internet connection is needed: for every new spot, the website downloads live
 ## 🛰️ How it works
 
 ```
-labelled sites  →  NASA data for a ±11 km area  →  13 features per pixel  →  LightGBM  →  Moon / Mars / Neither
+labelled sites  →  NASA data for a ±11 km area  →  15 features per pixel  →  LightGBM  →  Moon / Mars / Neither
 ```
 
 ### 1. Labelled places
@@ -79,19 +80,20 @@ For each place, TerraX downloads a 48 × 48 pixel area (about ±11 km, around 46
 | **NASA GIBS: Blue Marble** | true surface colour | red iron oxide (Mars), dark basalt (Moon), green vegetation (neither) |
 | **NASA GIBS: ASTER GDEM shaded relief** | terrain shape | craters, lava fields and canyons are rough |
 | **NASA GIBS: MODIS land surface temperature** | ground temperature in January and July | bare, dry ground heats and cools strongly |
+| **NASA GIBS: MODIS vegetation index (NDVI)** | how green the ground is in January and July | analogs are deserts, hot or polar, with almost no plants even in summer |
 | **NASA POWER** | temperature, humidity, sunlight | analogs are dry, with harsh temperature swings |
 | **NASA PDS: RELAB spectra** | lab spectra of Apollo soils, Mars dust simulant and Martian meteorites | the real colour of the Moon and Mars, used as references |
 | **Macrostrat geologic maps** | rock type | basalt and impact rock (Moon-like) vs sediments and salts (Mars-like) |
 
 ### 3. Features
 
-Every pixel becomes one row with **13 features**: colour and colour shape (`b`, `brightness`, `slope_rg`, `slope_gb`), the whole area's roughness, colour patchiness and average colour, the climate (mean temperature, temperature range, humidity, sunlight), the seasonal ground-temperature swing, and the rock type. Latitude and longitude are **not** features, so the model learns what a place is *like*, not where it is.
+Every pixel becomes one row with **15 features**: colour and colour shape (`b`, `brightness`, `slope_rg`, `slope_gb`), the whole area's roughness, colour patchiness and average colour, the climate (mean temperature, temperature range, humidity, sunlight), the seasonal ground-temperature swing, the summer greenness of the pixel and of the whole area (NDVI), and the rock type. Latitude and longitude are **not** features, so the model learns what a place is *like*, not where it is.
 
 ### 4. Model
 
 A **LightGBM** classifier made of 200 tiny trees, each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
 
-**Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's rare (about 5 of the 125 training places) and never appears for ordinary land.
+**Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's uncommon: about 7 of the 125 training places on average (3 to 11 depending on the split), and only rarely (0 to 2 places) for ordinary land.
 
 ### 5. Honest evaluation
 
@@ -99,11 +101,11 @@ Pixels of the same place are near-copies, so testing on random pixels would leak
 
 | | Result on unseen places |
 |---|---|
-| Place-level accuracy | **about 80 %** (125 places) |
-| Log-loss (probability quality, lower is better) | **0.50** |
-| F1: Mars / Neither / Moon | 0.82 / 0.80 / 0.78 |
+| Place-level accuracy | **about 84 %** (125 places) |
+| Log-loss (probability quality, lower is better) | **0.48** |
+| F1: Mars / Neither / Moon | 0.87 / 0.80 / 0.85 |
 
-The strongest signals are the rock type, the area's overall colour, humidity, the temperature range and colour patchiness. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
+The strongest signals are the summer greenness of the area, the rock type, the temperature range, the area's overall colour and humidity. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
 
 ---
 
@@ -159,6 +161,7 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - **125 labelled places is small.** More documented sites, especially Moon analogs, would help most.
 - **Labels follow where agencies have trained,** so the model partly learns the typical colour of those regions (for example, Earth's Moon analogs are often red cinder fields).
 - **Resolution is about 460 m per pixel,** so small features like a single crater rim are averaged out.
+- **In cold, high-latitude regions,** bare tundra often scores like the polar Mars analogs (Svalbard, Axel Heiberg), because these data can't tell documented and undocumented periglacial terrain apart. The website shows a caution for such places.
 - **Above 82° latitude** there's no usable imagery, and oceans are rejected.
 - An analog score means "looks similar in these data", not a scientific certification of a site.
 
@@ -176,6 +179,8 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - [NASA ASTER Global Digital Elevation Model (terrain relief)](https://lpdaac.usgs.gov/products/astgtmv003/)
 - [NASA MODIS Land Surface Temperature monthly (MOD11C3)](https://lpdaac.usgs.gov/products/mod11c3v061/)
 - [NASA GIBS MODIS Land Surface Temperature colormap](https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_Land_Surface_Temp.xml)
+- NASA GIBS MODIS vegetation index monthly layer (`MODIS_Terra_L3_NDVI_Monthly`, listed in the GIBS WMS layer list above)
+- [NASA GIBS MODIS NDVI colormap](https://gibs.earthdata.nasa.gov/colormaps/v1.3/MODIS_NDVI.xml)
 - [NASA POWER (Prediction Of Worldwide Energy Resources) climate data](https://power.larc.nasa.gov/)
 - [NASA POWER climatology API](https://power.larc.nasa.gov/docs/services/api/temporal/climatology/)
 - [NASA PDS Geosciences Node: Spectral Library](https://pds-geosciences.wustl.edu/spectrallibrary/default.htm)
