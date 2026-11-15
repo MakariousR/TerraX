@@ -54,7 +54,8 @@ An internet connection is needed: for every new spot, the website downloads live
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
 - **Search a place by name** (for example "Atacama Desert" or "Lanzarote").
-- **Click a coloured dot** to see how the model scores one of the 125 known training sites.
+- **Scan a whole area** to find new candidate analogs. Zoom in to a region and press **▦ Scan this area**. TerraX covers the view with a grid of 22 km squares, up to 2° × 2° (about 220 km, 100 squares) at a time, and colours each square by its verdict, with stronger colour for higher confidence. A summary lists the strongest analog squares; click any square for its full card. A new area takes about 30–60 seconds; an area already scanned takes a few seconds.
+- **Click a coloured dot** to see how the model scores one of the 110 known training sites.
 - **Switch the base map** between satellite imagery, NASA Blue Marble and OpenStreetMap.
 
 **Places worth trying:** the Lut Desert in Iran, the Namib Desert, and your own city for comparison.
@@ -69,7 +70,9 @@ labelled sites  →  NASA data for a ±11 km area  →  15 features per pixel  �
 
 ### 1. Labelled places
 
-[`data/sites.csv`](data/sites.csv) lists **125 places**: 38 Moon analogs, 48 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1), plus NASA, JPL, USGS, ESA and peer-reviewed sources for the remaining sites (see [Resources](#-resources)). Every place has its reference in the `source` column.
+[`data/sites.csv`](data/sites.csv) lists **110 places**: 26 Moon analogs, 45 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1), plus NASA, JPL, USGS, ESA and peer-reviewed sources for the remaining sites (see [Resources](#-resources)). Every place has its reference in the `source` column.
+
+Only analogs that are **visible from orbit** are used. Some documented analogs, such as the Sudbury and Ries impact craters, are valued for their *rocks*, but at this resolution their surroundings are forest or farmland. Including them taught the model that green land can be an analog (an area scan of Arizona called a pine forest "Moon"), so they are left out.
 
 ### 2. NASA data
 
@@ -93,7 +96,7 @@ Every pixel becomes one row with **15 features**: colour and colour shape (`b`, 
 
 A **LightGBM** classifier made of 200 tiny trees, each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
 
-**Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's uncommon: about 7 of the 125 training places on average (3 to 11 depending on the split), and only rarely (0 to 2 places) for ordinary land.
+**Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's uncommon: about 8 of the 110 training places on average (4 to 10 depending on the split), and never for ordinary land.
 
 ### 5. Honest evaluation
 
@@ -101,11 +104,11 @@ Pixels of the same place are near-copies, so testing on random pixels would leak
 
 | | Result on unseen places |
 |---|---|
-| Place-level accuracy | **about 84 %** (125 places) |
-| Log-loss (probability quality, lower is better) | **0.48** |
-| F1: Mars / Neither / Moon | 0.87 / 0.80 / 0.85 |
+| Place-level accuracy | **about 89 %** (110 places) |
+| Log-loss (probability quality, lower is better) | **0.32** |
+| F1: Mars / Neither / Moon | 0.88 / 0.90 / 0.90 |
 
-The strongest signals are the summer greenness of the area, the rock type, the temperature range, the area's overall colour and humidity. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
+The strongest signals are the summer greenness of the area, humidity, the rock type, the temperature range and the area's overall colour. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
 
 ---
 
@@ -114,7 +117,7 @@ The strongest signals are the summer greenness of the area, the rock type, the t
 ```
 TerraX/
 ├── data/
-│   ├── sites.csv              # the 125 labelled places, with sources
+│   ├── sites.csv              # the 110 labelled places, with sources
 │   ├── analog_model.joblib    # the trained model (ready to use)
 │   ├── web_meta.json          # feature list and reference values for the website
 │   ├── web_sites.json         # known sites shown on the map
@@ -152,15 +155,22 @@ The website's server can also be used directly:
 GET /api/predict?lat=35.03&lon=-111.02
 ```
 
-It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and the `similar` known site.
+It returns JSON with `probabilities`, `prediction`, `confidence`, `cautions`, `reasons`, `conditions` and the `similar` known site.
+
+```
+GET /api/scan?south=29.5&west=58&north=31.5&east=60
+```
+
+It scans the area as 22 km squares (at most 2° × 2°) and returns each square's `prediction`, `confidence` and `probabilities`. To stay fast, it downloads each NASA image layer once for the whole area and cuts it into squares, and fetches NASA POWER climate once per POWER grid cell, which nearby squares share. Each square gives the same result as clicking its centre.
 
 ---
 
 ## ⚠️ Limitations
 
-- **125 labelled places is small.** More documented sites, especially Moon analogs, would help most.
+- **110 labelled places is small.** More documented sites, especially Moon analogs, would help most.
 - **Labels follow where agencies have trained,** so the model partly learns the typical colour of those regions (for example, Earth's Moon analogs are often red cinder fields).
-- **Resolution is about 460 m per pixel,** so small features like a single crater rim are averaged out.
+- **Resolution is about 460 m per pixel,** so small features like a single crater rim are averaged out. For the same reason, analogs known only for their rocks, under forest or farmland, can't be recognised.
+- **There is no feature for cities.** A city in a desert, such as Phoenix, scores like the desert around it.
 - **In cold, high-latitude regions,** bare tundra often scores like the polar Mars analogs (Svalbard, Axel Heiberg), because these data can't tell documented and undocumented periglacial terrain apart. The website shows a caution for such places.
 - **Above 82° latitude** there's no usable imagery, and oceans are rejected.
 - An analog score means "looks similar in these data", not a scientific certification of a site.
@@ -187,7 +197,6 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - [NASA PDS RELAB spectra collection](https://pds-geosciences.wustl.edu/speclib/urn-nasa-pds-relab/)
 - [JPL: Mojave Desert Tests Prepare for NASA Mars Roving (Dumont Dunes)](https://www.jpl.nasa.gov/news/mojave-desert-tests-prepare-for-nasa-mars-roving/)
 - [JPL: NASA Tests Drones in Death Valley, Preps for Martian Sands and Skies](https://www.jpl.nasa.gov/news/nasa-tests-drones-in-death-valley-preps-for-martian-sands-and-skies/)
-- [NASA Earth Observatory: What a Lake in Turkey Can Tell Us About Mars (Lake Salda)](https://earthobservatory.nasa.gov/blogs/earthmatters/2021/02/17/what-a-lake-in-turkey-can-tell-us-about-mars/)
 - [NASA Earth Observatory: Mars on Earth (Wadi Rum)](https://science.nasa.gov/earth/earth-observatory/movie-mars-on-earth-148764/)
 
 ### Other resources
@@ -202,7 +211,6 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - [USGS Professional Paper 599-C: Structural Geology of the Henbury Meteorite Craters (Contributions to Astrogeology)](https://pubs.usgs.gov/publication/pp599C)
 - [USGS: Oblique thermal imaging of the Pisgah lava field (NASA-funded Mars analog study)](https://www.usgs.gov/data/oblique-thermal-imaging-pisgah-lava-field-california-acquired-march-2010)
 - [National Park Service: NASA in Death Valley](https://home.nps.gov/deva/nasa.htm)
-- [Spray et al. 2010: The Manicouagan impact structure as a terrestrial analogue site for lunar and martian planetary science (Planetary and Space Science)](https://doi.org/10.1016/j.pss.2009.09.010)
 - [Cavalazzi et al. 2019: The Dallol Geothermal Area, an exceptional planetary field analog on Earth (Astrobiology)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6459281)
 - [Dalangtan saline playa (Qaidam Basin) as a Mars analog (PubMed)](https://www.pubmed.gov/29792755/)
 - [Using an Australian Mars Analogue Research Facility for Astrobiology Education and Outreach (IAU Symposium)](https://cambridge.org/core/journals/symposium-international-astronomical-union/article/using-an-australian-mars-analogue-research-facility-for-astrobiology-education-and-outreach/AC7A2886632E2F728206A1CF51A356F3)

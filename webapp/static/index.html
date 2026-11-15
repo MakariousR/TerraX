@@ -50,6 +50,8 @@
     <h1>TerraX</h1>
     <div class="sub">Click anywhere on land. The model downloads NASA imagery, climate, surface temperature and geology for a ±11 km area and predicts whether it is a <b style="color:var(--moon)">Moon</b> analog, a <b style="color:var(--mars)">Mars</b> analog, <b style="color:#8a4fd0">both</b>, or <b style="color:var(--neither)">neither</b>.</div>
     <form id="search"><input id="q" placeholder="Search a place (e.g. Atacama Desert)"><button>Go</button></form>
+    <div id="scanbox"><button id="scanbtn" class="btn">▦ Scan this area</button>
+      <div class="note">Scores the area on screen as a grid of 22 km squares, up to 2° × 2° (about 220 km) at a time. Zoom in to a region first; a bigger view scans its centre.</div></div>
     <div id="result"><div class="hint">No place selected yet.<br><br>Click the map or search a place. The small dots are the known training sites; click one to see how the model scores it.</div></div>
   </div>
 </div>
@@ -67,8 +69,9 @@ const osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 const map = L.map("map", { worldCopyJump: true, layers: [esri] }).setView([25, 10], 3);
 
 const knownLayer = L.layerGroup().addTo(map);
+const scanLayer = L.layerGroup().addTo(map);
 L.control.layers({ "Satellite (Esri)": esri, "NASA Blue Marble": gibs, "OpenStreetMap": osm },
-                 { "Known sites (training)": knownLayer },
+                 { "Known sites (training)": knownLayer, "Area scan": scanLayer },
                  { collapsed: false }).addTo(map);
 
 const legend = L.control({ position: "bottomleft" });
@@ -76,17 +79,61 @@ legend.onAdd = () => {
   const d = L.DomUtil.create("div", "maplegend");
   d.innerHTML = `<span class="dot" style="background:${COLORS.Moon}"></span>Moon
                  <span class="dot" style="background:${COLORS.Mars};margin-left:8px"></span>Mars
+                 <span class="dot" style="background:${COLORS.Both};margin-left:8px"></span>Both
                  <span class="dot" style="background:${COLORS.Neither};margin-left:8px"></span>Neither<br>
-                 dots = known training sites`;
+                 dots = known training sites · squares = area scan`;
   return d;
 };
 legend.addTo(map);
 
 // ---- known sites ----
 fetch("/api/sites").then(r => r.json()).then(rows => rows.forEach(s =>
-  L.circleMarker([s.lat, s.lon], { radius: 5, weight: 1, color: "white", fillColor: COLORS[s.label], fillOpacity: 1 })
+  L.circleMarker([s.lat, s.lon], { radius: 5, weight: 1, color: "white", fillColor: COLORS[s.label], fillOpacity: 1, bubblingMouseEvents: false })
    .bindTooltip(`${s.site}<br><span style="color:#666">known ${s.label} site</span>`)
    .on("click", () => select(s.lat, s.lon, s.site)).addTo(knownLayer)));
+
+// ---- area scan ----
+let lastScanHtml = null;
+const OPACITY = { high: 0.55, medium: 0.35, low: 0.18 };
+document.getElementById("scanbtn").addEventListener("click", () => {
+  const b = map.getBounds(), btn = document.getElementById("scanbtn"), res = document.getElementById("result");
+  const big = b.getNorth() - b.getSouth() > 2.2 || b.getEast() - b.getWest() > 2.2;
+  btn.disabled = true; btn.textContent = "Scanning…";
+  res.innerHTML = `<div class="hint"><span class="spinner"></span>Scanning this area… please wait.<br>
+    <span style="font-size:12px">Up to 100 squares are scored. A new area can take up to about a minute; areas already scanned take a few seconds.</span></div>`;
+  fetch(`/api/scan?south=${b.getSouth()}&west=${b.getWest()}&north=${b.getNorth()}&east=${b.getEast()}`)
+    .then(r => r.json()).then(d => {
+      if (d.error) { res.innerHTML = `<div class="error">${d.error}</div>`; return; }
+      scanLayer.clearLayers();
+      const [s, w, n, e] = d.bounds, h = d.tile / 2;
+      L.rectangle([[s, w], [n, e]], { fill: false, color: "#222", weight: 1.5, dashArray: "5 4", interactive: false }).addTo(scanLayer);
+      d.squares.forEach(q => {
+        const p = q.probabilities, pct = v => Math.round(v * 100);
+        L.rectangle([[q.lat - h, q.lon - h], [q.lat + h, q.lon + h]],
+          { color: COLORS[q.prediction], weight: 0.6, fillColor: COLORS[q.prediction], fillOpacity: OPACITY[q.confidence], bubblingMouseEvents: false })
+          .bindTooltip(`<b>${q.prediction}</b> · ${q.confidence} confidence<br>Moon ${pct(p.Moon)}% · Mars ${pct(p.Mars)}% · Neither ${pct(p.Neither)}%`)
+          .on("click", () => select(q.lat, q.lon, `Scan square (${q.prediction})`)).addTo(scanLayer);
+      });
+      lastScanHtml = scanSummary(d, big); res.innerHTML = lastScanHtml;
+    }).catch(() => { res.innerHTML = `<div class="error">The server did not answer. Is <code>python webapp/app.py</code> running?</div>`; })
+    .finally(() => { btn.disabled = false; btn.textContent = "▦ Scan this area"; });
+});
+
+function scanSummary(d, big) {
+  const counts = { Moon: 0, Mars: 0, Both: 0, Neither: 0 };
+  d.squares.forEach(q => counts[q.prediction]++);
+  const analog = q => q.prediction === "Both" ? q.probabilities.Moon + q.probabilities.Mars : q.probabilities[q.prediction];
+  const top = d.squares.filter(q => q.prediction !== "Neither").sort((a, b) => analog(b) - analog(a)).slice(0, 5);
+  const list = top.map(q => `<li><a href="#" onclick="select(${q.lat}, ${q.lon}, 'Scan square (${q.prediction})'); return false;">
+      ${q.lat.toFixed(2)}°, ${q.lon.toFixed(2)}°</a> · <b style="color:${COLORS[q.prediction]}">${q.prediction}</b> ${Math.round(analog(q) * 100)}% · ${q.confidence}</li>`).join("");
+  return `<div class="card"><h2>Area scan</h2>
+    <div class="coords">${d.squares.length} land squares scored${d.skipped ? ` · ${d.skipped} ocean or water squares skipped` : ""}</div>
+    ${big ? `<div class="caution">The view was larger than 2° × 2°, so only its centre was scanned (dashed box). Zoom in or pan to scan elsewhere.</div>` : ""}
+    <div class="legend">${Object.entries(counts).map(([k, v]) => `<span><span class="dot" style="background:${COLORS[k]}"></span>${k} <b>${v}</b></span>`).join("")}</div>
+    <div class="section">Strongest analog squares</div>
+    <ul>${list || "<li>no analog squares in this area</li>"}</ul>
+    <div class="note">Stronger colour = higher confidence. Click any square for its full card: why, conditions and most similar known analog.</div></div>`;
+}
 
 // ---- predictions ----
 let pin = null;
@@ -115,6 +162,7 @@ function card(d, title) {
                  : d.prediction === "Both" ? "Looks like both a Moon and a Mars analog"
                  : `Looks like a ${d.prediction} analog`;
   return `<div class="card">
+    ${lastScanHtml ? `<a href="#" class="note" onclick="document.getElementById('result').innerHTML = lastScanHtml; return false;">← back to area scan</a>` : ""}
     <h2 style="color:${COLORS[d.prediction]}">${headline}</h2>
     <div class="coords">${title ? title + " · " : ""}${d.lat.toFixed(2)}°, ${d.lon.toFixed(2)}°</div>
     <div class="conf ${d.confidence}" title="How decisive the probabilities are: high ≥ 75 %, medium ≥ 55 %, low below">${d.confidence} confidence</div>
@@ -128,7 +176,7 @@ function card(d, title) {
     <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 % and each higher than Neither." : ""}</div>
     <div class="section">Most similar known analog</div>
     <div style="font-size:13px">${d.similar.site} <span style="color:${COLORS[d.similar.label]}">(${d.similar.label})</span></div>
-    <div class="note" style="margin-top:12px">Model: LightGBM trained on 125 documented sites · about 84 % accurate on unseen regions, weakest on Moon vs Mars.</div>
+    <div class="note" style="margin-top:12px">Model: LightGBM trained on 110 documented sites · about 89 % accurate on unseen regions, weakest on Moon vs Mars.</div>
   </div>`;
 }
 

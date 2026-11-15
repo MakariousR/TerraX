@@ -85,12 +85,19 @@ CM_K = np.array([(float(lo) + float(hi)) / 2 for *_, lo, hi in _entries])
 CM_K[0], CM_K[-1] = 200.0, 350.0
 
 
+def _nearest(img, table):
+    # index of the nearest colormap colour for every pixel, and its squared distance.
+    # Each distinct colour is matched once (an image has few distinct colours), so large area images stay fast.
+    u, inv = np.unique(img[..., :3].reshape(-1, 3), axis=0, return_inverse=True)
+    d = ((u[:, None, :] - table[None]) ** 2).sum(-1)
+    inv = inv.ravel()
+    return d.argmin(1)[inv].reshape(img.shape[:2]), d.min(1)[inv].reshape(img.shape[:2])
+
+
 def decode_lst(img):
-    rgb = img[..., :3].reshape(-1, 1, 3)
-    dist = ((rgb - CM_RGB[None]) ** 2).sum(-1)
-    k = CM_K[dist.argmin(1)].reshape(img.shape[:2])
-    nodata = (img[..., 3] == 0) | (dist.min(1).reshape(img.shape[:2]) > 0.003)
-    return np.where(nodata, np.nan, k)
+    idx, dist = _nearest(img, CM_RGB)
+    nodata = (img[..., 3] == 0) | (dist > 0.003)
+    return np.where(nodata, np.nan, CM_K[idx])
 
 
 def lst_season(lat, lon):
@@ -110,9 +117,8 @@ NDVI_VAL = np.array([(float(lo) + float(hi)) / 2 for *_, lo, hi in _nentries])
 
 def decode_ndvi(img):
     # transparent pixels are NDVI <= 0 (bare ground, snow) -> 0
-    rgb = img[..., :3].reshape(-1, 1, 3)
-    v = NDVI_VAL[((rgb - NDVI_RGB[None]) ** 2).sum(-1).argmin(1)].reshape(img.shape[:2])
-    return np.where(img[..., 3] == 0, 0.0, v)
+    idx, _ = _nearest(img, NDVI_RGB)
+    return np.where(img[..., 3] == 0, 0.0, NDVI_VAL[idx])
 
 
 def ndvi_peak(lat, lon):
@@ -163,6 +169,13 @@ def place_features(lat, lon):
     # one row per land pixel around lat/lon
     c = gibs_patch("BlueMarble_NextGeneration", lat, lon)
     relief = gibs_patch("ASTER_GDEM_Greyscale_Shaded_Relief", lat, lon)[..., 0]
+    return features_from(c, relief, lst_season(lat, lon), ndvi_peak(lat, lon),
+                         lambda: power_climate(lat, lon), lambda: rock_type(lat, lon))
+
+
+def features_from(c, relief, lst, ndvi, get_clim, get_rock):
+    # Same features as place_features, from images that are already downloaded (used by the area scan).
+    # c: colour (px,px,4), relief (px,px), lst / ndvi (px,px); get_clim / get_rock: called only if the square has land.
     r, g, b, alpha = c[..., 0], c[..., 1], c[..., 2], c[..., 3]
     brightness = (r + g + b) / 3
     lin = srgb_to_linear(c[..., :3]) + 1e-3
@@ -171,8 +184,8 @@ def place_features(lat, lon):
         "brightness": brightness,
         "slope_rg": np.log(lin[..., 0] / lin[..., 1]),
         "slope_gb": np.log(lin[..., 1] / lin[..., 2]),
-        "lst_season": lst_season(lat, lon),
-        "ndvi_peak": ndvi_peak(lat, lon),
+        "lst_season": lst,
+        "ndvi_peak": ndvi,
     }
     df = pd.DataFrame({k: v.ravel() for k, v in f.items()})
     water = (b > r) & (b > g) & (brightness < 0.35)
@@ -181,9 +194,40 @@ def place_features(lat, lon):
     df["patch_color_var"] = brightness.std()
     df["patch_slope_gb"] = df["slope_gb"].mean()
     df["patch_ndvi"] = df["ndvi_peak"].mean()
-    clim = power_climate(lat, lon)
+    if df.empty:
+        return df
+    clim = get_clim()
     for k, v in clim.items():
         df[k] = v
     df["temp_range"] = clim["T2M_MAX"] - clim["T2M_MIN"]
-    df["rock"] = pd.Categorical([rock_type(lat, lon)] * len(df), categories=ROCK_CLASSES)
+    df["rock"] = pd.Categorical([get_rock()] * len(df), categories=ROCK_CLASSES)
     return df
+
+
+# ---- area scan: one large image per layer, cut into squares ---------------------------------
+def area_image(layer, south, west, north, east, width, height, date=None):
+    # one GIBS image covering the whole area -> float array (height, width, 4). Cached on disk.
+    tag = f"_{date}" if date else ""
+    f = CACHE / f"AREA_{layer}{tag}_{south:.2f}_{west:.2f}_{north:.2f}_{east:.2f}_{width}x{height}.png"
+    if not f.exists():
+        params = dict(SERVICE="WMS", REQUEST="GetMap", VERSION="1.3.0", LAYERS=layer, CRS="EPSG:4326", STYLES="",
+                      FORMAT="image/png", WIDTH=width, HEIGHT=height, BBOX=f"{south},{west},{north},{east}")
+        if date:
+            params["TIME"] = date
+        f.write_bytes(_get(GIBS_WMS, params, expect="image").content)
+    return np.asarray(Image.open(f).convert("RGBA"), dtype=np.float32) / 255.0
+
+
+def area_layers(south, west, north, east, width, height):
+    # the four per-pixel inputs for a whole area: colour, relief, seasonal ground-temperature swing, summer greenness
+    a = lambda layer, date=None: area_image(layer, south, west, north, east, width, height, date)
+    colour = a("BlueMarble_NextGeneration")
+    relief = a("ASTER_GDEM_Greyscale_Shaded_Relief")[..., 0]
+    jan, jul = [decode_lst(a("MODIS_Terra_L3_Land_Surface_Temp_Monthly_Day", m)) for m in LST_MONTHS]
+    njan, njul = [decode_ndvi(a("MODIS_Terra_L3_NDVI_Monthly", m)) for m in NDVI_MONTHS]
+    return colour, relief, np.abs(jul - jan), np.maximum(njan, njul)
+
+
+def power_cell(lat, lon):
+    # NASA POWER climatology is on a 0.5 x 0.625 degree grid, so nearby squares share one cell (one download)
+    return round(round(lat / 0.5) * 0.5, 3), round(round(lon / 0.625) * 0.625, 3)

@@ -4,6 +4,8 @@ Run:   python webapp/app.py      then open http://localhost:5000
 Needs: data/analog_model.joblib, data/web_meta.json and data/web_sites.json, created by section 10 of model/main.ipynb.
 """
 import json
+import math
+from concurrent.futures import ThreadPoolExecutor
 
 import joblib
 import numpy as np
@@ -11,7 +13,8 @@ import pandas as pd
 from flask import Flask, jsonify, request, send_from_directory
 from PIL import Image
 
-from features import DATA, GIBS_WMS, _get, place_features
+from features import (DATA, GIBS_WMS, _get, place_features, features_from, area_layers, power_cell,
+                      power_climate, rock_type)
 
 app = Flask(__name__, static_folder="static")
 
@@ -55,6 +58,20 @@ SHOW = [("rock", "Rock type", ""), ("RH2M", "Humidity", " %"),
 def confidence(p):
     # how decisive the answer is: probability of the verdict (for Both: of being an analog at all)
     return "high" if p >= 0.75 else "medium" if p >= 0.55 else "low"
+
+
+def judge(proba):
+    # average probabilities -> (verdict, confidence), with the same Both rule as the notebook
+    moon, mars, neither = CLASSES.index("Moon"), CLASSES.index("Mars"), CLASSES.index("Neither")
+    if proba[moon] >= BOTH_MIN and proba[mars] >= BOTH_MIN and min(proba[moon], proba[mars]) > proba[neither]:
+        return "Both", confidence(proba[moon] + proba[mars])
+    best = int(np.argmax(proba))
+    return CLASSES[best], confidence(proba[best])
+
+
+TILE = 0.2          # one square = the same ±0.1° (about 22 km) area as a single click
+MAX_TILES = 10      # at most 10 x 10 squares per scan (2° x 2°, about 220 km)
+PX = 48             # pixels per square, as for a single click
 
 
 def fmt(f, v):
@@ -127,6 +144,50 @@ def predict():
                    confidence=conf, cautions=cautions,
                    reasons=reasons, conditions=conditions, similar={"site": twin.site, "label": twin.label},
                    land_pixels=int(len(df)))
+
+
+@app.get("/api/scan")
+def scan():
+    # Scan an area as a grid of 22 km squares. Images are downloaded once for the whole area and cut into squares;
+    # climate is downloaded once per NASA POWER grid cell; rock type once per square (in parallel).
+    try:
+        s, w, n, e = (float(request.args[k]) for k in ("south", "west", "north", "east"))
+    except (KeyError, ValueError):
+        return jsonify(error="south, west, north and east are required numbers"), 400
+    cy, cx = (s + n) / 2, ((((w + e) / 2) + 180) % 360) - 180
+    rows = max(1, min(MAX_TILES, round((n - s) / TILE)))
+    cols = max(1, min(MAX_TILES, round((e - w) / TILE)))
+    south = min(max(math.floor((cy - rows * TILE / 2) / TILE) * TILE, -82.0), 82.0 - rows * TILE)   # snap to the 0.2° grid
+    west = min(max(math.floor((cx - cols * TILE / 2) / TILE) * TILE, -180.0), 180.0 - cols * TILE)
+    south, west = round(south, 2), round(west, 2)
+    north, east = round(south + rows * TILE, 2), round(west + cols * TILE, 2)
+    try:
+        colour, relief, lst, ndvi = area_layers(south, west, north, east, cols * PX, rows * PX)
+        squares = []
+        for i in range(rows):
+            for j in range(cols):
+                sl = (slice(i * PX, (i + 1) * PX), slice(j * PX, (j + 1) * PX))
+                c = colour[sl]; r, g, b = c[..., 0], c[..., 1], c[..., 2]
+                land = (c[..., 3] > 0) & ~((b > r) & (b > g) & ((r + g + b) / 3 < 0.35))
+                if land.sum() >= 100:                                   # skip ocean / mostly-water squares
+                    squares.append((round(north - (i + 0.5) * TILE, 2), round(west + (j + 0.5) * TILE, 2), sl))
+        cells = sorted({power_cell(la, lo) for la, lo, _ in squares})
+        with ThreadPoolExecutor(12) as ex:
+            clim = dict(zip(cells, ex.map(lambda cell: power_climate(*cell), cells)))
+            rocks = list(ex.map(lambda sq: rock_type(sq[0], sq[1]), squares))
+    except Exception as err:                                            # a data service failed
+        return jsonify(error=f"Could not download the data for this area ({err}). Try again."), 502
+    out = []
+    for (lat, lon, sl), rock in zip(squares, rocks):
+        df = features_from(colour[sl], relief[sl], lst[sl], ndvi[sl],
+                           lambda: clim[power_cell(lat, lon)], lambda: rock)
+        if len(df) < 100:
+            continue
+        proba = model.predict_proba(df[FEATURES]).mean(0)
+        verdict, conf = judge(proba)
+        out.append(dict(lat=lat, lon=lon, prediction=verdict, confidence=conf,
+                        probabilities=dict(zip(CLASSES, map(float, proba)))))
+    return jsonify(bounds=[south, west, north, east], tile=TILE, squares=out, skipped=rows * cols - len(out))
 
 
 if __name__ == "__main__":
