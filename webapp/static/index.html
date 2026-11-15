@@ -241,6 +241,11 @@ function card(d, title) {
     <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 % and each higher than Neither." : ""}</div>
     <div class="section">Most similar known analog</div>
     <div style="font-size:13px">${d.similar.site} <span style="color:${COLORS[d.similar.label]}">(${d.similar.label})</span></div>
+    ${d.samples ? `<div class="section">Colour vs real samples (NASA PDS)</div>
+    <div style="font-size:13px">${d.sample_match ? `Closest: <b>${d.samples[0].name}</b>`
+      : `<b>Unlike all the real samples</b> (for example, vegetation or water colours)`}</div>
+    <table>${d.samples.map(s => `<tr><td>${s.name}</td><td class="here">${s.distance.toFixed(2)}</td></tr>`).join("")}</table>
+    <div class="note">Colour distance between this place's satellite colour and lab measurements of real Moon and Mars samples (lower = more similar). For comparison only: the model doesn't use it, because many Earth analogs are redder than real lunar soil.</div>` : ""}
     <div class="note" style="margin-top:12px">Model: LightGBM trained on 110 documented sites · about 89 % accurate on unseen regions, weakest on Moon vs Mars.</div>
   </div>`;
 }

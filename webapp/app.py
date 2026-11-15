@@ -30,6 +30,11 @@ ANALOGS = pd.DataFrame(meta["analogs"])
 SITES = pd.read_json(DATA / "web_sites.json")                      # known training sites (for the cold-region caution)
 TYPICAL = meta["typical"]
 BOTH_MIN = meta.get("both_min", 0.30)        # Moon and Mars both at least this and both above Neither -> "Both" (same as the notebook)
+# colour shape [ln(R/G), ln(G/B)] of real samples from NASA PDS RELAB lab spectra (section 3 of the notebook);
+# shown on the card for comparison only, not used by the model
+PDS_REF = meta.get("pds_ref", {"moon_soil": [0.105, 0.130], "mars_dust": [0.571, 0.867], "mars_rock": [0.062, 0.186]})
+PDS_NAMES = {"moon_soil": "Apollo lunar soil", "mars_dust": "Martian dust simulant (JSC Mars-1)", "mars_rock": "Martian meteorites"}
+PDS_MATCH = 0.7     # 99 % of the documented analogs are within this colour distance of a sample; half of ordinary land isn't
 
 # NASA GIBS land mask of the whole world at 0.5 deg: lets us reject ocean clicks instantly (downloaded once)
 _mask_file = DATA / "cache" / "OSM_Land_Mask_global_0.5deg.png"
@@ -144,10 +149,14 @@ def predict():
     if prediction != "Neither" and values["T2M"] < 0 and not near_known:   # cold climate: bare tundra resembles the polar Mars analogs
         cautions.append("Cold, high-latitude terrain: bare tundra often scores like the polar Mars analogs (Svalbard, "
                         "Axel Heiberg), even where no analog has been documented. Treat this result with care.")
+    # colour vs real Moon / Mars samples: distance between the place's average colour shape and each PDS reference
+    rg, gb = float(df["slope_rg"].mean()), float(df["slope_gb"].mean())
+    samples = sorted(({"name": PDS_NAMES.get(k, k), "distance": round(float(np.hypot(rg - v[0], gb - v[1])), 2)}
+                      for k, v in PDS_REF.items()), key=lambda d: d["distance"])
     return jsonify(lat=lat, lon=lon, probabilities=dict(zip(CLASSES, map(float, proba))), prediction=prediction,
                    confidence=conf, cautions=cautions,
                    reasons=reasons, conditions=conditions, similar={"site": twin.site, "label": twin.label},
-                   land_pixels=int(len(df)))
+                   samples=samples, sample_match=samples[0]["distance"] <= PDS_MATCH, land_pixels=int(len(df)))
 
 
 def parse_box(args):

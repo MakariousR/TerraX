@@ -52,7 +52,8 @@ An internet connection is needed: for every new spot, the website downloads live
   - a **confidence level** (high, medium or low) showing how decisive the probabilities are, plus a caution for cases the model is known to struggle with;
   - **why**: the features that pushed the model towards its answer;
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
-  - the **most similar known analog site**.
+  - the **most similar known analog site**;
+  - **colour vs real samples**: how close the place's colour is to NASA PDS lab measurements of Apollo lunar soil, Martian dust simulant and Martian meteorites.
 - **Search a place by name** (for example "Atacama Desert" or "Lanzarote").
 - **Scan a whole area** to find new candidate analogs. Press **▦ Select an area to scan** and drag a box on the map. TerraX covers the box with a grid of 22 km squares, up to 2° × 2° (about 220 km, 100 squares) at a time, and colours each square by its verdict, with stronger colour for higher confidence. A progress bar shows each step while it works. A summary lists the strongest analog squares; click any square for its full card. A new area takes under a minute; an area already scanned takes a few seconds.
 - **Click a coloured dot** to see how the model scores one of the 110 known training sites.
@@ -85,7 +86,7 @@ For each place, TerraX downloads a 48 × 48 pixel area (about ±11 km, around 46
 | **NASA GIBS: MODIS land surface temperature** | ground temperature in January and July | bare, dry ground heats and cools strongly |
 | **NASA GIBS: MODIS vegetation index (NDVI)** | how green the ground is in January and July | analogs are deserts, hot or polar, with almost no plants even in summer |
 | **NASA POWER** | temperature, humidity, sunlight | analogs are dry, with harsh temperature swings |
-| **NASA PDS: RELAB spectra** | lab spectra of Apollo soils, Mars dust simulant and Martian meteorites | the real colour of the Moon and Mars, used as references |
+| **NASA PDS: RELAB spectra** | lab spectra of Apollo soils, Mars dust simulant and Martian meteorites | the real colour of the Moon and Mars: a reference in the notebook's charts and on every website card. It's not a model input: tested as extra features, it didn't improve accuracy, because many Earth analogs are redder than real lunar soil |
 | **Macrostrat geologic maps** | rock type | basalt and impact rock (Moon-like) vs sediments and salts (Mars-like) |
 
 ### 3. Features
@@ -155,7 +156,7 @@ The website's server can also be used directly:
 GET /api/predict?lat=35.03&lon=-111.02
 ```
 
-It returns JSON with `probabilities`, `prediction`, `confidence`, `cautions`, `reasons`, `conditions` and the `similar` known site.
+It returns JSON with `probabilities`, `prediction`, `confidence`, `cautions`, `reasons`, `conditions`, the `similar` known site, and `samples` (the colour distance to each real Moon and Mars sample, closest first).
 
 ```
 GET /api/scan?south=29.5&west=58&north=31.5&east=60
