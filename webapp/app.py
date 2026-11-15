@@ -22,6 +22,7 @@ NUMERIC = [f for f in FEATURES if f != "rock"]
 MU, SD = pd.Series(meta["mu"]), pd.Series(meta["sd"])
 ANALOGS = pd.DataFrame(meta["analogs"])
 TYPICAL = meta["typical"]
+BOTH_MIN = meta.get("both_min", 0.30)        # Moon and Mars both at least this -> verdict "Both" (same as the notebook)
 
 # NASA GIBS land mask of the whole world at 0.5 deg: lets us reject ocean clicks instantly (downloaded once)
 _mask_file = DATA / "cache" / "OSM_Land_Mask_global_0.5deg.png"
@@ -87,8 +88,12 @@ def predict():
     X = df[FEATURES]
     proba = model.predict_proba(X).mean(0)
     best = int(np.argmax(proba))
+    moon, mars = CLASSES.index("Moon"), CLASSES.index("Mars")
+    both = proba[moon] >= BOTH_MIN and proba[mars] >= BOTH_MIN
+    prediction = "Both" if both else CLASSES[best]
     contrib = model.predict(X, pred_contrib=True).reshape(len(X), len(CLASSES), len(FEATURES) + 1)
-    c = pd.Series(contrib[:, best, :-1].mean(0), index=FEATURES).sort_values(ascending=False)
+    pushed = contrib[:, moon, :-1] + contrib[:, mars, :-1] if both else contrib[:, best, :-1]   # Both: what made it Moon- and Mars-like
+    c = pd.Series(pushed.mean(0), index=FEATURES).sort_values(ascending=False)
 
     values = {f: float(df[f].median()) for f in NUMERIC}
     values["rock"] = str(df["rock"].iloc[0])
@@ -101,7 +106,7 @@ def predict():
     conditions = [{"name": name, "here": fmt(f, values[f]) + unit,
                    "moon": fmt(f, TYPICAL["Moon"][f]) + unit, "mars": fmt(f, TYPICAL["Mars"][f]) + unit}
                   for f, name, unit in SHOW]
-    return jsonify(lat=lat, lon=lon, probabilities=dict(zip(CLASSES, map(float, proba))), prediction=CLASSES[best],
+    return jsonify(lat=lat, lon=lon, probabilities=dict(zip(CLASSES, map(float, proba))), prediction=prediction,
                    reasons=reasons, conditions=conditions, similar={"site": twin.site, "label": twin.label},
                    land_pixels=int(len(df)))
 

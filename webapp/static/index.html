@@ -45,14 +45,14 @@
   <div id="map"></div>
   <div id="panel">
     <h1>TerraX</h1>
-    <div class="sub">Click anywhere on land. The model downloads NASA imagery, climate, surface temperature and geology for a ±11 km area and predicts whether it is a <b style="color:var(--moon)">Moon</b> analog, a <b style="color:var(--mars)">Mars</b> analog, or <b style="color:var(--neither)">neither</b>.</div>
+    <div class="sub">Click anywhere on land. The model downloads NASA imagery, climate, surface temperature and geology for a ±11 km area and predicts whether it is a <b style="color:var(--moon)">Moon</b> analog, a <b style="color:var(--mars)">Mars</b> analog, <b style="color:#8a4fd0">both</b>, or <b style="color:var(--neither)">neither</b>.</div>
     <form id="search"><input id="q" placeholder="Search a place (e.g. Atacama Desert)"><button>Go</button></form>
     <div id="result"><div class="hint">No place selected yet.<br><br>Click the map or search a place. The small dots are the known training sites; click one to see how the model scores it.</div></div>
   </div>
 </div>
 
 <script>
-const COLORS = { Moon: "#2a78d6", Mars: "#eb6834", Neither: "#1baf7a" };
+const COLORS = { Moon: "#2a78d6", Mars: "#eb6834", Neither: "#1baf7a", Both: "#8a4fd0" };
 
 // ---- base map: free layers, no key needed ----
 const esri = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -108,7 +108,9 @@ function card(d, title) {
   const legend = ["Moon", "Mars", "Neither"].map(k =>
     `<span><span class="dot" style="background:${COLORS[k]}"></span>${k} <b>${pct(p[k])}%</b></span>`).join("");
   const rows = d.conditions.map(c => `<tr><td>${c.name}</td><td class="here">${c.here}</td><td>${c.moon}</td><td>${c.mars}</td></tr>`).join("");
-  const headline = d.prediction === "Neither" ? "Probably not an analog" : `Looks like a ${d.prediction} analog`;
+  const headline = d.prediction === "Neither" ? "Probably not an analog"
+                 : d.prediction === "Both" ? "Looks like both a Moon and a Mars analog"
+                 : `Looks like a ${d.prediction} analog`;
   return `<div class="card">
     <h2 style="color:${COLORS[d.prediction]}">${headline}</h2>
     <div class="coords">${title ? title + " · " : ""}${d.lat.toFixed(2)}°, ${d.lon.toFixed(2)}°</div>
@@ -118,7 +120,7 @@ function card(d, title) {
     <ul>${d.reasons.map(r => `<li>${r}</li>`).join("") || "<li>no single strong reason</li>"}</ul>
     <div class="section">Conditions</div>
     <table><tr><th>condition</th><th>here</th><th>Moon analogs</th><th>Mars analogs</th></tr>${rows}</table>
-    <div class="note">Moon / Mars analog columns = typical value of the known training sites.</div>
+    <div class="note">Moon / Mars analog columns = typical value of the known training sites.${d.prediction === "Both" ? " “Both” means the Moon and Mars probabilities are each at least 30 %." : ""}</div>
     <div class="section">Most similar known analog</div>
     <div style="font-size:13px">${d.similar.site} <span style="color:${COLORS[d.similar.label]}">(${d.similar.label})</span></div>
     <div class="note" style="margin-top:12px">Model: LightGBM trained on 125 documented sites · about 80 % accurate on unseen regions, weakest on Moon vs Mars.</div>

@@ -1,8 +1,8 @@
 # 🌍 → 🌕 / 🔴 TerraX
 
-**Click any place on Earth and find out whether it looks like the Moon, like Mars, or neither.**
+**Click any place on Earth and find out whether it looks like the Moon, like Mars, like both, or neither.**
 
-TerraX is a machine-learning model, built on open NASA data, that scores any coordinate on Earth as a **Moon analog**, a **Mars analog** or **neither**, for example `Moon 92 % · Mars 6 % · Neither 3 %`. It comes with an interactive map website, so anyone can explore the planet and discover new candidate analog sites.
+TerraX is a machine-learning model, built on open NASA data, that scores any coordinate on Earth as a **Moon analog**, a **Mars analog**, **both**, or **neither**, for example `Moon 92 % · Mars 6 % · Neither 3 %`. It comes with an interactive map website, so anyone can explore the planet and discover new candidate analog sites.
 
 > ✅ **The model is already trained and included.** You don't need to train anything. The first thing to try is the website (see [Quick start](#-quick-start-try-the-website)).
 
@@ -48,7 +48,7 @@ An internet connection is needed: for every new spot, the website downloads live
 ### What to do on the website
 
 - **Click anywhere on land.** After about 10–20 seconds (instant for places already seen), a card shows:
-  - the **probabilities** for Moon, Mars and Neither;
+  - the **verdict** (Moon, Mars, Both or Neither) and the **probabilities** for Moon, Mars and Neither;
   - **why**: the features that pushed the model towards its answer;
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
@@ -90,6 +90,8 @@ Every pixel becomes one row with **13 features**: colour and colour shape (`b`, 
 ### 4. Model
 
 A **LightGBM** classifier made of 200 tiny trees, each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
+
+**Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 %**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's rare (about 5 of the 125 training places) and never appears for ordinary land.
 
 ### 5. Honest evaluation
 
