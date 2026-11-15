@@ -2,6 +2,7 @@
 
 Run:   python webapp/app.py      then open http://localhost:5000
 Needs: data/analog_model.joblib, data/web_meta.json and data/web_sites.json, created by section 10 of model/main.ipynb.
+Written with the help of Claude (Anthropic), an AI assistant; designed, reviewed and tested by the TerraX team.
 """
 import json
 import math

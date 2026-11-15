@@ -17,7 +17,7 @@ Before astronauts walk on the Moon or rovers drive on Mars, they train and test 
 
 These sites were found by experts, one at a time. **TerraX learns what they have in common from NASA satellite data and searches the whole planet for more.** That can help to:
 
-- find new, closer or cheaper training and test sites for Artemis and future Mars missions;
+- find new, closer or cheaper training and test sites for future Moon and Mars missions;
 - show students and the public *why* a place looks like another world, with real data;
 - give scientists a quick first screen before a field visit.
 
@@ -177,6 +177,13 @@ The website runs scans in the background instead: `GET /api/scan/start?…` (sam
 - **In cold, high-latitude regions,** bare tundra often scores like the polar Mars analogs (Svalbard, Axel Heiberg), because these data can't tell documented and undocumented periglacial terrain apart. The website shows a caution for such places.
 - **Above 82° latitude** there's no usable imagery, and oceans are rejected.
 - An analog score means "looks similar in these data", not a scientific certification of a site.
+
+---
+
+## 🤝 How we built TerraX
+
+- **Our role:** we chose the challenge and the idea, collected the data resources, tested the tool on real places, and made every scientific and design decision: which sites to include, relabel or remove, which features and website functions to add, and what the limitations are. We reviewed every result before including it.
+- **AI role:** we used **Claude** (Anthropic), through Claude Code in VS Code, as an AI assistant to help write and review the code, run experiments, verify data sources and site coordinates, and draft documentation.
 
 ---
 

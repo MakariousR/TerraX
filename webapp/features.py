@@ -2,6 +2,7 @@
 
 If you change a feature in the notebook, change it here too, then re-run the notebook so the
 saved model (data/analog_model.joblib) matches.
+Written with the help of Claude (Anthropic), an AI assistant; designed, reviewed and tested by the TerraX team.
 """
 import json
 import re
