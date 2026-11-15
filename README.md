@@ -2,7 +2,7 @@
 
 **Click any place on Earth and find out whether it looks like the Moon, like Mars, like both, or neither.**
 
-TerraX is a machine-learning model, built on open NASA data, that scores any coordinate on Earth as a **Moon analog**, a **Mars analog**, **both**, or **neither**, for example `Moon 92 % · Mars 6 % · Neither 3 %`. It comes with an interactive map website, so anyone can explore the planet and discover new candidate analog sites.
+TerraX is a machine-learning model, built on open NASA data, that scores any coordinate on Earth as a **Moon analog**, a **Mars analog**, **both**, or **neither**, for example `Moon 96 % · Mars 2 % · Neither 2 %` for Meteor Crater. It comes with an interactive map website, so anyone can explore the planet and discover new candidate analog sites.
 
 > ✅ **The model is already trained and included.** You don't need to train anything. The first thing to try is the website (see [Quick start](#-quick-start-try-the-website)).
 
@@ -95,7 +95,7 @@ Every pixel becomes one row with **15 features**: colour and colour shape (`b`, 
 
 ### 4. Model
 
-A **LightGBM** classifier made of 200 tiny trees, each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
+A **LightGBM** classifier built in 200 rounds of tiny trees (one per class each round, 600 in total), each a single yes/no rule that must hold for about a dozen places. Each tree only sees 30 % of the features, so no single feature can dominate. For a new place, the probabilities of all its land pixels are averaged.
 
 **Both Moon and Mars.** Some places resemble both worlds: the Catalogue of Planetary Analogues describes the Atacama Desert, Iceland and Meteor Crater as analogues for both. When the Moon and Mars probabilities are **each at least 30 % and each higher than Neither**, TerraX gives the verdict **Both** instead of the single highest class. The model still learns three classes; "Both" is read from its probabilities, so it doesn't change the accuracy below. On unseen places it's uncommon: about 8 of the 110 training places on average (4 to 10 depending on the split), and never for ordinary land.
 
@@ -144,7 +144,7 @@ cd model
 jupyter notebook main.ipynb      # or open it in VS Code
 ```
 
-Run all cells. The first run downloads about 1,000 small files (5–15 minutes); later runs use `data/cache/`. The last section saves a new model into `data/`, and the website uses it the next time it starts.
+Run all cells. The first run downloads about 900 small files, 12 places at a time (a few minutes); later runs use `data/cache/` and take seconds. The last section saves a new model into `data/`, and the website uses it the next time it starts.
 
 **To add your own places,** add rows to `data/sites.csv` (`site, lat, lon, label, region, source`) and re-run the notebook. If you change a feature, change it in both `model/main.ipynb` and `webapp/features.py`.
 
