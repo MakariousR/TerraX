@@ -35,19 +35,19 @@
  "typical": {
   "Mars": {
    "rock": "clastic_sediment",
-   "RH2M": 42.965,
-   "temp_range": 48.75,
+   "RH2M": 43.14,
+   "temp_range": 48.74,
    "lst_season": 27.900000000000006,
-   "patch_roughness": 0.04893925413489342,
-   "patch_slope_gb": 0.6420546770095825
+   "patch_roughness": 0.04817384108901024,
+   "patch_slope_gb": 0.6594516038894653
   },
   "Moon": {
    "rock": "mafic_volcanic",
-   "RH2M": 47.71,
-   "temp_range": 54.97,
-   "lst_season": 37.20000000000002,
-   "patch_roughness": 0.05021966993808746,
-   "patch_slope_gb": 0.832139253616333
+   "RH2M": 46.265,
+   "temp_range": 56.41,
+   "lst_season": 39.0,
+   "patch_roughness": 0.04603977128863335,
+   "patch_slope_gb": 0.8222771286964417
   },
   "Neither": {
    "rock": "clastic_sediment",
@@ -59,32 +59,32 @@
   }
  },
  "mu": {
-  "b": 0.22773109376430511,
-  "brightness": 0.32015058398246765,
-  "slope_rg": 0.15140213072299957,
-  "slope_gb": 0.9302682876586914,
-  "patch_roughness": 0.054564379155635834,
-  "patch_color_var": 0.05604606121778488,
-  "patch_slope_gb": 0.938506543636322,
-  "T2M": 13.933482142857144,
-  "temp_range": 48.57883928571429,
-  "RH2M": 60.22339285714286,
-  "ALLSKY_SFC_SW_DWN": 17.76875,
-  "lst_season": 26.110810810810808
+  "b": 0.22987522184848785,
+  "brightness": 0.32253119349479675,
+  "slope_rg": 0.152079775929451,
+  "slope_gb": 0.9266501665115356,
+  "patch_roughness": 0.053078290075063705,
+  "patch_color_var": 0.056174010038375854,
+  "patch_slope_gb": 0.9339655637741089,
+  "T2M": 13.78218181818182,
+  "temp_range": 49.202000000000005,
+  "RH2M": 59.86899999999999,
+  "ALLSKY_SFC_SW_DWN": 17.728909090909088,
+  "lst_season": 26.493577981651377
  },
  "sd": {
-  "b": 0.14612750709056854,
-  "brightness": 0.16090810298919678,
-  "slope_rg": 0.40578028559684753,
-  "slope_gb": 0.3916196823120117,
-  "patch_roughness": 0.03792548179626465,
-  "patch_color_var": 0.051740363240242004,
-  "patch_slope_gb": 0.3841009736061096,
-  "T2M": 11.511486289540237,
-  "temp_range": 15.865528315524037,
-  "RH2M": 20.834399809253934,
-  "ALLSKY_SFC_SW_DWN": 4.192111021886207,
-  "lst_season": 14.743845257359865
+  "b": 0.14646191895008087,
+  "brightness": 0.16122698783874512,
+  "slope_rg": 0.40742069482803345,
+  "slope_gb": 0.39281824231147766,
+  "patch_roughness": 0.03654971346259117,
+  "patch_color_var": 0.05218390375375748,
+  "patch_slope_gb": 0.38494524359703064,
+  "T2M": 11.559341778490674,
+  "temp_range": 15.308161449778254,
+  "RH2M": 20.852793487648892,
+  "ALLSKY_SFC_SW_DWN": 4.217817676827967,
+  "lst_season": 14.598955284979953
  },
  "analogs": [
   {
@@ -376,22 +376,6 @@
    "lst_season": 15.0
   },
   {
-   "site": "Haleakala Crater, Maui",
-   "label": "Moon",
-   "b": 0.06666667014360428,
-   "brightness": 0.13594771921634674,
-   "slope_rg": -0.18676848709583282,
-   "slope_gb": 1.3778729438781738,
-   "patch_roughness": 0.1511445790529251,
-   "patch_color_var": 0.05970871075987816,
-   "patch_slope_gb": 1.4087964296340942,
-   "T2M": 23.61,
-   "temp_range": 12.690000000000001,
-   "RH2M": 77.38,
-   "ALLSKY_SFC_SW_DWN": 20.91,
-   "lst_season": 3.299999999999983
-  },
-  {
    "site": "Haughton Crater, Devon Island",
    "label": "Mars",
    "b": 0.8705882430076599,
@@ -457,7 +441,7 @@
   },
   {
    "site": "Kilauea / Ka'u Desert, Hawaii",
-   "label": "Moon",
+   "label": "Mars",
    "b": 0.12941177189350128,
    "brightness": 0.20000000298023224,
    "slope_rg": 0.34723961353302,
@@ -537,7 +521,7 @@
   },
   {
    "site": "Lonar Crater, India",
-   "label": "Moon",
+   "label": "Mars",
    "b": 0.13333334028720856,
    "brightness": 0.21568627655506134,
    "slope_rg": 0.0797518789768219,
@@ -582,22 +566,6 @@
    "RH2M": 43.14,
    "ALLSKY_SFC_SW_DWN": 19.03,
    "lst_season": 47.39999999999998
-  },
-  {
-   "site": "Mauna Kea, Hawaii",
-   "label": "Moon",
-   "b": 0.15294118225574493,
-   "brightness": 0.24248366057872772,
-   "slope_rg": 0.41503220796585083,
-   "slope_gb": 0.8806507587432861,
-   "patch_roughness": 0.12145388871431351,
-   "patch_color_var": 0.03830921649932861,
-   "patch_slope_gb": 0.9677062630653381,
-   "T2M": 20.9,
-   "temp_range": 15.920000000000002,
-   "RH2M": 82.05,
-   "ALLSKY_SFC_SW_DWN": 19.01,
-   "lst_season": 7.2000000000000455
   },
   {
    "site": "Mauna Loa (HI-SEAS), Hawaii",
@@ -825,7 +793,7 @@
   },
   {
    "site": "Pisgah Crater, California",
-   "label": "Moon",
+   "label": "Mars",
    "b": 0.343137264251709,
    "brightness": 0.4660130739212036,
    "slope_rg": 0.3705785274505615,
