@@ -8,6 +8,8 @@ TerraX is a machine-learning model, built on open NASA data, that scores any coo
 
 📽️ **Project demo slides:** [TerraX presentation (Google Slides)](https://docs.google.com/presentation/d/1gFjVxi-iK1YIf68bNpQSjmnjLXC1AeOR/edit?usp=sharing)
 
+The website runs locally (see [Quick start](#-quick-start-try-the-website)); the demo slides show it in use with screenshots.
+
 ---
 
 ## 💡 The idea
