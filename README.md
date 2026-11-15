@@ -53,10 +53,10 @@ An internet connection is needed: for every new spot, the website downloads live
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
 - **Search a place by name** (for example "Atacama Desert" or "Lanzarote").
-- **Click a coloured dot** to see how the model scores one of the 110 known training sites.
+- **Click a coloured dot** to see how the model scores one of the 125 known training sites.
 - **Switch the base map** between satellite imagery, NASA Blue Marble and OpenStreetMap.
 
-**Places worth trying:** the Lut Desert in Iran, the Namib Desert, Wolfe Creek Crater in Australia, Mount Etna, Iceland's lava fields, and your own city for comparison.
+**Places worth trying:** the Lut Desert in Iran, the Namib Desert, Wolfe Creek Crater in Australia, Mount Etna, and your own city for comparison.
 
 ---
 
@@ -68,7 +68,7 @@ labelled sites  →  NASA data for a ±11 km area  →  13 features per pixel  �
 
 ### 1. Labelled places
 
-[`data/sites.csv`](data/sites.csv) lists **110 places**: 28 Moon analogs, 43 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1), plus NASA, JPL, USGS, ESA and peer-reviewed sources for the remaining sites (see [Resources](#-resources)). Every place has its reference in the `source` column.
+[`data/sites.csv`](data/sites.csv) lists **125 places**: 38 Moon analogs, 48 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1), plus NASA, JPL, USGS, ESA and peer-reviewed sources for the remaining sites (see [Resources](#-resources)). Every place has its reference in the `source` column.
 
 ### 2. NASA data
 
@@ -97,9 +97,9 @@ Pixels of the same place are near-copies, so testing on random pixels would leak
 
 | | Result on unseen places |
 |---|---|
-| Place-level accuracy | **about 79 %** (110 places) |
-| Log-loss (probability quality, lower is better) | **0.55** |
-| F1: Mars / Neither / Moon | 0.81 / 0.84 / 0.71 |
+| Place-level accuracy | **about 80 %** (125 places) |
+| Log-loss (probability quality, lower is better) | **0.50** |
+| F1: Mars / Neither / Moon | 0.82 / 0.80 / 0.78 |
 
 The strongest signals are the rock type, the area's overall colour, humidity, the temperature range and colour patchiness. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
 
@@ -110,7 +110,7 @@ The strongest signals are the rock type, the area's overall colour, humidity, th
 ```
 TerraX/
 ├── data/
-│   ├── sites.csv              # the 110 labelled places, with sources
+│   ├── sites.csv              # the 125 labelled places, with sources
 │   ├── analog_model.joblib    # the trained model (ready to use)
 │   ├── web_meta.json          # feature list and reference values for the website
 │   ├── web_sites.json         # known sites shown on the map
@@ -136,7 +136,7 @@ cd model
 jupyter notebook main.ipynb      # or open it in VS Code
 ```
 
-Run all cells. The first run downloads about 800 small files (5–10 minutes); later runs use `data/cache/`. The last section saves a new model into `data/`, and the website uses it the next time it starts.
+Run all cells. The first run downloads about 1,000 small files (5–15 minutes); later runs use `data/cache/`. The last section saves a new model into `data/`, and the website uses it the next time it starts.
 
 **To add your own places,** add rows to `data/sites.csv` (`site, lat, lon, label, region, source`) and re-run the notebook. If you change a feature, change it in both `model/main.ipynb` and `webapp/features.py`.
 
@@ -154,7 +154,7 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 
 ## ⚠️ Limitations
 
-- **110 labelled places is small.** More documented sites, especially Moon analogs, would help most.
+- **125 labelled places is small.** More documented sites, especially Moon analogs, would help most.
 - **Labels follow where agencies have trained,** so the model partly learns the typical colour of those regions (for example, Earth's Moon analogs are often red cinder fields).
 - **Resolution is about 460 m per pixel,** so small features like a single crater rim are averaged out.
 - **Above 82° latitude** there's no usable imagery, and oceans are rejected.
