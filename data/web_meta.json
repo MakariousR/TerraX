@@ -35,19 +35,19 @@
  "typical": {
   "Mars": {
    "rock": "clastic_sediment",
-   "RH2M": 43.14,
-   "temp_range": 48.74,
-   "lst_season": 27.900000000000006,
-   "patch_roughness": 0.04817384108901024,
-   "patch_slope_gb": 0.6594516038894653
+   "RH2M": 50.015,
+   "temp_range": 48.675,
+   "lst_season": 28.19999999999999,
+   "patch_roughness": 0.04893925413489342,
+   "patch_slope_gb": 0.6549349427223206
   },
   "Moon": {
    "rock": "mafic_volcanic",
-   "RH2M": 46.265,
-   "temp_range": 56.41,
+   "RH2M": 45.725,
+   "temp_range": 56.83,
    "lst_season": 39.0,
-   "patch_roughness": 0.04603977128863335,
-   "patch_slope_gb": 0.8222771286964417
+   "patch_roughness": 0.05912173166871071,
+   "patch_slope_gb": 0.8126716017723083
   },
   "Neither": {
    "rock": "clastic_sediment",
@@ -59,32 +59,32 @@
   }
  },
  "mu": {
-  "b": 0.22987522184848785,
-  "brightness": 0.32253119349479675,
-  "slope_rg": 0.152079775929451,
-  "slope_gb": 0.9266501665115356,
-  "patch_roughness": 0.053078290075063705,
-  "patch_color_var": 0.056174010038375854,
-  "patch_slope_gb": 0.9339655637741089,
-  "T2M": 13.78218181818182,
-  "temp_range": 49.202000000000005,
-  "RH2M": 59.86899999999999,
-  "ALLSKY_SFC_SW_DWN": 17.728909090909088,
-  "lst_season": 26.493577981651377
+  "b": 0.23818039894104004,
+  "brightness": 0.3274039328098297,
+  "slope_rg": 0.1473897397518158,
+  "slope_gb": 0.9015257954597473,
+  "patch_roughness": 0.056346770375967026,
+  "patch_color_var": 0.059073202311992645,
+  "patch_slope_gb": 0.9076482057571411,
+  "T2M": 12.73112,
+  "temp_range": 50.098639999999996,
+  "RH2M": 60.72759999999998,
+  "ALLSKY_SFC_SW_DWN": 17.395359999999997,
+  "lst_season": 27.66774193548387
  },
  "sd": {
-  "b": 0.14646191895008087,
-  "brightness": 0.16122698783874512,
-  "slope_rg": 0.40742069482803345,
-  "slope_gb": 0.39281824231147766,
-  "patch_roughness": 0.03654971346259117,
-  "patch_color_var": 0.05218390375375748,
-  "patch_slope_gb": 0.38494524359703064,
-  "T2M": 11.559341778490674,
-  "temp_range": 15.308161449778254,
-  "RH2M": 20.852793487648892,
-  "ALLSKY_SFC_SW_DWN": 4.217817676827967,
-  "lst_season": 14.598955284979953
+  "b": 0.16617193818092346,
+  "brightness": 0.1740172654390335,
+  "slope_rg": 0.3909294605255127,
+  "slope_gb": 0.40117138624191284,
+  "patch_roughness": 0.03776206448674202,
+  "patch_color_var": 0.05226235091686249,
+  "patch_slope_gb": 0.39362019300460815,
+  "T2M": 11.777204349244814,
+  "temp_range": 14.989266177996795,
+  "RH2M": 21.34949706289845,
+  "ALLSKY_SFC_SW_DWN": 4.482269468371661,
+  "lst_season": 14.338376207160438
  },
  "analogs": [
   {
@@ -168,6 +168,22 @@
    "lst_season": 20.099999999999994
   },
   {
+   "site": "Axel Heiberg Island (Gypsum Hill), Canada",
+   "label": "Mars",
+   "b": 0.7607843279838562,
+   "brightness": 0.7542483806610107,
+   "slope_rg": -0.06376957148313522,
+   "slope_gb": -0.02223365008831024,
+   "patch_roughness": 0.03342674672603607,
+   "patch_color_var": 0.15870271623134613,
+   "patch_slope_gb": 0.0018024269957095385,
+   "T2M": -18.27,
+   "temp_range": 61.85,
+   "RH2M": 93.09,
+   "ALLSKY_SFC_SW_DWN": 9.13,
+   "lst_season": 47.39999999999998
+  },
+  {
    "site": "Beacon Valley, Antarctica",
    "label": "Mars",
    "b": 0.1725490242242813,
@@ -216,6 +232,38 @@
    "lst_season": 46.200000000000045
   },
   {
+   "site": "Blackhawk Slide, California",
+   "label": "Moon",
+   "b": 0.364705890417099,
+   "brightness": 0.4758170247077942,
+   "slope_rg": 0.2931426167488098,
+   "slope_gb": 0.6271264553070068,
+   "patch_roughness": 0.06552167236804962,
+   "patch_color_var": 0.10221375524997711,
+   "patch_slope_gb": 0.6608344316482544,
+   "T2M": 16.14,
+   "temp_range": 49.66,
+   "RH2M": 40.88,
+   "ALLSKY_SFC_SW_DWN": 21.19,
+   "lst_season": 39.0
+  },
+  {
+   "site": "Buell Park, Arizona",
+   "label": "Moon",
+   "b": 0.20392157137393951,
+   "brightness": 0.29281046986579895,
+   "slope_rg": 0.41561195254325867,
+   "slope_gb": 0.7476608753204346,
+   "patch_roughness": 0.051838506013154984,
+   "patch_color_var": 0.05866508558392525,
+   "patch_slope_gb": 0.7570200562477112,
+   "T2M": 10.59,
+   "temp_range": 58.97,
+   "RH2M": 45.33,
+   "ALLSKY_SFC_SW_DWN": 20.11,
+   "lst_season": 44.39999999999998
+  },
+  {
    "site": "Capulin Volcano, New Mexico",
    "label": "Moon",
    "b": 0.14901961386203766,
@@ -246,6 +294,22 @@
    "RH2M": 45.78,
    "ALLSKY_SFC_SW_DWN": 20.66,
    "lst_season": 24.600000000000023
+  },
+  {
+   "site": "Chocolate Mountains, California",
+   "label": "Moon",
+   "b": 0.32156863808631897,
+   "brightness": 0.43921568989753723,
+   "slope_rg": 0.3111969232559204,
+   "slope_gb": 0.7337982654571533,
+   "patch_roughness": 0.06073484942317009,
+   "patch_color_var": 0.05828169360756874,
+   "patch_slope_gb": 0.716367244720459,
+   "T2M": 21.89,
+   "temp_range": 51.53,
+   "RH2M": 35.07,
+   "ALLSKY_SFC_SW_DWN": 21.34,
+   "lst_season": 32.400000000000034
   },
   {
    "site": "Cinder Lake Crater Field, AZ",
@@ -376,6 +440,22 @@
    "lst_season": 15.0
   },
   {
+   "site": "Grand Canyon, Arizona",
+   "label": "Moon",
+   "b": 0.21960784494876862,
+   "brightness": 0.30980393290519714,
+   "slope_rg": 0.4569505453109741,
+   "slope_gb": 0.7267462015151978,
+   "patch_roughness": 0.18456681072711945,
+   "patch_color_var": 0.057298529893159866,
+   "patch_slope_gb": 0.7418367862701416,
+   "T2M": 11.86,
+   "temp_range": 56.459999999999994,
+   "RH2M": 44.32,
+   "ALLSKY_SFC_SW_DWN": 19.6,
+   "lst_season": 40.19999999999999
+  },
+  {
    "site": "Haughton Crater, Devon Island",
    "label": "Mars",
    "b": 0.8705882430076599,
@@ -472,6 +552,38 @@
    "lst_season": 36.0
   },
   {
+   "site": "Klyuchevskaya volcano group, Kamchatka",
+   "label": "Mars",
+   "b": 0.7980391979217529,
+   "brightness": 0.8045752048492432,
+   "slope_rg": 0.0,
+   "slope_gb": 0.02208041585981846,
+   "patch_roughness": 0.11665795743465424,
+   "patch_color_var": 0.12947672605514526,
+   "patch_slope_gb": 0.026286015287041664,
+   "T2M": -5.47,
+   "temp_range": 65.39,
+   "RH2M": 93.16,
+   "ALLSKY_SFC_SW_DWN": 10.1,
+   "lst_season": 39.0
+  },
+  {
+   "site": "Krysuvik, Iceland",
+   "label": "Mars",
+   "b": 0.07450980693101883,
+   "brightness": 0.14640523493289948,
+   "slope_rg": 0.1302381157875061,
+   "slope_gb": 1.2258636951446533,
+   "patch_roughness": 0.09925875812768936,
+   "patch_color_var": 0.05255434289574623,
+   "patch_slope_gb": 1.1621646881103516,
+   "T2M": 4.58,
+   "temp_range": 36.92,
+   "RH2M": 87.82,
+   "ALLSKY_SFC_SW_DWN": 8.02,
+   "lst_season": 32.39999999999998
+  },
+  {
    "site": "Lake Maider, Morocco",
    "label": "Mars",
    "b": 0.3764705955982208,
@@ -504,6 +616,22 @@
    "lst_season": 26.399999999999977
   },
   {
+   "site": "Laki flow field, Iceland",
+   "label": "Mars",
+   "b": 0.0941176488995552,
+   "brightness": 0.1594771295785904,
+   "slope_rg": 0.07165812700986862,
+   "slope_gb": 1.047363519668579,
+   "patch_roughness": 0.033087119460105896,
+   "patch_color_var": 0.024314744397997856,
+   "patch_slope_gb": 1.056310772895813,
+   "T2M": 0.95,
+   "temp_range": 38.65,
+   "RH2M": 90.62,
+   "ALLSKY_SFC_SW_DWN": 9.6,
+   "lst_season": 30.600000000000023
+  },
+  {
    "site": "Lanzarote (Timanfaya), Spain",
    "label": "Moon",
    "b": 0.11372549086809158,
@@ -534,6 +662,22 @@
    "RH2M": 53.19,
    "ALLSKY_SFC_SW_DWN": 19.21,
    "lst_season": NaN
+  },
+  {
+   "site": "Lunar Crater, Nevada",
+   "label": "Moon",
+   "b": 0.26274511218070984,
+   "brightness": 0.379084974527359,
+   "slope_rg": 0.399924099445343,
+   "slope_gb": 0.7732364535331726,
+   "patch_roughness": 0.06691030412912369,
+   "patch_color_var": 0.08438096195459366,
+   "patch_slope_gb": 0.7767208814620972,
+   "T2M": 10.34,
+   "temp_range": 58.3,
+   "RH2M": 40.47,
+   "ALLSKY_SFC_SW_DWN": 19.21,
+   "lst_season": 51.60000000000002
   },
   {
    "site": "Manicouagan Crater, Quebec",
@@ -614,6 +758,22 @@
    "RH2M": 79.0,
    "ALLSKY_SFC_SW_DWN": 10.8,
    "lst_season": 25.80000000000001
+  },
+  {
+   "site": "Medicine Lake Volcano, California",
+   "label": "Moon",
+   "b": 0.06666667014360428,
+   "brightness": 0.11241830140352249,
+   "slope_rg": 0.0458017960190773,
+   "slope_gb": 1.0215458869934082,
+   "patch_roughness": 0.05750861391425133,
+   "patch_color_var": 0.04590199142694473,
+   "patch_slope_gb": 1.011706829071045,
+   "T2M": 8.12,
+   "temp_range": 64.19999999999999,
+   "RH2M": 66.95,
+   "ALLSKY_SFC_SW_DWN": 17.51,
+   "lst_season": 35.39999999999998
   },
   {
    "site": "Merzouga / Erg Chebbi, Morocco",
@@ -710,6 +870,22 @@
    "RH2M": 48.61,
    "ALLSKY_SFC_SW_DWN": 19.18,
    "lst_season": 46.80000000000001
+  },
+  {
+   "site": "Murchison Fjord, Svalbard",
+   "label": "Mars",
+   "b": 0.7745097875595093,
+   "brightness": 0.774509847164154,
+   "slope_rg": -0.04278705269098282,
+   "slope_gb": 0.009904637932777405,
+   "patch_roughness": 0.07415606081485748,
+   "patch_color_var": 0.2007395327091217,
+   "patch_slope_gb": 0.015955623239278793,
+   "T2M": -6.78,
+   "temp_range": 47.86,
+   "RH2M": 94.13,
+   "ALLSKY_SFC_SW_DWN": 8.35,
+   "lst_season": 16.799999999999955
   },
   {
    "site": "Newberry Volcano, Oregon",
@@ -1000,6 +1176,22 @@
    "lst_season": 43.799999999999955
   },
   {
+   "site": "Sierra Blanca, Texas",
+   "label": "Moon",
+   "b": 0.3450980484485626,
+   "brightness": 0.4601307213306427,
+   "slope_rg": 0.3364624083042145,
+   "slope_gb": 0.6850308179855347,
+   "patch_roughness": 0.05746336281299591,
+   "patch_color_var": 0.04551469162106514,
+   "patch_slope_gb": 0.6854742765426636,
+   "T2M": 17.24,
+   "temp_range": 56.58,
+   "RH2M": 42.22,
+   "ALLSKY_SFC_SW_DWN": 20.98,
+   "lst_season": 30.600000000000023
+  },
+  {
    "site": "Sierra Madera impact structure, Texas",
    "label": "Moon",
    "b": 0.27843138575553894,
@@ -1144,6 +1336,38 @@
    "lst_season": 39.599999999999966
   },
   {
+   "site": "Valles Caldera, New Mexico",
+   "label": "Moon",
+   "b": 0.08235294371843338,
+   "brightness": 0.13856209814548492,
+   "slope_rg": -0.14755703508853912,
+   "slope_gb": 1.1901638507843018,
+   "patch_roughness": 0.11157169193029404,
+   "patch_color_var": 0.04015549272298813,
+   "patch_slope_gb": 1.1985002756118774,
+   "T2M": 9.0,
+   "temp_range": 58.92,
+   "RH2M": 50.74,
+   "ALLSKY_SFC_SW_DWN": 19.9,
+   "lst_season": 34.80000000000001
+  },
+  {
+   "site": "Valley of Ten Thousand Smokes, Katmai, Alaska",
+   "label": "Moon",
+   "b": 0.09019608050584793,
+   "brightness": 0.15751634538173676,
+   "slope_rg": -0.19148293137550354,
+   "slope_gb": 1.2908855676651,
+   "patch_roughness": 0.10819625109434128,
+   "patch_color_var": 0.09690578281879425,
+   "patch_slope_gb": 1.2632105350494385,
+   "T2M": 0.2,
+   "temp_range": 67.72,
+   "RH2M": 89.35,
+   "ALLSKY_SFC_SW_DWN": 8.67,
+   "lst_season": 27.599999999999966
+  },
+  {
    "site": "Wadi Rum, Jordan",
    "label": "Mars",
    "b": 0.3921568691730499,
@@ -1158,6 +1382,22 @@
    "RH2M": 41.77,
    "ALLSKY_SFC_SW_DWN": 22.53,
    "lst_season": 30.0
+  },
+  {
+   "site": "West Clearwater Lake impact structure, Quebec",
+   "label": "Moon",
+   "b": 0.027450980618596077,
+   "brightness": 0.04248366132378578,
+   "slope_rg": -0.32044699788093567,
+   "slope_gb": 0.6800333261489868,
+   "patch_roughness": 0.08383545279502869,
+   "patch_color_var": 0.04990379884839058,
+   "patch_slope_gb": 0.645610511302948,
+   "T2M": -5.04,
+   "temp_range": 77.1,
+   "RH2M": 91.21,
+   "ALLSKY_SFC_SW_DWN": 10.53,
+   "lst_season": 40.80000000000001
   },
   {
    "site": "Wright Valley South Fork, Antarctica",
