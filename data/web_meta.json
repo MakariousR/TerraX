@@ -12,6 +12,8 @@
   "RH2M",
   "ALLSKY_SFC_SW_DWN",
   "lst_season",
+  "ndvi_peak",
+  "patch_ndvi",
   "rock"
  ],
  "classes": [
@@ -38,6 +40,7 @@
    "RH2M": 50.015,
    "temp_range": 48.675,
    "lst_season": 28.19999999999999,
+   "patch_ndvi": 0.10250993923611111,
    "patch_roughness": 0.04893925413489342,
    "patch_slope_gb": 0.6549349427223206
   },
@@ -46,6 +49,7 @@
    "RH2M": 45.725,
    "temp_range": 56.83,
    "lst_season": 39.0,
+   "patch_ndvi": 0.22437571614583335,
    "patch_roughness": 0.05912173166871071,
    "patch_slope_gb": 0.8126716017723083
   },
@@ -54,6 +58,7 @@
    "RH2M": 75.59,
    "temp_range": 45.459999999999994,
    "lst_season": 16.19999999999999,
+   "patch_ndvi": 0.6120363715277778,
    "patch_roughness": 0.0263567753136158,
    "patch_slope_gb": 1.1770436763763428
   }
@@ -71,7 +76,9 @@
   "temp_range": 50.098639999999996,
   "RH2M": 60.72759999999998,
   "ALLSKY_SFC_SW_DWN": 17.395359999999997,
-  "lst_season": 27.66774193548387
+  "lst_season": 27.66774193548387,
+  "ndvi_peak": 0.33939600000000003,
+  "patch_ndvi": 0.33770021193266286
  },
  "sd": {
   "b": 0.16617193818092346,
@@ -85,7 +92,9 @@
   "temp_range": 14.989266177996795,
   "RH2M": 21.34949706289845,
   "ALLSKY_SFC_SW_DWN": 4.482269468371661,
-  "lst_season": 14.338376207160438
+  "lst_season": 14.338376207160438,
+  "ndvi_peak": 0.27260827566249235,
+  "patch_ndvi": 0.25977356961218107
  },
  "analogs": [
   {
@@ -102,7 +111,9 @@
    "temp_range": 47.230000000000004,
    "RH2M": 94.8,
    "ALLSKY_SFC_SW_DWN": 7.41,
-   "lst_season": 26.400000000000034
+   "lst_season": 26.400000000000034,
+   "ndvi_peak": 0.2476,
+   "patch_ndvi": 0.25316055582642616
   },
   {
    "site": "Alnif, Morocco",
@@ -118,7 +129,9 @@
    "temp_range": 47.17,
    "RH2M": 39.9,
    "ALLSKY_SFC_SW_DWN": 20.61,
-   "lst_season": 28.19999999999999
+   "lst_season": 28.19999999999999,
+   "ndvi_peak": 0.1276,
+   "patch_ndvi": 0.12526710069444447
   },
   {
    "site": "Amboy Crater, California",
@@ -134,7 +147,9 @@
    "temp_range": 53.099999999999994,
    "RH2M": 30.69,
    "ALLSKY_SFC_SW_DWN": 21.01,
-   "lst_season": 39.0
+   "lst_season": 39.0,
+   "ndvi_peak": 0.0776,
+   "patch_ndvi": 0.07554921875000001
   },
   {
    "site": "Arkaroola, South Australia",
@@ -150,7 +165,9 @@
    "temp_range": 48.74,
    "RH2M": 42.79,
    "ALLSKY_SFC_SW_DWN": 20.45,
-   "lst_season": 26.399999999999977
+   "lst_season": 26.399999999999977,
+   "ndvi_peak": 0.2426,
+   "patch_ndvi": 0.24630442708333333
   },
   {
    "site": "Atacama Desert (Yungay), Chile",
@@ -166,7 +183,9 @@
    "temp_range": 33.57,
    "RH2M": 44.09,
    "ALLSKY_SFC_SW_DWN": 25.94,
-   "lst_season": 20.099999999999994
+   "lst_season": 20.099999999999994,
+   "ndvi_peak": 0.0926,
+   "patch_ndvi": 0.09589861111111112
   },
   {
    "site": "Axel Heiberg Island (Gypsum Hill), Canada",
@@ -182,7 +201,9 @@
    "temp_range": 61.85,
    "RH2M": 93.09,
    "ALLSKY_SFC_SW_DWN": 9.13,
-   "lst_season": 47.39999999999998
+   "lst_season": 47.39999999999998,
+   "ndvi_peak": 0.1501,
+   "patch_ndvi": 0.17223245307725885
   },
   {
    "site": "Beacon Valley, Antarctica",
@@ -198,7 +219,9 @@
    "temp_range": 51.849999999999994,
    "RH2M": 79.33,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "lst_season": 23.399999999999977
+   "lst_season": 23.399999999999977,
+   "ndvi_peak": 0.0,
+   "patch_ndvi": 0.0
   },
   {
    "site": "Ben Haddou, Morocco",
@@ -214,7 +237,9 @@
    "temp_range": 47.38,
    "RH2M": 39.94,
    "ALLSKY_SFC_SW_DWN": 21.51,
-   "lst_season": 31.19999999999999
+   "lst_season": 31.19999999999999,
+   "ndvi_peak": 0.1126,
+   "patch_ndvi": 0.12052643229166667
   },
   {
    "site": "Black Point Lava Flow, AZ",
@@ -230,7 +255,9 @@
    "temp_range": 57.0,
    "RH2M": 41.85,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "lst_season": 46.200000000000045
+   "lst_season": 46.200000000000045,
+   "ndvi_peak": 0.1326,
+   "patch_ndvi": 0.12962473958333331
   },
   {
    "site": "Blackhawk Slide, California",
@@ -246,7 +273,9 @@
    "temp_range": 49.66,
    "RH2M": 40.88,
    "ALLSKY_SFC_SW_DWN": 21.19,
-   "lst_season": 39.0
+   "lst_season": 39.0,
+   "ndvi_peak": 0.1076,
+   "patch_ndvi": 0.14229401041666667
   },
   {
    "site": "Buell Park, Arizona",
@@ -262,7 +291,9 @@
    "temp_range": 58.97,
    "RH2M": 45.33,
    "ALLSKY_SFC_SW_DWN": 20.11,
-   "lst_season": 44.39999999999998
+   "lst_season": 44.39999999999998,
+   "ndvi_peak": 0.32635000000000003,
+   "patch_ndvi": 0.34169776475694447
   },
   {
    "site": "Capulin Volcano, New Mexico",
@@ -278,7 +309,9 @@
    "temp_range": 61.08,
    "RH2M": 47.98,
    "ALLSKY_SFC_SW_DWN": 19.22,
-   "lst_season": 32.70000000000002
+   "lst_season": 32.70000000000002,
+   "ndvi_peak": 0.46135000000000004,
+   "patch_ndvi": 0.45809370659722226
   },
   {
    "site": "Chisos Mountains, Big Bend, Texas",
@@ -294,7 +327,9 @@
    "temp_range": 54.74,
    "RH2M": 45.78,
    "ALLSKY_SFC_SW_DWN": 20.66,
-   "lst_season": 24.600000000000023
+   "lst_season": 24.600000000000023,
+   "ndvi_peak": 0.2276,
+   "patch_ndvi": 0.25542769097222223
   },
   {
    "site": "Chocolate Mountains, California",
@@ -310,7 +345,9 @@
    "temp_range": 51.53,
    "RH2M": 35.07,
    "ALLSKY_SFC_SW_DWN": 21.34,
-   "lst_season": 32.400000000000034
+   "lst_season": 32.400000000000034,
+   "ndvi_peak": 0.1326,
+   "patch_ndvi": 0.12845720486111112
   },
   {
    "site": "Cinder Lake Crater Field, AZ",
@@ -326,7 +363,9 @@
    "temp_range": 57.0,
    "RH2M": 41.85,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "lst_season": 46.19999999999999
+   "lst_season": 46.19999999999999,
+   "ndvi_peak": 0.30384999999999995,
+   "patch_ndvi": 0.32467736545138887
   },
   {
    "site": "Coso volcanic field, California",
@@ -342,7 +381,9 @@
    "temp_range": 54.97,
    "RH2M": 44.96,
    "ALLSKY_SFC_SW_DWN": 20.56,
-   "lst_season": 39.599999999999966
+   "lst_season": 39.599999999999966,
+   "ndvi_peak": 0.1676,
+   "patch_ndvi": 0.16647369791666666
   },
   {
    "site": "Craters of the Moon, Idaho",
@@ -358,7 +399,9 @@
    "temp_range": 69.53,
    "RH2M": 59.83,
    "ALLSKY_SFC_SW_DWN": 16.38,
-   "lst_season": 54.0
+   "lst_season": 54.0,
+   "ndvi_peak": 0.2676,
+   "patch_ndvi": 0.2543502170138889
   },
   {
    "site": "Dallol, Ethiopia",
@@ -374,7 +417,9 @@
    "temp_range": 29.010000000000005,
    "RH2M": 46.84,
    "ALLSKY_SFC_SW_DWN": 21.45,
-   "lst_season": 6.600000000000023
+   "lst_season": 6.600000000000023,
+   "ndvi_peak": 0.0751,
+   "patch_ndvi": 0.07646067708333333
   },
   {
    "site": "Death Valley, California",
@@ -390,7 +435,9 @@
    "temp_range": 52.379999999999995,
    "RH2M": 29.33,
    "ALLSKY_SFC_SW_DWN": 20.53,
-   "lst_season": 38.39999999999998
+   "lst_season": 38.39999999999998,
+   "ndvi_peak": 0.0776,
+   "patch_ndvi": 0.08363407118055556
   },
   {
    "site": "Ebbadalen, Svalbard",
@@ -406,7 +453,9 @@
    "temp_range": 48.76,
    "RH2M": 95.66,
    "ALLSKY_SFC_SW_DWN": 7.94,
-   "lst_season": 24.600000000000023
+   "lst_season": 24.600000000000023,
+   "ndvi_peak": 0.1051,
+   "patch_ndvi": 0.12276106271777003
   },
   {
    "site": "El Elegante crater, Pinacate, Mexico",
@@ -422,7 +471,9 @@
    "temp_range": 53.059999999999995,
    "RH2M": 37.68,
    "ALLSKY_SFC_SW_DWN": 21.62,
-   "lst_season": 30.599999999999966
+   "lst_season": 30.599999999999966,
+   "ndvi_peak": 0.1476,
+   "patch_ndvi": 0.15119375000000002
   },
   {
    "site": "Gobabeb, Namib Desert",
@@ -438,7 +489,9 @@
    "temp_range": 40.37,
    "RH2M": 41.66,
    "ALLSKY_SFC_SW_DWN": 23.89,
-   "lst_season": 15.0
+   "lst_season": 15.0,
+   "ndvi_peak": 0.1076,
+   "patch_ndvi": 0.09204878472222222
   },
   {
    "site": "Grand Canyon, Arizona",
@@ -454,7 +507,9 @@
    "temp_range": 56.459999999999994,
    "RH2M": 44.32,
    "ALLSKY_SFC_SW_DWN": 19.6,
-   "lst_season": 40.19999999999999
+   "lst_season": 40.19999999999999,
+   "ndvi_peak": 0.2676,
+   "patch_ndvi": 0.284348046875
   },
   {
    "site": "Haughton Crater, Devon Island",
@@ -470,7 +525,9 @@
    "temp_range": 65.36,
    "RH2M": 94.36,
    "ALLSKY_SFC_SW_DWN": 8.34,
-   "lst_season": 49.80000000000001
+   "lst_season": 49.80000000000001,
+   "ndvi_peak": 0.1626,
+   "patch_ndvi": 0.1543013888888889
   },
   {
    "site": "Henbury Craters, Australia",
@@ -486,7 +543,9 @@
    "temp_range": 49.25,
    "RH2M": 34.81,
    "ALLSKY_SFC_SW_DWN": 22.57,
-   "lst_season": 24.599999999999966
+   "lst_season": 24.599999999999966,
+   "ndvi_peak": 0.21760000000000002,
+   "patch_ndvi": 0.21960086805555556
   },
   {
    "site": "Holuhraun, Iceland",
@@ -502,7 +561,9 @@
    "temp_range": 34.14,
    "RH2M": 94.09,
    "ALLSKY_SFC_SW_DWN": 10.73,
-   "lst_season": 26.400000000000034
+   "lst_season": 26.400000000000034,
+   "ndvi_peak": 0.0,
+   "patch_ndvi": 0.03354616470588235
   },
   {
    "site": "Hopi Buttes volcanic field, Arizona",
@@ -518,7 +579,9 @@
    "temp_range": 57.49,
    "RH2M": 42.56,
    "ALLSKY_SFC_SW_DWN": 20.32,
-   "lst_season": 48.60000000000002
+   "lst_season": 48.60000000000002,
+   "ndvi_peak": 0.18259999999999998,
+   "patch_ndvi": 0.18425147569444444
   },
   {
    "site": "Kilauea / Ka'u Desert, Hawaii",
@@ -534,7 +597,9 @@
    "temp_range": 20.529999999999998,
    "RH2M": 83.01,
    "ALLSKY_SFC_SW_DWN": 19.01,
-   "lst_season": 6.0
+   "lst_season": 6.0,
+   "ndvi_peak": 0.3751,
+   "patch_ndvi": 0.4059492511013216
   },
   {
    "site": "Kilbourne Hole, New Mexico",
@@ -550,7 +615,9 @@
    "temp_range": 56.16,
    "RH2M": 39.08,
    "ALLSKY_SFC_SW_DWN": 21.24,
-   "lst_season": 36.0
+   "lst_season": 36.0,
+   "ndvi_peak": 0.1676,
+   "patch_ndvi": 0.16620677083333335
   },
   {
    "site": "Klyuchevskaya volcano group, Kamchatka",
@@ -566,7 +633,9 @@
    "temp_range": 65.39,
    "RH2M": 93.16,
    "ALLSKY_SFC_SW_DWN": 10.1,
-   "lst_season": 39.0
+   "lst_season": 39.0,
+   "ndvi_peak": 0.0476,
+   "patch_ndvi": 0.06972209201388889
   },
   {
    "site": "Krysuvik, Iceland",
@@ -582,7 +651,9 @@
    "temp_range": 36.92,
    "RH2M": 87.82,
    "ALLSKY_SFC_SW_DWN": 8.02,
-   "lst_season": 32.39999999999998
+   "lst_season": 32.39999999999998,
+   "ndvi_peak": 0.40135,
+   "patch_ndvi": 0.36919092654824776
   },
   {
    "site": "Lake Maider, Morocco",
@@ -598,7 +669,9 @@
    "temp_range": 49.459999999999994,
    "RH2M": 30.09,
    "ALLSKY_SFC_SW_DWN": 21.68,
-   "lst_season": 30.599999999999966
+   "lst_season": 30.599999999999966,
+   "ndvi_peak": 0.1026,
+   "patch_ndvi": 0.10450538194444445
   },
   {
    "site": "Lake Salda, Turkey",
@@ -614,7 +687,9 @@
    "temp_range": 58.3,
    "RH2M": 62.95,
    "ALLSKY_SFC_SW_DWN": 17.76,
-   "lst_season": 26.399999999999977
+   "lst_season": 26.399999999999977,
+   "ndvi_peak": 0.47635000000000005,
+   "patch_ndvi": 0.46631347402597395
   },
   {
    "site": "Laki flow field, Iceland",
@@ -630,7 +705,9 @@
    "temp_range": 38.65,
    "RH2M": 90.62,
    "ALLSKY_SFC_SW_DWN": 9.6,
-   "lst_season": 30.600000000000023
+   "lst_season": 30.600000000000023,
+   "ndvi_peak": 0.39385000000000003,
+   "patch_ndvi": 0.35784911024305555
   },
   {
    "site": "Lanzarote (Timanfaya), Spain",
@@ -646,7 +723,9 @@
    "temp_range": 15.469999999999999,
    "RH2M": 78.06,
    "ALLSKY_SFC_SW_DWN": 18.6,
-   "lst_season": 9.599999999999966
+   "lst_season": 9.599999999999966,
+   "ndvi_peak": 0.1626,
+   "patch_ndvi": 0.17076444444444444
   },
   {
    "site": "Lonar Crater, India",
@@ -662,7 +741,9 @@
    "temp_range": 39.47,
    "RH2M": 53.19,
    "ALLSKY_SFC_SW_DWN": 19.21,
-   "lst_season": NaN
+   "lst_season": NaN,
+   "ndvi_peak": 0.55135,
+   "patch_ndvi": 0.5430709201388888
   },
   {
    "site": "Lunar Crater, Nevada",
@@ -678,7 +759,9 @@
    "temp_range": 58.3,
    "RH2M": 40.47,
    "ALLSKY_SFC_SW_DWN": 19.21,
-   "lst_season": 51.60000000000002
+   "lst_season": 51.60000000000002,
+   "ndvi_peak": 0.1426,
+   "patch_ndvi": 0.1411959201388889
   },
   {
    "site": "Manicouagan Crater, Quebec",
@@ -694,7 +777,9 @@
    "temp_range": 78.87,
    "RH2M": 90.41,
    "ALLSKY_SFC_SW_DWN": 11.17,
-   "lst_season": 39.0
+   "lst_season": 39.0,
+   "ndvi_peak": 0.7851,
+   "patch_ndvi": 0.7793230902777778
   },
   {
    "site": "Mars Desert Research Station, UT",
@@ -710,7 +795,9 @@
    "temp_range": 61.08,
    "RH2M": 43.14,
    "ALLSKY_SFC_SW_DWN": 19.03,
-   "lst_season": 47.39999999999998
+   "lst_season": 47.39999999999998,
+   "ndvi_peak": 0.1026,
+   "patch_ndvi": 0.10578793402777778
   },
   {
    "site": "Mauna Loa (HI-SEAS), Hawaii",
@@ -726,7 +813,9 @@
    "temp_range": 20.529999999999998,
    "RH2M": 83.01,
    "ALLSKY_SFC_SW_DWN": 19.01,
-   "lst_season": 7.199999999999989
+   "lst_season": 7.199999999999989,
+   "ndvi_peak": 0.0826,
+   "patch_ndvi": 0.15659414062500002
   },
   {
    "site": "McCullough Range, Nevada",
@@ -742,7 +831,9 @@
    "temp_range": 53.41,
    "RH2M": 30.62,
    "ALLSKY_SFC_SW_DWN": 20.7,
-   "lst_season": 40.19999999999999
+   "lst_season": 40.19999999999999,
+   "ndvi_peak": 0.1526,
+   "patch_ndvi": 0.15998823784722221
   },
   {
    "site": "McMurdo Dry Valleys, Antarctica",
@@ -758,7 +849,9 @@
    "temp_range": 48.22,
    "RH2M": 79.0,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "lst_season": 25.80000000000001
+   "lst_season": 25.80000000000001,
+   "ndvi_peak": 0.0,
+   "patch_ndvi": 0.0
   },
   {
    "site": "Medicine Lake Volcano, California",
@@ -774,7 +867,9 @@
    "temp_range": 64.19999999999999,
    "RH2M": 66.95,
    "ALLSKY_SFC_SW_DWN": 17.51,
-   "lst_season": 35.39999999999998
+   "lst_season": 35.39999999999998,
+   "ndvi_peak": 0.5063500000000001,
+   "patch_ndvi": 0.48662126736111116
   },
   {
    "site": "Merzouga / Erg Chebbi, Morocco",
@@ -790,7 +885,9 @@
    "temp_range": 49.199999999999996,
    "RH2M": 32.97,
    "ALLSKY_SFC_SW_DWN": 21.34,
-   "lst_season": 28.200000000000045
+   "lst_season": 28.200000000000045,
+   "ndvi_peak": 0.0876,
+   "patch_ndvi": 0.09776710069444444
   },
   {
    "site": "Meteor Crater, Arizona",
@@ -806,7 +903,9 @@
    "temp_range": 60.19,
    "RH2M": 47.71,
    "ALLSKY_SFC_SW_DWN": 20.03,
-   "lst_season": 44.39999999999998
+   "lst_season": 44.39999999999998,
+   "ndvi_peak": 0.1626,
+   "patch_ndvi": 0.16393897569444443
   },
   {
    "site": "Mhamid, Morocco",
@@ -822,7 +921,9 @@
    "temp_range": 50.15,
    "RH2M": 28.76,
    "ALLSKY_SFC_SW_DWN": 21.9,
-   "lst_season": 28.80000000000001
+   "lst_season": 28.80000000000001,
+   "ndvi_peak": 0.09759999999999999,
+   "patch_ndvi": 0.09850711805555558
   },
   {
    "site": "Mistastin Lake Crater, Labrador",
@@ -838,7 +939,9 @@
    "temp_range": 72.25,
    "RH2M": 92.59,
    "ALLSKY_SFC_SW_DWN": 10.83,
-   "lst_season": 44.400000000000034
+   "lst_season": 44.400000000000034,
+   "ndvi_peak": 0.5963499999999999,
+   "patch_ndvi": 0.5623806178239474
   },
   {
    "site": "Mojave (Dumont Dunes), California",
@@ -854,7 +957,9 @@
    "temp_range": 52.279999999999994,
    "RH2M": 32.56,
    "ALLSKY_SFC_SW_DWN": 20.84,
-   "lst_season": 37.80000000000001
+   "lst_season": 37.80000000000001,
+   "ndvi_peak": 0.0776,
+   "patch_ndvi": 0.07814470486111111
   },
   {
    "site": "Mono Craters, California",
@@ -870,7 +975,9 @@
    "temp_range": 60.39,
    "RH2M": 48.61,
    "ALLSKY_SFC_SW_DWN": 19.18,
-   "lst_season": 46.80000000000001
+   "lst_season": 46.80000000000001,
+   "ndvi_peak": 0.32635000000000003,
+   "patch_ndvi": 0.31341549479166664
   },
   {
    "site": "Murchison Fjord, Svalbard",
@@ -886,7 +993,9 @@
    "temp_range": 47.86,
    "RH2M": 94.13,
    "ALLSKY_SFC_SW_DWN": 8.35,
-   "lst_season": 16.799999999999955
+   "lst_season": 16.799999999999955,
+   "ndvi_peak": 0.06509999999999999,
+   "patch_ndvi": 0.05965617491590581
   },
   {
    "site": "Newberry Volcano, Oregon",
@@ -902,7 +1011,9 @@
    "temp_range": 65.35,
    "RH2M": 68.43,
    "ALLSKY_SFC_SW_DWN": 16.31,
-   "lst_season": 33.0
+   "lst_season": 33.0,
+   "ndvi_peak": 0.6051,
+   "patch_ndvi": 0.5960977213541666
   },
   {
    "site": "Orocopia Mountains, California",
@@ -918,7 +1029,9 @@
    "temp_range": 51.53,
    "RH2M": 35.07,
    "ALLSKY_SFC_SW_DWN": 21.34,
-   "lst_season": 32.400000000000034
+   "lst_season": 32.400000000000034,
+   "ndvi_peak": 0.1426,
+   "patch_ndvi": 0.14550907118055553
   },
   {
    "site": "Ouarzazate travertine, Morocco",
@@ -934,7 +1047,9 @@
    "temp_range": 47.38,
    "RH2M": 39.94,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "lst_season": 30.0
+   "lst_season": 30.0,
+   "ndvi_peak": 0.0876,
+   "patch_ndvi": 0.09799696180555556
   },
   {
    "site": "Pampas de La Joya, Peru",
@@ -950,7 +1065,9 @@
    "temp_range": 22.169999999999998,
    "RH2M": 55.57,
    "ALLSKY_SFC_SW_DWN": 23.86,
-   "lst_season": 9.599999999999966
+   "lst_season": 9.599999999999966,
+   "ndvi_peak": 0.0576,
+   "patch_ndvi": 0.07860694444444444
   },
   {
    "site": "Pilbara (Dresser Fm), Australia",
@@ -966,7 +1083,9 @@
    "temp_range": 42.46,
    "RH2M": 39.26,
    "ALLSKY_SFC_SW_DWN": 23.06,
-   "lst_season": 14.400000000000034
+   "lst_season": 14.400000000000034,
+   "ndvi_peak": 0.2276,
+   "patch_ndvi": 0.23617421875
   },
   {
    "site": "Pisgah Crater, California",
@@ -982,7 +1101,9 @@
    "temp_range": 52.11,
    "RH2M": 33.06,
    "ALLSKY_SFC_SW_DWN": 21.19,
-   "lst_season": 38.400000000000034
+   "lst_season": 38.400000000000034,
+   "ndvi_peak": 0.1026,
+   "patch_ndvi": 0.10532135416666667
   },
   {
    "site": "Qaidam Basin (Dalangtan), China",
@@ -998,7 +1119,9 @@
    "temp_range": 55.68,
    "RH2M": 33.54,
    "ALLSKY_SFC_SW_DWN": 18.67,
-   "lst_season": 42.0
+   "lst_season": 42.0,
+   "ndvi_peak": 0.0526,
+   "patch_ndvi": 0.05642925347222221
   },
   {
    "site": "Ries Crater, Germany",
@@ -1014,7 +1137,9 @@
    "temp_range": 55.39,
    "RH2M": 81.27,
    "ALLSKY_SFC_SW_DWN": 11.71,
-   "lst_season": 30.599999999999966
+   "lst_season": 30.599999999999966,
+   "ndvi_peak": 0.5776,
+   "patch_ndvi": 0.575732052951389
   },
   {
    "site": "Rio Grande Gorge, New Mexico",
@@ -1030,7 +1155,9 @@
    "temp_range": 59.379999999999995,
    "RH2M": 53.65,
    "ALLSKY_SFC_SW_DWN": 19.06,
-   "lst_season": 44.39999999999998
+   "lst_season": 44.39999999999998,
+   "ndvi_peak": 0.2076,
+   "patch_ndvi": 0.2291505642361111
   },
   {
    "site": "Rio Tinto, Spain",
@@ -1046,7 +1173,9 @@
    "temp_range": 50.87,
    "RH2M": 62.53,
    "ALLSKY_SFC_SW_DWN": 18.07,
-   "lst_season": 30.0
+   "lst_season": 30.0,
+   "ndvi_peak": 0.6151,
+   "patch_ndvi": 0.5744929036458334
   },
   {
    "site": "Rissani, Morocco",
@@ -1062,7 +1191,9 @@
    "temp_range": 48.58,
    "RH2M": 34.72,
    "ALLSKY_SFC_SW_DWN": 21.15,
-   "lst_season": 30.600000000000023
+   "lst_season": 30.600000000000023,
+   "ndvi_peak": 0.0876,
+   "patch_ndvi": 0.0931859375
   },
   {
    "site": "San Gabriel anorthosite, California",
@@ -1078,7 +1209,9 @@
    "temp_range": 49.67,
    "RH2M": 46.75,
    "ALLSKY_SFC_SW_DWN": 20.32,
-   "lst_season": 28.80000000000001
+   "lst_season": 28.80000000000001,
+   "ndvi_peak": 0.49885,
+   "patch_ndvi": 0.5022044921875
   },
   {
    "site": "Saoun, Morocco",
@@ -1094,7 +1227,9 @@
    "temp_range": 49.13,
    "RH2M": 34.47,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "lst_season": 28.19999999999999
+   "lst_season": 28.19999999999999,
+   "ndvi_peak": 0.1076,
+   "patch_ndvi": 0.10949453125
   },
   {
    "site": "Sebkha Aridal, Western Sahara",
@@ -1110,7 +1245,9 @@
    "temp_range": 43.650000000000006,
    "RH2M": 61.29,
    "ALLSKY_SFC_SW_DWN": 20.55,
-   "lst_season": 9.0
+   "lst_season": 9.0,
+   "ndvi_peak": 0.09759999999999999,
+   "patch_ndvi": 0.09557309027777777
   },
   {
    "site": "Sebkha Oum Dba, Morocco",
@@ -1126,7 +1263,9 @@
    "temp_range": 34.31,
    "RH2M": 72.07,
    "ALLSKY_SFC_SW_DWN": 20.42,
-   "lst_season": 10.199999999999989
+   "lst_season": 10.199999999999989,
+   "ndvi_peak": 0.0926,
+   "patch_ndvi": 0.09294722222222222
   },
   {
    "site": "Sebkha Tah, Morocco",
@@ -1142,7 +1281,9 @@
    "temp_range": 44.26,
    "RH2M": 66.77,
    "ALLSKY_SFC_SW_DWN": 20.97,
-   "lst_season": 9.0
+   "lst_season": 9.0,
+   "ndvi_peak": 0.0926,
+   "patch_ndvi": 0.09117638888888889
   },
   {
    "site": "Sebkha Tazra, Morocco",
@@ -1158,7 +1299,9 @@
    "temp_range": 33.43,
    "RH2M": 75.23,
    "ALLSKY_SFC_SW_DWN": 20.97,
-   "lst_season": 6.599999999999966
+   "lst_season": 6.599999999999966,
+   "ndvi_peak": 0.0876,
+   "patch_ndvi": 0.09694383680555556
   },
   {
    "site": "Sedan Crater, Nevada Test Site",
@@ -1174,7 +1317,9 @@
    "temp_range": 53.73,
    "RH2M": 34.29,
    "ALLSKY_SFC_SW_DWN": 20.04,
-   "lst_season": 43.799999999999955
+   "lst_season": 43.799999999999955,
+   "ndvi_peak": 0.1576,
+   "patch_ndvi": 0.17659251302083334
   },
   {
    "site": "Sierra Blanca, Texas",
@@ -1190,7 +1335,9 @@
    "temp_range": 56.58,
    "RH2M": 42.22,
    "ALLSKY_SFC_SW_DWN": 20.98,
-   "lst_season": 30.600000000000023
+   "lst_season": 30.600000000000023,
+   "ndvi_peak": 0.1626,
+   "patch_ndvi": 0.162521875
   },
   {
    "site": "Sierra Madera impact structure, Texas",
@@ -1206,7 +1353,9 @@
    "temp_range": 54.67,
    "RH2M": 48.12,
    "ALLSKY_SFC_SW_DWN": 19.98,
-   "lst_season": 27.600000000000023
+   "lst_season": 27.600000000000023,
+   "ndvi_peak": 0.2126,
+   "patch_ndvi": 0.21872847222222222
   },
   {
    "site": "Stillwater complex, Montana",
@@ -1222,7 +1371,9 @@
    "temp_range": 71.46000000000001,
    "RH2M": 68.86,
    "ALLSKY_SFC_SW_DWN": 14.84,
-   "lst_season": 31.200000000000045
+   "lst_season": 31.200000000000045,
+   "ndvi_peak": 0.6151,
+   "patch_ndvi": 0.590263302951389
   },
   {
    "site": "Sudbury Basin, Ontario",
@@ -1238,7 +1389,9 @@
    "temp_range": 80.00999999999999,
    "RH2M": 83.88,
    "ALLSKY_SFC_SW_DWN": 12.66,
-   "lst_season": 36.0
+   "lst_season": 36.0,
+   "ndvi_peak": 0.7751,
+   "patch_ndvi": 0.7470818793402777
   },
   {
    "site": "Svalbard (Bockfjorden), Norway",
@@ -1254,7 +1407,9 @@
    "temp_range": 51.940000000000005,
    "RH2M": 94.8,
    "ALLSKY_SFC_SW_DWN": 7.52,
-   "lst_season": 24.600000000000023
+   "lst_season": 24.600000000000023,
+   "ndvi_peak": 0.0,
+   "patch_ndvi": 0.1268603316898252
   },
   {
    "site": "Taklimakan Desert (Tarim highway)",
@@ -1270,7 +1425,9 @@
    "temp_range": 62.06999999999999,
    "RH2M": 31.6,
    "ALLSKY_SFC_SW_DWN": 17.97,
-   "lst_season": 46.200000000000045
+   "lst_season": 46.200000000000045,
+   "ndvi_peak": 0.0576,
+   "patch_ndvi": 0.057545746527777775
   },
   {
    "site": "Tenerife (Las Canadas), Spain",
@@ -1286,7 +1443,9 @@
    "temp_range": 15.719999999999999,
    "RH2M": 77.2,
    "ALLSKY_SFC_SW_DWN": 18.78,
-   "lst_season": 22.80000000000001
+   "lst_season": 22.80000000000001,
+   "ndvi_peak": 0.46135000000000004,
+   "patch_ndvi": 0.41335683593750006
   },
   {
    "site": "Tinerhir, Morocco",
@@ -1302,7 +1461,9 @@
    "temp_range": 49.17,
    "RH2M": 30.93,
    "ALLSKY_SFC_SW_DWN": 20.61,
-   "lst_season": 28.200000000000045
+   "lst_season": 28.200000000000045,
+   "ndvi_peak": 0.1126,
+   "patch_ndvi": 0.11108524305555556
   },
   {
    "site": "Turpan Desert, China",
@@ -1318,7 +1479,9 @@
    "temp_range": 65.3,
    "RH2M": 28.55,
    "ALLSKY_SFC_SW_DWN": 17.19,
-   "lst_season": 56.39999999999998
+   "lst_season": 56.39999999999998,
+   "ndvi_peak": 0.0876,
+   "patch_ndvi": 0.1295851345486111
   },
   {
    "site": "Ubehebe Craters, California",
@@ -1334,7 +1497,9 @@
    "temp_range": 54.21,
    "RH2M": 32.82,
    "ALLSKY_SFC_SW_DWN": 20.17,
-   "lst_season": 39.599999999999966
+   "lst_season": 39.599999999999966,
+   "ndvi_peak": 0.09759999999999999,
+   "patch_ndvi": 0.10074778645833334
   },
   {
    "site": "Valles Caldera, New Mexico",
@@ -1350,7 +1515,9 @@
    "temp_range": 58.92,
    "RH2M": 50.74,
    "ALLSKY_SFC_SW_DWN": 19.9,
-   "lst_season": 34.80000000000001
+   "lst_season": 34.80000000000001,
+   "ndvi_peak": 0.55135,
+   "patch_ndvi": 0.5591619574652777
   },
   {
    "site": "Valley of Ten Thousand Smokes, Katmai, Alaska",
@@ -1366,7 +1533,9 @@
    "temp_range": 67.72,
    "RH2M": 89.35,
    "ALLSKY_SFC_SW_DWN": 8.67,
-   "lst_season": 27.599999999999966
+   "lst_season": 27.599999999999966,
+   "ndvi_peak": 0.7351,
+   "patch_ndvi": 0.671400998263889
   },
   {
    "site": "Wadi Rum, Jordan",
@@ -1382,7 +1551,9 @@
    "temp_range": 48.92,
    "RH2M": 41.77,
    "ALLSKY_SFC_SW_DWN": 22.53,
-   "lst_season": 30.0
+   "lst_season": 30.0,
+   "ndvi_peak": 0.1076,
+   "patch_ndvi": 0.10745677083333334
   },
   {
    "site": "West Clearwater Lake impact structure, Quebec",
@@ -1398,7 +1569,9 @@
    "temp_range": 77.1,
    "RH2M": 91.21,
    "ALLSKY_SFC_SW_DWN": 10.53,
-   "lst_season": 40.80000000000001
+   "lst_season": 40.80000000000001,
+   "ndvi_peak": 0.7451,
+   "patch_ndvi": 0.639937358490566
   },
   {
    "site": "Wright Valley South Fork, Antarctica",
@@ -1414,7 +1587,9 @@
    "temp_range": 50.54,
    "RH2M": 67.49,
    "ALLSKY_SFC_SW_DWN": 10.8,
-   "lst_season": 27.600000000000023
+   "lst_season": 27.600000000000023,
+   "ndvi_peak": 0.0,
+   "patch_ndvi": 0.0
   },
   {
    "site": "Zagora, Morocco",
@@ -1430,7 +1605,9 @@
    "temp_range": 49.56,
    "RH2M": 29.74,
    "ALLSKY_SFC_SW_DWN": 21.7,
-   "lst_season": 28.799999999999955
+   "lst_season": 28.799999999999955,
+   "ndvi_peak": 0.0926,
+   "patch_ndvi": 0.10051449652777777
   },
   {
    "site": "Zaouia (Zagora), Morocco",
@@ -1446,7 +1623,9 @@
    "temp_range": 48.61,
    "RH2M": 32.19,
    "ALLSKY_SFC_SW_DWN": 21.54,
-   "lst_season": 28.80000000000001
+   "lst_season": 28.80000000000001,
+   "ndvi_peak": 0.09759999999999999,
+   "patch_ndvi": 0.09964155815972224
   },
   {
    "site": "Zuni Salt Lake maar, New Mexico",
@@ -1462,7 +1641,9 @@
    "temp_range": 56.66,
    "RH2M": 45.67,
    "ALLSKY_SFC_SW_DWN": 19.83,
-   "lst_season": 43.80000000000001
+   "lst_season": 43.80000000000001,
+   "ndvi_peak": 0.1726,
+   "patch_ndvi": 0.17692074652777778
   }
  ]
 }
