@@ -1,0 +1,132 @@
+site,lat,lon,label,region,use,exclude_reason,source
+"Meteor Crater, Arizona",35.03,-111.02,Moon,"Meteor Crater, Arizona",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 16; USGS OFR 2005-1190 Table 1 (Apollo training) 1963
+"Cinder Lake Crater Field, AZ",35.29,-111.47,Moon,"Cinder Lake Crater Field, AZ",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 7; USGS OFR 2005-1190 Table 1 (Apollo training) 1970
+"Black Point Lava Flow, AZ",35.7,-111.46,Moon,"Black Point Lava Flow, AZ",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 6 (NASA Desert RATS)
+"Craters of the Moon, Idaho",43.42,-113.52,Moon,"Craters of the Moon, Idaho",True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1969
+"Sudbury Basin, Ontario",46.6,-81.0,Moon,"Sudbury Basin, Ontario",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 24; USGS OFR 2005-1190 Table 1 (Apollo training) 1972
+"Ries Crater, Germany",48.88,10.56,Moon,"Ries Crater, Germany",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 22; USGS OFR 2005-1190 Table 1 (Apollo training) 1970
+"Mistastin Lake Crater, Labrador",55.88,-63.31,Moon,"Mistastin Lake Crater, Labrador",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 17
+"Manicouagan Crater, Quebec",51.38,-68.7,Moon,"Manicouagan Crater, Quebec",True,,not yet cited
+"Kilauea / Ka'u Desert, Hawaii",19.35,-155.35,Moon,"Kilauea / Ka'u Desert, Hawaii",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 14; USGS OFR 2005-1190 Table 1 (Apollo training) Hawaii trips 1965-1972
+"Mauna Kea, Hawaii",19.82,-155.47,Moon,"Mauna Kea, Hawaii",True,,USGS OFR 2005-1190 Table 1 (Apollo training) Hawaii (Big Island) trips 1965-1972
+"Haleakala Crater, Maui",20.71,-156.17,Moon,"Haleakala Crater, Maui",True,,not yet cited
+"Lanzarote (Timanfaya), Spain",29.0,-13.75,Moon,"Lanzarote (Timanfaya), Spain",True,,not yet cited
+"Lonar Crater, India",19.98,76.51,Moon,"Lonar Crater, India",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 15
+"Rio Grande Gorge, New Mexico",36.48,-105.73,Moon,"Rio Grande Gorge, New Mexico",True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1971 (Taos)
+"Orocopia Mountains, California",33.56,-115.78,Moon,"Orocopia Mountains, California",True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1970
+"Newberry Volcano, Oregon",43.69,-121.25,Moon,"Newberry Volcano, Oregon",True,,"USGS OFR 2005-1190 Table 1 (Apollo training) 1964 (Bend, Oregon)"
+"Pisgah Crater, California",34.75,-116.38,Moon,"Pisgah Crater, California",True,,not yet cited
+"Henbury Craters, Australia",-24.57,133.15,Moon,"Henbury Craters, Australia",True,,not yet cited
+"Atacama Desert (Yungay), Chile",-24.08,-70.0,Mars,"Atacama Desert (Yungay), Chile",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 2 (sec. 2.6.1 Yungay)
+"Haughton Crater, Devon Island",75.38,-89.68,Mars,"Haughton Crater, Devon Island",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 10
+"Rio Tinto, Spain",37.72,-6.55,Mars,"Rio Tinto, Spain",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 23
+"McMurdo Dry Valleys, Antarctica",-77.55,161.9,Mars,"McMurdo Dry Valleys, Antarctica",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 1
+"Mars Desert Research Station, UT",38.41,-110.79,Mars,"Mars Desert Research Station, UT",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 29
+"Svalbard (Bockfjorden), Norway",79.43,13.33,Mars,"Svalbard (Bockfjorden), Norway",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 26 (sec. 26.6.1)
+"Pilbara (Dresser Fm), Australia",-21.15,119.42,Mars,"Pilbara (Dresser Fm), Australia",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 21
+"Dallol, Ethiopia",14.24,40.3,Mars,"Dallol, Ethiopia",True,,not yet cited
+"Holuhraun, Iceland",64.87,-16.83,Mars,"Holuhraun, Iceland",True,,"Catalogue of Planetary Analogues (Preston et al. 2012) ch. 12 (Iceland, region)"
+"Wadi Rum, Jordan",29.58,35.42,Mars,"Wadi Rum, Jordan",True,,not yet cited
+"Death Valley, California",36.46,-116.87,Mars,"Death Valley, California",True,,not yet cited
+"Mojave (Dumont Dunes), California",35.68,-116.22,Mars,"Mojave (Dumont Dunes), California",True,,not yet cited
+"Merzouga / Erg Chebbi, Morocco",31.15,-4.0,Mars,"Merzouga / Erg Chebbi, Morocco",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 11 (sec. 11.6.3.5 Chebbi)
+"Arkaroola, South Australia",-30.31,139.34,Mars,"Arkaroola, South Australia",True,,not yet cited
+"Mauna Loa (HI-SEAS), Hawaii",19.6,-155.48,Mars,"Mauna Loa (HI-SEAS), Hawaii",True,,not yet cited
+"Tenerife (Las Canadas), Spain",28.27,-16.64,Mars,"Tenerife (Las Canadas), Spain",True,,Catalogue of Planetary Analogues (Preston et al. 2012) ch. 27
+"Lake Salda, Turkey",37.55,29.68,Mars,"Lake Salda, Turkey",True,,not yet cited
+"Qaidam Basin (Dalangtan), China",38.6,91.3,Mars,"Qaidam Basin (Dalangtan), China",True,,not yet cited
+"Amazon rainforest, Brazil",-3.47,-62.37,Neither,"Amazon rainforest, Brazil",True,,ordinary land cover (not an analog)
+"Congo rainforest, DRC",-0.5,23.0,Neither,"Congo rainforest, DRC",True,,ordinary land cover (not an analog)
+"Borneo, Indonesia",1.0,114.0,Neither,"Borneo, Indonesia",True,,ordinary land cover (not an analog)
+"Paris, France",48.86,2.35,Neither,"Paris, France",True,,ordinary land cover (not an analog)
+"Tokyo, Japan",35.68,139.69,Neither,"Tokyo, Japan",True,,ordinary land cover (not an analog)
+"Sao Paulo, Brazil",-23.55,-46.63,Neither,"Sao Paulo, Brazil",True,,ordinary land cover (not an analog)
+"Iowa farmland, USA",42.0,-93.6,Neither,"Iowa farmland, USA",True,,ordinary land cover (not an analog)
+Ukraine farmland,49.5,32.0,Neither,Ukraine farmland,True,,ordinary land cover (not an analog)
+"Pampas, Argentina",-35.0,-61.0,Neither,"Pampas, Argentina",True,,ordinary land cover (not an analog)
+"Ganges plain, India",26.0,82.0,Neither,"Ganges plain, India",True,,ordinary land cover (not an analog)
+Netherlands,52.3,5.5,Neither,Netherlands,True,,ordinary land cover (not an analog)
+Bangladesh,23.7,90.4,Neither,Bangladesh,True,,ordinary land cover (not an analog)
+"Java rice fields, Indonesia",-7.2,110.5,Neither,"Java rice fields, Indonesia",True,,ordinary land cover (not an analog)
+Southeast China hills,25.0,114.0,Neither,Southeast China hills,True,,ordinary land cover (not an analog)
+"Black Forest, Germany",48.0,8.2,Neither,"Black Forest, Germany",True,,ordinary land cover (not an analog)
+"Appalachians, West Virginia",37.5,-80.5,Neither,"Appalachians, West Virginia",True,,ordinary land cover (not an analog)
+"Pacific NW forest, Washington",47.5,-122.0,Neither,"Pacific NW forest, Washington",True,,ordinary land cover (not an analog)
+Finland boreal forest,62.5,26.0,Neither,Finland boreal forest,True,,ordinary land cover (not an analog)
+"Siberian taiga, Russia",60.0,100.0,Neither,"Siberian taiga, Russia",True,,ordinary land cover (not an analog)
+"Quebec forest, Canada",47.0,-72.0,Neither,"Quebec forest, Canada",True,,ordinary land cover (not an analog)
+Ireland pasture,53.0,-8.0,Neither,Ireland pasture,True,,ordinary land cover (not an analog)
+New Zealand pasture,-38.0,175.5,Neither,New Zealand pasture,True,,ordinary land cover (not an analog)
+"Pantanal wetland, Brazil",-17.5,-57.0,Neither,"Pantanal wetland, Brazil",True,,ordinary land cover (not an analog)
+"Everglades, Florida",25.9,-80.8,Neither,"Everglades, Florida",True,,ordinary land cover (not an analog)
+"Sundarbans, Bangladesh",21.9,89.2,Neither,"Sundarbans, Bangladesh",True,,ordinary land cover (not an analog)
+"Maasai Mara, Kenya",-1.5,35.1,Neither,"Maasai Mara, Kenya",True,,ordinary land cover (not an analog)
+"Nile Delta, Egypt",30.8,31.0,Neither,"Nile Delta, Egypt",True,,ordinary land cover (not an analog)
+"Beacon Valley, Antarctica",-77.842,160.844,Mars,Antarctica Dry Valleys,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 1.6.3"
+"Wright Valley South Fork, Antarctica",-77.3336,161.1724,Mars,Antarctica Dry Valleys,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 1.6.2"
+"Pampas de La Joya, Peru",-16.699,-71.806,Mars,Peru coastal desert,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 2.6.2"
+"Gypsum Hill springs, Axel Heiberg",79.4092,-90.7328,Mars,Axel Heiberg Island,False,box is mostly snow/ice in the imagery,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 4.6.1"
+"Ben Haddou, Morocco",30.9936,-7.0727,Mars,Morocco Ouarzazate,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.1.1"
+"Saoun, Morocco",30.7,-6.7219,Mars,Morocco Ouarzazate,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.1.6"
+"Ouarzazate travertine, Morocco",30.989,-6.7001,Mars,Morocco Ouarzazate,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.1.4"
+"Tinerhir, Morocco",31.2286,-5.2383,Mars,Morocco Draa-Tafilalet,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.2.1"
+"Alnif, Morocco",31.4337,-5.6517,Mars,Morocco Draa-Tafilalet,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.2.2"
+"Rissani, Morocco",31.2942,-4.4031,Mars,Morocco Draa-Tafilalet,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.3.1"
+"Lake Maider, Morocco",30.655,-4.7144,Mars,Morocco Draa-Tafilalet,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.3.6"
+"Zaouia (Zagora), Morocco",30.7208,-6.0384,Mars,Morocco Draa valley,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.4.1"
+"Zagora, Morocco",30.3231,-5.7044,Mars,Morocco Draa valley,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.4.2"
+"Mhamid, Morocco",29.9069,-5.6872,Mars,Morocco Draa valley,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.4.3"
+"Sebkha Tazra, Morocco",27.9267,-12.3219,Mars,Morocco Tan-Tan sebkhas,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.5.1"
+"Sebkha Tah, Morocco",27.7019,-12.7978,Mars,Morocco Tan-Tan sebkhas,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.5.2"
+"Sebkha Oum Dba, Morocco",27.5419,-13.0064,Mars,Morocco Tan-Tan sebkhas,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.5.3"
+"Sebkha Aridal, Western Sahara",26.1642,-14.0025,Mars,Morocco Tan-Tan sebkhas,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 11.6.5.4"
+"Krysuvik geothermal field, Iceland",63.8958,-22.0525,Mars,Iceland Reykjanes,False,"box is mostly vegetated lava/moss, wet climate","ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 12.6.3"
+"Gobabeb, Namib Desert",-23.5667,15.05,Mars,Namib,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), ch. 19; coordinates: Wikidata"
+"Turpan Desert, China",42.63,89.86,Mars,Turpan,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), ch. 28"
+Taklimakan Desert (Tarim highway),39.42,83.47,Mars,Taklimakan,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), ch. 28 (midpoint of the Luntai-Minfeng desert highway named there)"
+"Ebbadalen, Svalbard",78.7097,16.7178,Mars,Svalbard,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 26.6.2"
+"Murchison Fjord, Svalbard",79.8786,18.4881,Mars,Svalbard,False,box is mostly snow/ice in the imagery,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 26.6.3"
+"Adventtoppen, Svalbard",78.273,15.745,Mars,Svalbard,True,,"ESA/Open University Catalogue of Planetary Analogues (Preston, Grady & Barber 2012), sec. 26.6.4"
+"Kilbourne Hole, New Mexico",31.972,-106.9647,Moon,New Mexico south,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1969-1971; coordinates: Wikidata"
+"Zuni Salt Lake maar, New Mexico",34.45,-108.7677,Moon,New Mexico west,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1965-1967; coordinates: Wikidata"
+"Hopi Buttes volcanic field, Arizona",35.45,-110.1,Moon,Arizona Hopi Buttes,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1966-1967; coordinates: Wikidata"
+"Mono Craters, California",37.8625,-119.0067,Moon,California east,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1969, 1971; coordinates: Wikidata"
+"Ubehebe Craters, California",37.0108,-117.4528,Moon,California east,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): Feb 1971; coordinates: approximate, not in Wikidata"
+"Coso volcanic field, California",36.0333,-117.817,Moon,California east,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1971; coordinates: Wikidata"
+"Medicine Lake Volcano, California",41.5825,-121.5995,Moon,California north,False,box is mostly forest,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): Sept 1965; coordinates: Wikidata"
+"El Elegante crater, Pinacate, Mexico",31.8467,-113.3913,Moon,Pinacate,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1965-1970; coordinates: Wikidata"
+"Sedan Crater, Nevada Test Site",37.1769,-116.0461,Moon,Nevada Test Site,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1965-1972, nuclear crater used as impact-crater analog; coordinates: Wikidata"
+"Capulin Volcano, New Mexico",36.781,-103.97,Moon,New Mexico northeast,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): May 1971; coordinates: approximate, not in Wikidata"
+"Valley of Ten Thousand Smokes, Alaska",58.3939,-155.3853,Moon,Katmai,False,"box is mostly vegetation/snow, wet climate","USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): 1965-1966 (Katmai); coordinates: Wikidata"
+"Sierra Madera impact structure, Texas",30.6,-102.917,Moon,Texas west,True,,"USGS Open-File Report 2005-1190, Table 1 (Apollo astronaut field training): Mar 1972; coordinates: Wikidata"
+"Amboy Crater, California",34.5439,-115.7911,Moon,California Mojave,True,,USGS California Volcano Observatory article on volcanoes used for astronaut training and lunar rover testing; coordinates: Wikidata
+Kazakh steppe,50.0,67.0,Neither,Kazakhstan,True,,"hard negative: semi-arid grassland, not a documented analog"
+Mongolian steppe,47.3,105.3,Neither,Mongolia,True,,hard negative: semi-arid grassland
+"Sahel, Niger",14.0,3.0,Neither,Sahel,True,,hard negative: semi-arid shrub/savanna
+Texas Panhandle rangeland,35.0,-101.5,Neither,Texas north,True,,hard negative: semi-arid rangeland/farms
+"Patagonian steppe, Argentina",-45.5,-69.5,Neither,Patagonia,True,,hard negative: dry steppe
+Western Australia wheatbelt,-31.0,118.0,Neither,Australia SW,True,,hard negative: dryland farming
+Spanish Meseta (La Mancha),39.4,-3.0,Neither,Spain,True,,hard negative: dryland farming
+"Anatolian plateau, Turkey",39.0,33.0,Neither,Anatolia,True,,hard negative: dry steppe/farms
+"Zacatecas highlands, Mexico",23.0,-102.5,Neither,Mexico highlands,True,,hard negative: semi-arid scrub/farms
+"Caatinga, Brazil",-8.0,-39.5,Neither,Brazil NE,True,,hard negative: dry thorn scrub
+"Deccan dryland farms, India",17.0,76.0,Neither,Deccan,True,,hard negative: semi-arid farmland
+"Tsavo, Kenya",-3.0,38.5,Neither,Kenya SE,True,,hard negative: semi-arid bushland
+"West Clearwater impact structure, Quebec",56.21,-74.5,Moon,Quebec north,False,box is mostly vegetation/forest,NASA SSERVI FINESSE lunar impact analog; coordinates: Earth Impact Database (approx.)
+"Lofoten anorthosite (Flakstadoya), Norway",68.0667,13.3,Moon,Lofoten,False,box is mostly vegetation/forest,ESA PANGAEA astronaut training (lunar highland anorthosite); coordinates: Wikidata
+"Chisos Mountains, Big Bend, Texas",29.27,-103.3,Moon,Texas Big Bend,True,,"USGS OFR 2005-1190 Table 1 (Apollo training) 1964, 1969, 1971; coordinates: Wikidata"
+"McCullough Range, Nevada",35.9158,-115.048,Moon,Nevada south,True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1972; coordinates: Wikidata
+"San Gabriel anorthosite, California",34.35,-118.1,Moon,California south,True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1970-1972; coordinates: approximate
+"Stillwater complex, Montana",45.3861,-109.9031,Moon,Montana,True,,USGS OFR 2005-1190 Table 1 (Apollo training) 1972 (anorthosite); coordinates: Wikidata
+"Gosses Bluff crater, Australia",-23.8208,132.3078,Moon,Australia central,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Tenoumer crater, Mauritania",22.9181,-10.4075,Moon,Mauritania,False,label from impact-crater rule only; box is mostly very bright sand,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Aorounga crater, Chad",19.1,19.25,Moon,Chad,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: approximate
+"Kamil crater, Egypt",22.0183,26.0877,Moon,Egypt west,False,label from impact-crater rule only; box is mostly very bright sand,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Roter Kamm crater, Namibia",-27.7667,16.2889,Moon,Namibia south,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Amguid crater, Algeria",26.0878,4.3953,Moon,Algeria south,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Talemzane crater, Algeria",33.315,4.0353,Moon,Algeria north,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Wabar craters, Saudi Arabia",21.5053,50.4742,Moon,Arabia,False,label from impact-crater rule only; box is mostly very bright sand,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Shoemaker crater, Western Australia",-25.8667,120.8833,Moon,Australia west,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Spider crater, Western Australia",-16.7394,126.0903,Moon,Australia Kimberley,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Zhamanshin crater, Kazakhstan",48.4,60.9667,Moon,Kazakhstan,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
+"Upheaval Dome, Utah",38.4245,-109.9293,Moon,Utah,False,label from impact-crater rule only (not a documented analog); lowered accuracy when tested,Earth Impact Database (confirmed impact structure); labelled Moon by the impact-crater rule; coordinates: Wikidata
