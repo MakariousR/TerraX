@@ -56,7 +56,7 @@ An internet connection is needed: for every new spot, the website downloads live
 - **Click a coloured dot** to see how the model scores one of the 125 known training sites.
 - **Switch the base map** between satellite imagery, NASA Blue Marble and OpenStreetMap.
 
-**Places worth trying:** the Lut Desert in Iran, the Namib Desert, Wolfe Creek Crater in Australia, Mount Etna, and your own city for comparison.
+**Places worth trying:** the Lut Desert in Iran, the Namib Desert, and your own city for comparison.
 
 ---
 
