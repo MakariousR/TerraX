@@ -6,17 +6,15 @@ site,lat,lon,label,region,source
 "Sudbury Basin, Ontario",46.6,-81,Moon,"Sudbury Basin, Ontario",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 24; USGS OFR 2005-1190 Table 1 (Apollo training) 1972
 "Ries Crater, Germany",48.88,10.56,Moon,"Ries Crater, Germany",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 22; USGS OFR 2005-1190 Table 1 (Apollo training) 1970
 "Mistastin Lake Crater, Labrador",55.88,-63.31,Moon,"Mistastin Lake Crater, Labrador",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 17
-"Manicouagan Crater, Quebec",51.38,-68.7,Moon,"Manicouagan Crater, Quebec",not yet cited
-"Kilauea / Ka'u Desert, Hawaii",19.35,-155.35,Moon,"Kilauea / Ka'u Desert, Hawaii",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 14; USGS OFR 2005-1190 Table 1 (Apollo training) Hawaii trips 1965-1972
-"Mauna Kea, Hawaii",19.82,-155.47,Moon,"Mauna Kea, Hawaii",USGS OFR 2005-1190 Table 1 (Apollo training) Hawaii (Big Island) trips 1965-1972
-"Haleakala Crater, Maui",20.71,-156.17,Moon,"Haleakala Crater, Maui",not yet cited
-"Lanzarote (Timanfaya), Spain",29,-13.75,Moon,"Lanzarote (Timanfaya), Spain",not yet cited
-"Lonar Crater, India",19.98,76.51,Moon,"Lonar Crater, India",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 15
+"Manicouagan Crater, Quebec",51.38,-68.7,Moon,"Manicouagan Crater, Quebec","Spray et al. 2010, Planetary and Space Science: The Manicouagan impact structure as a terrestrial analogue site for lunar and martian planetary science"
+"Kilauea / Ka'u Desert, Hawaii",19.35,-155.35,Mars,"Kilauea / Ka'u Desert, Hawaii",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 14 (Kilauea): the Ka'u Desert represents a good Mars analog
+"Lanzarote (Timanfaya), Spain",29,-13.75,Moon,"Lanzarote (Timanfaya), Spain",ESA - Turning astronauts into Moon explorers (PANGAEA): Lanzarote geology training
+"Lonar Crater, India",19.98,76.51,Mars,"Lonar Crater, India",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 15
 "Rio Grande Gorge, New Mexico",36.48,-105.73,Moon,"Rio Grande Gorge, New Mexico",USGS OFR 2005-1190 Table 1 (Apollo training) 1971 (Taos)
 "Orocopia Mountains, California",33.56,-115.78,Moon,"Orocopia Mountains, California",USGS OFR 2005-1190 Table 1 (Apollo training) 1970
 "Newberry Volcano, Oregon",43.69,-121.25,Moon,"Newberry Volcano, Oregon","USGS OFR 2005-1190 Table 1 (Apollo training) 1964 (Bend, Oregon)"
-"Pisgah Crater, California",34.75,-116.38,Moon,"Pisgah Crater, California",not yet cited
-"Henbury Craters, Australia",-24.57,133.15,Moon,"Henbury Craters, Australia",not yet cited
+"Pisgah Crater, California",34.75,-116.38,Mars,"Pisgah Crater, California","USGS: NASA-funded thermal imaging at a Mars analog site, Pisgah lava field (2010)"
+"Henbury Craters, Australia",-24.57,133.15,Moon,"Henbury Craters, Australia",USGS Professional Paper 599-C (Contributions to Astrogeology); Mars Society Australia: Apollo training area
 "Atacama Desert (Yungay), Chile",-24.08,-70,Mars,"Atacama Desert (Yungay), Chile",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 2 (sec. 2.6.1 Yungay)
 "Haughton Crater, Devon Island",75.38,-89.68,Mars,"Haughton Crater, Devon Island",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 10
 "Rio Tinto, Spain",37.72,-6.55,Mars,"Rio Tinto, Spain",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 23
@@ -24,17 +22,17 @@ site,lat,lon,label,region,source
 "Mars Desert Research Station, UT",38.41,-110.79,Mars,"Mars Desert Research Station, UT",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 29
 "Svalbard (Bockfjorden), Norway",79.43,13.33,Mars,"Svalbard (Bockfjorden), Norway",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 26 (sec. 26.6.1)
 "Pilbara (Dresser Fm), Australia",-21.15,119.42,Mars,"Pilbara (Dresser Fm), Australia",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 21
-"Dallol, Ethiopia",14.24,40.3,Mars,"Dallol, Ethiopia",not yet cited
+"Dallol, Ethiopia",14.24,40.3,Mars,"Dallol, Ethiopia","Cavalazzi et al. 2019, Astrobiology: The Dallol Geothermal Area, an exceptional planetary field analog on Earth"
 "Holuhraun, Iceland",64.87,-16.83,Mars,"Holuhraun, Iceland","Catalogue of Planetary Analogues (Preston et al. 2012) ch. 12 (Iceland, region)"
-"Wadi Rum, Jordan",29.58,35.42,Mars,"Wadi Rum, Jordan",not yet cited
-"Death Valley, California",36.46,-116.87,Mars,"Death Valley, California",not yet cited
-"Mojave (Dumont Dunes), California",35.68,-116.22,Mars,"Mojave (Dumont Dunes), California",not yet cited
+"Wadi Rum, Jordan",29.58,35.42,Mars,"Wadi Rum, Jordan",NASA Earth Observatory: Mars on Earth; Jordan Times: space simulation in Wadi Rum
+"Death Valley, California",36.46,-116.87,Mars,"Death Valley, California",National Park Service: NASA in Death Valley; JPL: NASA tests drones in Death Valley for Mars
+"Mojave (Dumont Dunes), California",35.68,-116.22,Mars,"Mojave (Dumont Dunes), California","JPL: Mojave Desert tests prepare for NASA Mars roving (Dumont Dunes, 2012)"
 "Merzouga / Erg Chebbi, Morocco",31.15,-4,Mars,"Merzouga / Erg Chebbi, Morocco",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 11 (sec. 11.6.3.5 Chebbi)
-"Arkaroola, South Australia",-30.31,139.34,Mars,"Arkaroola, South Australia",not yet cited
-"Mauna Loa (HI-SEAS), Hawaii",19.6,-155.48,Mars,"Mauna Loa (HI-SEAS), Hawaii",not yet cited
+"Arkaroola, South Australia",-30.31,139.34,Mars,"Arkaroola, South Australia",Mars Society Australia: Mars Australia Research Station; IAU Symposium paper on an Australian Mars analogue facility
+"Mauna Loa (HI-SEAS), Hawaii",19.6,-155.48,Mars,"Mauna Loa (HI-SEAS), Hawaii",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 14 (Kilauea): key reference HI-SEAS (Hawaii Space Exploration Analog and Simulation)
 "Tenerife (Las Canadas), Spain",28.27,-16.64,Mars,"Tenerife (Las Canadas), Spain",Catalogue of Planetary Analogues (Preston et al. 2012) ch. 27
-"Lake Salda, Turkey",37.55,29.68,Mars,"Lake Salda, Turkey",not yet cited
-"Qaidam Basin (Dalangtan), China",38.6,91.3,Mars,"Qaidam Basin (Dalangtan), China",not yet cited
+"Lake Salda, Turkey",37.55,29.68,Mars,"Lake Salda, Turkey",NASA Earth Observatory: What a lake in Turkey can tell us about Mars (Jezero analog)
+"Qaidam Basin (Dalangtan), China",38.6,91.3,Mars,"Qaidam Basin (Dalangtan), China","Dalangtan saline playa (Qaidam Basin) Mars analog study, PubMed 29792755"
 "Amazon rainforest, Brazil",-3.47,-62.37,Neither,"Amazon rainforest, Brazil",ordinary land cover (not an analog)
 "Congo rainforest, DRC",-0.5,23,Neither,"Congo rainforest, DRC",ordinary land cover (not an analog)
 "Borneo, Indonesia",1,114,Neither,"Borneo, Indonesia",ordinary land cover (not an analog)

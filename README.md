@@ -53,7 +53,7 @@ An internet connection is needed: for every new spot, the website downloads live
   - **conditions**: the place's values next to those of typical known Moon and Mars analogs;
   - the **most similar known analog site**.
 - **Search a place by name** (for example "Atacama Desert" or "Lanzarote").
-- **Click a coloured dot** to see how the model scores one of the 112 known training sites.
+- **Click a coloured dot** to see how the model scores one of the 110 known training sites.
 - **Switch the base map** between satellite imagery, NASA Blue Marble and OpenStreetMap.
 
 **Places worth trying:** the Lut Desert in Iran, the Namib Desert, Wolfe Creek Crater in Australia, Mount Etna, Iceland's lava fields, and your own city for comparison.
@@ -68,7 +68,7 @@ labelled sites  →  NASA data for a ±11 km area  →  13 features per pixel  �
 
 ### 1. Labelled places
 
-[`data/sites.csv`](data/sites.csv) lists **112 places**: 33 Moon analogs, 40 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1). The `source` column gives the reference for each place.
+[`data/sites.csv`](data/sites.csv) lists **110 places**: 28 Moon analogs, 43 Mars analogs and 39 ordinary places (forests, cities, farmland, wetlands, and also dry steppe, so that "dry" alone isn't enough to count as an analog). The analog labels come from documented training and test sites, mainly the ESA / Open University *Catalogue of Planetary Analogues* (Preston et al. 2012) and the USGS record of Apollo astronaut field training (Open-File Report 2005-1190, Table 1), plus NASA, JPL, USGS, ESA and peer-reviewed sources for the remaining sites (see [Resources](#-resources)). Every place has its reference in the `source` column.
 
 ### 2. NASA data
 
@@ -97,11 +97,11 @@ Pixels of the same place are near-copies, so testing on random pixels would leak
 
 | | Result on unseen places |
 |---|---|
-| Place-level accuracy | **about 80 %** (112 places) |
-| Log-loss (probability quality, lower is better) | **0.50** |
-| F1: Mars / Neither / Moon | 0.85 / 0.83 / 0.70 |
+| Place-level accuracy | **about 79 %** (110 places) |
+| Log-loss (probability quality, lower is better) | **0.55** |
+| F1: Mars / Neither / Moon | 0.81 / 0.84 / 0.71 |
 
-The strongest signals are the area's overall colour, the rock type, humidity, colour patchiness and the seasonal ground-temperature swing. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
+The strongest signals are the rock type, the area's overall colour, humidity, the temperature range and colour patchiness. Moon vs Mars is the hardest distinction, because several real sites serve as analogs for both.
 
 ---
 
@@ -110,7 +110,7 @@ The strongest signals are the area's overall colour, the rock type, humidity, co
 ```
 TerraX/
 ├── data/
-│   ├── sites.csv              # the 112 labelled places, with sources
+│   ├── sites.csv              # the 110 labelled places, with sources
 │   ├── analog_model.joblib    # the trained model (ready to use)
 │   ├── web_meta.json          # feature list and reference values for the website
 │   ├── web_sites.json         # known sites shown on the map
@@ -154,7 +154,7 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 
 ## ⚠️ Limitations
 
-- **112 labelled places is small.** More documented sites, especially Moon analogs, would help most.
+- **110 labelled places is small.** More documented sites, especially Moon analogs, would help most.
 - **Labels follow where agencies have trained,** so the model partly learns the typical colour of those regions (for example, Earth's Moon analogs are often red cinder fields).
 - **Resolution is about 460 m per pixel,** so small features like a single crater rim are averaged out.
 - **Above 82° latitude** there's no usable imagery, and oceans are rejected.
@@ -178,6 +178,10 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - [NASA POWER climatology API](https://power.larc.nasa.gov/docs/services/api/temporal/climatology/)
 - [NASA PDS Geosciences Node: Spectral Library](https://pds-geosciences.wustl.edu/spectrallibrary/default.htm)
 - [NASA PDS RELAB spectra collection](https://pds-geosciences.wustl.edu/speclib/urn-nasa-pds-relab/)
+- [JPL: Mojave Desert Tests Prepare for NASA Mars Roving (Dumont Dunes)](https://www.jpl.nasa.gov/news/mojave-desert-tests-prepare-for-nasa-mars-roving/)
+- [JPL: NASA Tests Drones in Death Valley, Preps for Martian Sands and Skies](https://www.jpl.nasa.gov/news/nasa-tests-drones-in-death-valley-preps-for-martian-sands-and-skies/)
+- [NASA Earth Observatory: What a Lake in Turkey Can Tell Us About Mars (Lake Salda)](https://earthobservatory.nasa.gov/blogs/earthmatters/2021/02/17/what-a-lake-in-turkey-can-tell-us-about-mars/)
+- [NASA Earth Observatory: Mars on Earth (Wadi Rum)](https://science.nasa.gov/earth/earth-observatory/movie-mars-on-earth-148764/)
 
 ### Other resources
 
@@ -188,7 +192,16 @@ It returns JSON with `probabilities`, `prediction`, `reasons`, `conditions` and 
 - [USGS California Volcano Observatory: Can't make it to the Moon? Try California's volcanoes](https://www.usgs.gov/observatories/calvo/news/cant-make-it-moon-try-californias-volcanoes)
 - [ESA: Turning astronauts into Moon explorers (PANGAEA)](https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Turning_astronauts_into_Moon_explorers)
 - [ESA: PANGAEA 2019 dry run](https://www.esa.int/ESA_Multimedia/Videos/2019/08/Pangaea_2019_dry_run)
-- [Earth Impact Database (Planetary and Space Science Centre)](http://www.passc.net/EarthImpactDatabase/)
+- [USGS Professional Paper 599-C: Structural Geology of the Henbury Meteorite Craters (Contributions to Astrogeology)](https://pubs.usgs.gov/publication/pp599C)
+- [USGS: Oblique thermal imaging of the Pisgah lava field (NASA-funded Mars analog study)](https://www.usgs.gov/data/oblique-thermal-imaging-pisgah-lava-field-california-acquired-march-2010)
+- [National Park Service: NASA in Death Valley](https://home.nps.gov/deva/nasa.htm)
+- [Spray et al. 2010: The Manicouagan impact structure as a terrestrial analogue site for lunar and martian planetary science (Planetary and Space Science)](https://doi.org/10.1016/j.pss.2009.09.010)
+- [Cavalazzi et al. 2019: The Dallol Geothermal Area, an exceptional planetary field analog on Earth (Astrobiology)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6459281)
+- [Dalangtan saline playa (Qaidam Basin) as a Mars analog (PubMed)](https://www.pubmed.gov/29792755/)
+- [Using an Australian Mars Analogue Research Facility for Astrobiology Education and Outreach (IAU Symposium)](https://cambridge.org/core/journals/symposium-international-astronomical-union/article/using-an-australian-mars-analogue-research-facility-for-astrobiology-education-and-outreach/AC7A2886632E2F728206A1CF51A356F3)
+- [Mars Society Australia: Mars Australia Research Station (Arkaroola)](https://mars.marssociety.org.au/)
+- [Mars Society Australia: Henbury Craters](https://marssociety.org.au/project/geology/place/henbury-craters)
+- [Jordan Times: Space simulation in Wadi Rum](https://jordantimes.com/news/local/jordanian-palestinian-women-lead-historic-space-simulation-in-wadi-rum)
 - [Wikidata (site coordinates)](https://www.wikidata.org/)
 - [RELAB Spectral Database (Brown University)](https://sites.brown.edu/relab/relab-spectral-database/)
 - [Macrostrat (geologic maps: rock type)](https://macrostrat.org/)
